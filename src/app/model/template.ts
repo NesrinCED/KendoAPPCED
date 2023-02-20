@@ -6,6 +6,6 @@ export class Template {
     createdBy: string;
     modifiedBy :string;
     project : string;
-    createdDate :Date;
-    modifiedDate : Date;
+    createdDate? :Date;
+    modifiedDate? : Date;
 }

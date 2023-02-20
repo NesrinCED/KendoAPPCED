@@ -7,57 +7,104 @@
                     <label>Language</label>
                     <kendo-dropdownlist 
                     formControlName="language" [data]="languages" class="form-control"
-                     [ngClass]="{ 'ng-invalid ng-touched': submitted && f.title.errors }">
+                     [ngClass]="{ 'ng-invalid ng-touched': submitted && f.language.errors }">
                     </kendo-dropdownlist>
-                    <div *ngIf="submitted && f.title.errors" class="k-tooltip-validation">
-                        <div *ngIf="f.title.errors.required">Language is required</div>
+                    <div *ngIf="submitted && f.language.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.language.errors.required">Language is required</div>
                     </div>
                 </div>
                 <div class="form-group col-5">
                     <label>Name</label>
                     <input kendoTextBox formControlName="name" class="form-control"
-                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.firstName.errors }" />
-                    <div *ngIf="submitted && f.firstName.errors" class="k-tooltip-validation">
-                        <div *ngIf="f.firstName.errors.required">Name is required</div>
+                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
                     </div>
                 </div>
                 <div class="form-group col-5">
                     <label>createdBy</label>
-                    <input kendoTextBox formControlName="createdBy" class="form-control" [ngClass]="{ 'ng-invalid ng-touched': submitted && f.lastName.errors }" />
-                    <div *ngIf="submitted && f.lastName.errors" class="k-tooltip-validation">
-                        <div *ngIf="f.lastName.errors.required">createdBy is required</div>
+                    <input kendoTextBox formControlName="createdBy" class="form-control" 
+                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.createdBy.errors }" />
+                    <div *ngIf="submitted && f.createdBy.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.createdBy.errors.required">createdBy is required</div>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     <label>project</label>
-                    <input kendoTextBox formControlName="project" class="form-control"
-                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.firstName.errors }" />
-                    <div *ngIf="submitted && f.firstName.errors" class="k-tooltip-validation">
-                        <div *ngIf="f.firstName.errors.required">project is required</div>
+                    <input kendoTextBox formControlName="project" class="form-control" 
+                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.project.errors }" />
+                    <div *ngIf="submitted && f.project.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.project.errors.required">project is required</div>
                     </div>
                 </div>
                 <div class="form-group col">
                     <label>Content</label>
-                    <input kendoTextBox formControlName="content" class="form-control"
-                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.confirmPassword.errors }" />
-                    <div *ngIf="submitted && f.confirmPassword.errors" class="k-tooltip-validation">
-                        <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-                        <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                    <input kendoTextBox formControlName="content" class="form-control" 
+                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.content.errors }" />
+                    <div *ngIf="submitted && f.content.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.content.errors.required">content is required</div>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <kendo-switch formControlName="acceptTerms" onLabel="Yes"
-          offLabel="No"></kendo-switch>
-                <label>Accept Terms & Conditions</label>
-                <div *ngIf="submitted && f.acceptTerms.errors" class="k-tooltip-validation">Accept Ts & Cs is required</div>
-            </div>
             <div class="text-center">
-                <button kendoButton  class="mr-2">Register</button>
+                <button kendoButton type="submit" class="mr-2">Register</button>
                 <button kendoButton type="reset" (click)="onReset()">Cancel</button>
             </div>
         </form>
     </div>
 </div>
+
+<!--<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Language</label>
+                    <kendo-dropdownlist 
+                    formControlName="language" [data]="languages" class="form-control"
+                     [ngClass]="{ 'ng-invalid ng-touched': submitted && f.language.errors }">
+                    </kendo-dropdownlist>
+                    <div *ngIf="submitted && f.language.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.language.errors.required">Language is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label>Name</label>
+                    <input kendoTextBox formControlName="name" class="form-control"
+                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label>createdBy</label>
+                    <input kendoTextBox formControlName="createdBy" class="form-control" 
+                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.createdBy.errors }" />
+                    <div *ngIf="submitted && f.createdBy.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.createdBy.errors.required">createdBy is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>project</label>
+                    <input kendoTextBox formControlName="project" class="form-control" 
+                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.project.errors }" />
+                    <div *ngIf="submitted && f.project.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.project.errors.required">project is required</div>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label>Content</label>
+                    <input kendoTextBox formControlName="content" class="form-control" 
+                    [ngClass]="{ 'ng-invalid ng-touched': submitted && f.content.errors }" />
+                    <div *ngIf="submitted && f.content.errors" class="k-tooltip-validation">
+                        <div *ngIf="f.content.errors.required">content is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button kendoButton type="submit" class="mr-2">Register</button>
+                <button kendoButton type="reset" (click)="onReset()">Cancel</button>
+            </div>
+        </form>-->

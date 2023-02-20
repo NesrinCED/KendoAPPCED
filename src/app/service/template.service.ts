@@ -18,7 +18,7 @@ export class TemplateService {
   public updateTemplate(template : Template): Observable<Template[]>{
     return this.http.put<Template[]>(`${this.apiURL}/${this.url}`,template);
   }
-  public CreateTemplate(template : Template): Observable<Template[]>{
+  public CreateTemplate(template : any): Observable<Template[]>{
     return this.http.post<Template[]>(`${this.apiURL}/${this.url}`,template);
   }
   public deleteTemplate(template : Template): Observable<Template[]>{
