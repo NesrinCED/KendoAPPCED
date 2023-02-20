@@ -1,13 +1,20 @@
 <h1>Templates</h1>
-<div style="margin-bottom: 1%; margin-right: 2%; margin-top: 1%; text-align: right;">
-  <kendo-button #anchor  icon="add" (click)="function()">Create New Templatehhah</kendo-button> 
-  <kendo-popup [anchor]="anchor.element" *ngIf="show" [popupAlign]="popupAlign">
-      <div class="popupClass">
-        <app-add-template></app-add-template>
-      </div>
-  </kendo-popup>
-
-</div>
+  <div style="margin-bottom: 1%; margin-right: 2%; margin-top: 1%; text-align: right;">
+    <kendo-button icon="add" *ngIf="!opened" (click)="open()">Create New Template</kendo-button> 
+  </div>
+  <kendo-dialog
+  title="Create A New Template" *ngIf="opened" (close)="close('cancel')"
+  [minWidth]="250" [width]="450">
+  <p style="margin: 30px; text-align: center;">
+    <app-add-template></app-add-template>
+  </p>
+  <kendo-dialog-actions>
+    <button kendoButton (click)="close('no')">Cancel</button>
+    <button kendoButton (click)="close('yes')" themeColor="primary">
+      Save
+    </button>
+  </kendo-dialog-actions>
+</kendo-dialog>
 
 <kendo-grid 
 [kendoGridBinding]="gridData" [filterable]="true" 
@@ -35,6 +42,15 @@
   
   </kendo-grid-column>
 </kendo-grid>
+
+<!--<div style="margin-bottom: 1%; margin-right: 2%; margin-top: 1%; text-align: right;">
+  <kendo-button #anchor  icon="add" (click)="function()">Create New Template</kendo-button> 
+  <kendo-popup [anchor]="anchor.element" *ngIf="show" [popupAlign]="popupAlign">
+      <div class="popupClass">
+        <app-add-template></app-add-template>
+      </div>
+  </kendo-popup>
+</div>-->
 <!--    <kendo-icon name="trash"></kendo-icon> -->
 <!-- <div class="k-block">
     <button kendoButton [look]="'default'">Edit</button>

@@ -17,6 +17,8 @@ import { ListTemplateComponent } from './components/template/list-template/list-
 import { HttpClientModule } from '@angular/common/http';
 import { IconsModule } from '@progress/kendo-angular-icons';
 import { PopupModule } from '@progress/kendo-angular-popup';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+
 
 
 
@@ -43,7 +45,8 @@ import { PopupModule } from '@progress/kendo-angular-popup';
     InputsModule,
     IconsModule,
     PopupModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogsModule
 
     
   ],

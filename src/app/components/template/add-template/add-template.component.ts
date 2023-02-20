@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 export class AddTemplateComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  titles = ['Mr', 'Mrs', 'Miss', 'Ms'];
+  languages = ['Arabic', 'French', 'English'];
 
   constructor(private formBuilder: FormBuilder) { }
 

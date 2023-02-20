@@ -14,11 +14,11 @@ enableProdMode();
 })
 export class ListTemplateComponent {
   public popupAlign: Align = { horizontal: "center", vertical: "top" };
-
-  public show = false;
+ // public show = false;
   public groupBy = [{field: 'name'}];
   public gridData: any[] ;
-  
+  public opened = true;
+
   constructor(private router:Router, private templateService:TemplateService){
     this.gridData=[{"action":true}]
   }
@@ -27,11 +27,19 @@ export class ListTemplateComponent {
     .getAllTemp()
     .subscribe( (result: any[]) => (this.gridData=result ,  console.log(this.gridData)));
   }
-  function():void{
+  public close(status: string): void {
+    console.log(`Dialog result: ${status}`);
+    this.opened = false;
+  }
+
+  public open(): void {
+    this.opened = true;
+  }
+ /* function():void{
       this.show = !this.show;
       //this.toggleText = this.show ? "Hide" : "Show";
    // this.router.navigate(['AddTemplate']);
-  }
+  }*/
   /*goBack(): void {
   this.location.back();
 } */
