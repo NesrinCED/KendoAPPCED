@@ -1,1 +1,50 @@
-<p>update-template works!</p>
+
+<div class="card m-3" >
+    <div class="card-body">
+        <h1>Edit Template</h1>
+        <form #form="ngForm" (ngSubmit)="updateTempate()">
+            <div class="form-row">
+                <div class="form-group col-5">
+                    <label>Language</label>
+                    <input kendoTextBox  class="form-control" id="language"
+                    name="language" [(ngModel)]="templateDetails.language"> 
+                </div>
+                <div class="form-group col-5">
+                    <label>Id</label>
+                    <input kendoTextBox  class="form-control" id="id" readonly
+                    name="id" [(ngModel)]="templateDetails.id"> 
+                </div>
+                <div class="form-group col-5">
+                    <label>Name</label>
+                    <input kendoTextBox  class="form-control" id="name"
+                    name="name" [(ngModel)]="templateDetails.name"> 
+                </div>
+                <div class="form-group col-5">
+                    <label>createdBy</label>
+                    <input kendoTextBox  class="form-control"  id="createdBy"
+                    name="createdBy" [(ngModel)]="templateDetails.createdBy"> 
+                </div>
+                <div class="form-group col-5">
+                    <label>modifiedBy</label>
+                    <input kendoTextBox  class="form-control"  id="modifiedBy"
+                    name="modifiedBy" [(ngModel)]="templateDetails.modifiedBy"> 
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>project</label>
+                    <input kendoTextBox  class="form-control"  id="project"
+                    name="project" [(ngModel)]="templateDetails.project"> 
+                </div>
+                <div class="form-group col">
+                    <label>Content</label>
+                    <input kendoTextBox class="form-control"  id="content"
+                    name="content" [(ngModel)]="templateDetails.content"> 
+                </div>
+            </div>
+            <kendo-dialog-actions>
+                <button kendoButton  type="submit" >Save</button>
+                <button kendoButton type="reset" >Cancel</button>
+              </kendo-dialog-actions>
+        </form>
+    </div>

@@ -1,20 +1,21 @@
 <h1>Templates</h1>
   <div style="margin-bottom: 1%; margin-right: 2%; margin-top: 1%; text-align: right;">
-    <kendo-button icon="add" *ngIf="!opened" (click)="open()">Create New Template</kendo-button> 
+    <kendo-button icon="add" *ngIf="opened" (click)="open()">Create New Template</kendo-button> 
   </div>
-  <kendo-dialog
-  title="Create A New Template" *ngIf="opened" (close)="close('cancel')"
+ <!-- <kendo-dialog
+  title="Create A New Template" *ngIf="opened" (close)="close('cangggggggggcel')"
   [minWidth]="250" [width]="450">
   <p style="margin: 30px; text-align: center;">
     <app-add-template></app-add-template>
   </p>
+</kendo-dialog>-->
   <!--<kendo-dialog-actions>
     <button kendoButton (click)="close('no')">Cancel</button>
     <button kendoButton (click)="close('yes')" themeColor="primary">
       Save
     </button>
   </kendo-dialog-actions>-->
-</kendo-dialog>
+
 
 <kendo-grid 
 [kendoGridBinding]="gridData" [filterable]="true" 
@@ -36,8 +37,8 @@
   <kendo-grid-column field="modifiedDate" title="ModifiedDate"> </kendo-grid-column>
   <kendo-grid-column field="action" title="Actions" > 
     <ng-template kendoGridCellTemplate let-dataItem>
-      <button kendoButton icon="pencil" style="margin-right: 10%;">Edit</button>
-      <button kendoButton icon="trash">Delete</button>
+      <button kendoButton icon="pencil" style="margin-right: 10%;" (click)="updateTemplate(this.dataItem.id)" >Edit</button>
+      <button kendoButton icon="trash" (click)="deleteTemplate(this.dataItem.id)">Delete</button>
     </ng-template>
   
   </kendo-grid-column>

@@ -1,5 +1,5 @@
 export class Template {
-    id:string;
+    id:string="";
     name:string;
     language:string;
     content:string;

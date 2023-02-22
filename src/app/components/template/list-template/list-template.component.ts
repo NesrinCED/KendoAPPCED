@@ -22,10 +22,14 @@ export class ListTemplateComponent {
   constructor(private router:Router, private templateService:TemplateService){
     this.gridData=[{"action":true}]
   }
-  ngOnInit() : void{
+  getalltemp(){
     this.templateService
     .getAllTemp()
     .subscribe( (result: any[]) => (this.gridData=result ,  console.log(this.gridData)));
+ 
+  }
+  ngOnInit() : void{
+    this.getalltemp();
   }
   public close(status: string): void {
     console.log(`Dialog result: ${status}`);
@@ -34,6 +38,17 @@ export class ListTemplateComponent {
 
   public open(): void {
     this.opened = true;
+    this.router.navigate(['AddTemplate']);
+  }
+  deleteTemplate(id : string){
+    console.log(id);
+    this.templateService.deleteTemplate(id).subscribe
+    ( (result) => (console.log(result),this.getalltemp()))
+  }
+  updateTemplate(id : string){
+    this.router.navigate(['UpdateTemplate',id]);
+
+    //this.templateService.updateTemplate(id).subscribe( (result) => (console.log(result)))
   }
  /* function():void{
       this.show = !this.show;

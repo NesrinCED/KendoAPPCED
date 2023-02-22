@@ -15,13 +15,18 @@ export class TemplateService {
   public getAllTemp(): Observable<Template[]>{
     return this.http.get<Template[]>(`${this.apiURL}/${this.url}`);
   }
-  public updateTemplate(template : Template): Observable<Template[]>{
-    return this.http.put<Template[]>(`${this.apiURL}/${this.url}`,template);
+  public getTemplate(id :string): Observable<Template>{
+    console.log("hekislash importanteeeeeeeee");
+    return this.http.get<Template>(`${this.apiURL}/${this.url}/` + id);
   }
-  public CreateTemplate(template : any): Observable<Template[]>{
-    return this.http.post<Template[]>(`${this.apiURL}/${this.url}`,template);
+  public updateTemplate(id :string, template : Template): Observable<Template>{
+    return this.http.put<Template>(`${this.apiURL}/${this.url}/` + id, template);
   }
-  public deleteTemplate(template : Template): Observable<Template[]>{
-    return this.http.delete<Template[]>(`${this.apiURL}/${this.url}/${template.id}`);
+  public CreateTemplate(addTemplateRequest : Template): Observable<Template>{
+    addTemplateRequest.id='00000000-0000-0000-0000-000000000000';
+    return this.http.post<Template>(`${this.apiURL}/${this.url}`,addTemplateRequest);
+  }
+  public deleteTemplate(id :string): Observable<Template>{
+    return this.http.delete<Template>(`${this.apiURL}/${this.url}/` + id);
   }
 }
