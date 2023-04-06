@@ -9,28 +9,48 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { InputsModule } from "@progress/kendo-angular-inputs";
-import { AddTemplateComponent } from './components/template/add-template/add-template.component';
-import { DeleteTemplateComponent } from './components/template/delete-template/delete-template.component';
-import { UpdateTemplateComponent } from './components/template/update-template/update-template.component';
-import { ViewTemplateComponent } from './components/template/view-template/view-template.component';
-import { ListTemplateComponent } from './components/template/list-template/list-template.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IconsModule } from '@progress/kendo-angular-icons';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { EditorModule } from '@progress/kendo-angular-editor';
+import { LoginComponent } from './Modules/authentication/login/login.component';
+import { SignupComponent } from './Modules/authentication/signup/signup.component';
+import { LabelModule } from '@progress/kendo-angular-label';
+import { LayoutModule } from '@progress/kendo-angular-layout';
+import { HomeMenuComponent } from './Modules/admin/home-menu/home-menu.component';
+import { MenuModule } from '@progress/kendo-angular-menu';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { UploadsModule } from '@progress/kendo-angular-upload';
+import { NavigationModule } from '@progress/kendo-angular-navigation';
+import { IndicatorsModule } from '@progress/kendo-angular-indicators';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './Modules/admin/home-menu/home/home.component';
+import { CommonModule } from '@angular/common';
+import { ListTemplatesEmployeeComponent } from './Modules/admin/home-menu/employee/list-templates-employee/list-templates-employee.component';
+import { UpdateEmployeeComponent } from './Modules/admin/home-menu/employee/update-employee/update-employee.component';
+import { ListProjectComponent } from './Modules/admin/home-menu/list-project/list-project.component';
+import { AddTemplateComponent } from './Modules/admin/home-menu/template/add-template/add-template.component';
+import { ListTemplateComponent } from './Modules/admin/home-menu/template/list-template/list-template.component';
+import { UpdateTemplateComponent } from './Modules/admin/home-menu/template/update-template/update-template.component';
+import { ViewTemplateComponent } from './Modules/admin/home-menu/template/view-template/view-template.component';
+import { ListEmployeeComponent } from './Modules/admin/home-menu/employee/list-employee/list-employee.component';
 
-
-
-
- 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    SignupComponent,
+    HomeMenuComponent,
+    ListEmployeeComponent,
     AddTemplateComponent,
-    DeleteTemplateComponent,
+    ListTemplateComponent,
+    ListProjectComponent,
     UpdateTemplateComponent,
     ViewTemplateComponent,
-    ListTemplateComponent,
+    UpdateEmployeeComponent,
+    ListTemplatesEmployeeComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,11 +66,18 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     IconsModule,
     PopupModule,
     ReactiveFormsModule,
-    DialogsModule
-
-    
+    DialogsModule,
+    EditorModule,
+    LabelModule,
+    LayoutModule,
+    MenuModule,
+    PDFExportModule,
+    UploadsModule,
+    NavigationModule,
+    IndicatorsModule,
+    NgbModule,
   ],
-  providers: [],
+  providers: [  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,83 @@
+.panel{
+    min-height: 400px;
+    width: 1000px;
+    box-shadow: 20px 20px 80px rgb(142, 176, 203);
+    border-radius: 12px;
+    margin-top: 8%;
+    margin-left: 15%;
+
+}
+.panel-body {
+    display: flex;
+}
+.login{
+    height: 450px;
+    min-width:550px; 
+}
+/****************form**************/
+/*Blue #3899DD Green #86BC35Purple #56248C*/
+.loginT{
+    font-size: 48px;
+    color: #48545e;
+    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+.form{
+    padding-top: 13%;
+    padding-left: 8%;
+}
+#forget{
+    font-size: 12px;
+    margin-left: auto;
+    text-decoration: none;
+    cursor: pointer;
+}
+a:hover{
+    text-decoration: none;
+}
+.form-inline label{
+    padding-left: 10px;
+    margin: 0;
+    cursor: pointer;
+}
+.loginButton{
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    padding: 6px 45%;
+    margin-top: 2%;
+    border-radius: 25px;
+    color:  #f6f6f6;
+    background-color: #378ed6;
+    border: none;
+    cursor: pointer;
+}
+
+.input-field{
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #399ed8;
+    color: #585858;
+}
+.input-field.error{
+    border : 1px solid red;
+    color: red;
+}
+
+input[type='text'],
+input[type='password']{
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+}
+.fa-eye-slash.btn{
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+

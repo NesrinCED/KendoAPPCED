@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Template } from './model/template';
 import { TemplateService } from './service/template.service';
 import {enableProdMode} from '@angular/core';
+import { AppModule } from "./app.module";
+
+
 enableProdMode();
 
 @Component({

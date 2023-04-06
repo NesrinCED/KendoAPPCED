@@ -1,11 +1,13 @@
 export class Template {
-    id:string="";
+    templateId:string="";
     name:string;
     language:string;
     content:string;
-    createdBy: string;
-    modifiedBy :string;
-    project : string;
     createdDate? :Date;
     modifiedDate? : Date;
+    
+    modifiedBy :string="";
+    createdBy: string="";
+
+    projectId : string="";
 }

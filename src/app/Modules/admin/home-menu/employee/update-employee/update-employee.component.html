@@ -1,0 +1,68 @@
+<!--link for fa-eye slash-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<div class="alert">
+    <ngb-alert *ngIf="!same" type="danger" >
+        Type Correct Recent Password !
+    </ngb-alert>
+</div>
+<div class="card" >
+  <div class="card-body">
+    <div class="card-header" style="height: 12%;margin-bottom: 2%; background-color: #fdf9ff;">
+        <div class="container">
+        <span class="k-icon k-i-edit" style="padding-bottom: 3%;font-size: 30px; color: #8d0f8b "></span> 
+        <div class="titleT"> Edit Account</div>
+    </div>      
+    </div>      
+    <!--row word is important not form-row !!!!-->
+    <div class="form-row row">
+        <div class="col-md-4" style="padding-top: 1px">
+            <img src="assets/images/user.jpg" class="rounded-circle" style="text-align: center;" >
+        </div>
+        <div class="col-md-8" style="padding-left: 5%;">
+            <form [formGroup]="ngForm" (ngSubmit)="edit()" >
+                <div class="form-group ">
+                    <label>Name</label>
+                    <div class="input-field" >
+                        <span class="k-icon k-i-user" style="color: #4c036d;font-size: 20px;"></span>
+                        <input class="form-control" id="employeeName"
+                        formControlName="employeeName" type="text" placeholder="Username" 
+                        [(ngModel)]="employeeDetails.employeeName" >
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label>Recent Password</label>
+                    <div class="input-field" >
+                        <span class="k-icon k-i-lock" style="color: #4c036d;font-size: 20px;"></span>
+                        <input class="form-control" id="currentPassword" [type]="type"
+                        formControlName="currentPassword" placeholder="Recent Password"
+                         >
+                        <span (click)="hideshowPass()" class="fa {{eyeIcon}}" style=" color: #4c036d;"></span>
+
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label>New Password</label>
+                    <div class="input-field" >
+                        <span class="k-icon k-i-lock"style="color: #4c036d;font-size: 20px;"></span>
+                        <input class="form-control" id="newPassword" [type]="type"
+                         formControlName="newPassword"  placeholder="New Password" 
+                         [(ngModel)]="employeeDetails.employeePassword">
+                         <span (click)="hideshowPass()" class="fa {{eyeIcon}}" style=" color: #4c036d;"></span>
+
+                    </div>
+                </div>
+            </form>
+
+            <div class="row" style="padding-top: 5%;">
+                <div class="col-6">
+                    <button kendoButton (click)="edit()" type="submit" class="updateButton">Save</button>
+                </div>
+                <div class="col-6">
+                    <button kendoButton  type="reset" class="updateButton">Cancel</button>
+                </div>
+
+            </div>
+
+    </div>
+
+</div>

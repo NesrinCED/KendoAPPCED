@@ -1,0 +1,63 @@
+<router-outlet></router-outlet>
+<div class="custom-toolbar">
+  <div class="row">
+    <div class="col-sm-2">
+      <button kendoButton (click)="drawer.toggle()">
+        <img src="assets/images/CED_Img.png" alt="CED"  height="40" width="100">
+      </button>
+    </div> 
+    <div class="col-sm-8">
+      <!--<div class="title">
+        <h2>DTG</h2>
+        <h2>DTG</h2>
+      </div>-->
+    </div>
+    <div class="col-sm-2" style="  justify-content: space-between; ">
+      <kendo-textbox
+       [style.width.px]="160"
+       placeholder="Search..."
+       [clearButton]="true"
+      >
+        <ng-template kendoTextBoxPrefixTemplate>
+          <kendo-icon name="search"></kendo-icon>
+        </ng-template>
+      </kendo-textbox> 
+      <kendo-avatar [imageSrc]="'assets/images/imageUser.png'" shape="circle"></kendo-avatar>
+      <button kendoButton *ngIf="employeeService.IsLoggedIn()" (click)="logout()">
+        <kendo-icon name="logout" style="color: #24558c;"></kendo-icon>
+      </button>  
+    </div>      
+    </div>
+  </div>
+<kendo-drawer-container > 
+    <kendo-drawer
+      #drawer 
+      [items]="items"
+      mode="push"
+      [mini]="true"
+      [width]="250"
+      [(expanded)]="expanded"
+      (select)="onSelect($event)"
+    >
+      <ng-template kendoDrawerItemTemplate let-item  >
+        <span class="k-icon {{ item.iconDrawer }}" style="font-size: 25px; color: #743c9a; width: 20%;">
+        </span>
+        <div class="drawer-item"  >
+          <div  *ngIf="expanded" >
+            <div class="itemTitle">{{ item.title }}</div> 
+            <span class="item-descr">{{ item.description }}</span>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-drawer>
+    <kendo-drawer-content> 
+      <!--<app-list-template></app-list-template>-->
+      <app-home *ngIf="selectedItem === 'Home'"></app-home>
+      <app-list-project *ngIf="selectedItem === 'Projects'"></app-list-project>
+      <app-list-template *ngIf="selectedItem === 'Template'"></app-list-template>
+      <app-list-templates-employee *ngIf="selectedItem === 'My Templates'"></app-list-templates-employee>
+      <app-update-employee *ngIf="selectedItem === 'Settings'"></app-update-employee>
+      <app-add-template *ngIf="selectedItem === 'New Template'"></app-add-template>
+      <app-list-employee *ngIf="selectedItem === 'Developers'"></app-list-employee>
+    </kendo-drawer-content>
+  </kendo-drawer-container>

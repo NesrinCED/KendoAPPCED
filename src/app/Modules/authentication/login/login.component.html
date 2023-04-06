@@ -1,0 +1,49 @@
+<!--link for fa-eye slash-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<div class="panel"> 
+    <ngb-alert *ngIf="showSuccessAlert" type="info" >
+        Your logged in successufully !
+    </ngb-alert>
+    <ngb-alert *ngIf="showDangerAlert" type="danger" >
+        User Not Found !
+    </ngb-alert>
+    <div class="panel-body">
+        <div class="left-section">
+            <img src="assets/images/Login2.png" alt="login" class="login" >
+        </div>
+        <div class="right-section" >
+            <div class="loginT">
+                Welcome Back ! 
+              </div>
+            <form [formGroup]="loginForm" class="form">
+                <div class="form-group pt-3">
+                    <div class="input-field" [class.error]="loginForm.controls['EmployeeName'].dirty && loginForm.hasError('required','EmployeeName')" >
+                        <span class="k-icon k-i-user" style="color: #3899DD;font-size: 20px;"></span>
+                        <input formControlName="EmployeeName" type="text" placeholder="Username" >
+                    </div>
+                </div>
+                <small *ngIf="loginForm.controls['EmployeeName'].dirty && loginForm.hasError('required','EmployeeName')" class="text-danger">*Username is required </small>
+                <div class="form-group pt-3">
+                    <div class="input-field" [class.error]="loginForm.controls['EmployeePassword'].dirty && loginForm.hasError('required','EmployeePassword')" >
+                        <span class="k-icon k-i-lock" style="color: #3899DD;font-size: 20px;"></span>
+                        <input  formControlName="EmployeePassword" [type]="type" placeholder="Password">
+                        <span (click)="hideshowPass()" class="fa {{eyeIcon}}"></span>
+                    </div>
+                </div>
+                <small *ngIf="loginForm.controls['EmployeePassword'].dirty && loginForm.hasError('required','EmployeePassword')" class="text-danger">*Password is required </small>
+            <div class="">
+                    <a id="forget" class="font-weight-bold">Forget Password?</a>
+                </div>
+                <button kendoButton (click)="onLogin()" type="submit" class="loginButton">Login</button>
+
+                <div  class="text-center pt-4 text-muted">
+                    Dont you have an account?
+                    <a id="forget" routerLink="/signup">Sign Up</a>
+                </div>  
+            
+        </form>
+        </div>
+
+    </div>
+
+</div>

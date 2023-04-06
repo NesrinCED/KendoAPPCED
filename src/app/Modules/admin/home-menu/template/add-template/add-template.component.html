@@ -1,0 +1,156 @@
+<kendo-dialog
+title="Create A New Template" *ngIf="opened" (close)="close('cancel')"
+[minWidth]="250" [width]="1000">
+<div class="card m-3" >
+    <div class="card-body">
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Language</label>
+                    <kendo-dropdownlist  
+                     [data]="languages" class="form-control" id="language" 
+                     name="language" [(ngModel)]="addTemplateRequest.language">
+                    </kendo-dropdownlist>
+                </div>
+                <div class="form-group col-5">
+                    <label>Template Name</label>
+                    <input kendoTextBox  class="form-control" id="name"
+                    name="name" [(ngModel)]="addTemplateRequest.name"> 
+                </div>
+                <div class="form-group col-5">
+                    <label>Employee Name</label>
+                    <input kendoTextBox class="form-control" id="employeeName" 
+                    name="employeeName" [(ngModel)]="employee.employeeName" >
+                   <!--<kendo-dropdownlist 
+                    [data]="employeNames" class="form-control" id="employeeName"
+                    name="employeeName"  [(ngModel)]="employee.employeeName">
+                   </kendo-dropdownlist>-->
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Project Name</label>
+                    <kendo-dropdownlist 
+                    [data]="projectNames" class="form-control" id="ProjectName"
+                    name="ProjectName"  [(ngModel)]="project.projectName">
+                   </kendo-dropdownlist>
+              
+                </div>
+                <div class="form-group col">
+                    <label>Content</label>
+                   <kendo-pdf-export #pdf paperSize="A4" margin="1cm">
+                    <kendo-editor
+                    class="form-control"  id="content" [(value)]="addTemplateRequest.content" [iframe]="false"  
+                    name="content" [(ngModel)]="addTemplateRequest.content">                 
+                   </kendo-editor>
+                   </kendo-pdf-export>
+                  
+                  <kendo-button
+                  icon="pdf"
+                  (click)="pdf.saveAs('editor-content.pdf')"
+                  >Export as PDF</kendo-button>
+
+                
+                </div>
+            </div>
+
+         
+            <kendo-dialog-actions>
+                <button kendoButton  type="submit" >Register</button>
+                <button kendoButton type="reset" (click)="close('no')" >Cancel</button>
+              </kendo-dialog-actions>
+        </form>
+    </div>
+</div>
+</kendo-dialog>
+
+
+
+
+
+
+<!--              
+                    <kendo-pdf-export #pdf paperSize="A4" margin="1cm">
+                        <kendo-editor    class="form-control"  id="content" [iframe]="false"  
+                        name="content" [(ngModel)]="addTemplateRequest.content" [(value)]="addTemplateRequest.content" >
+                            <kendo-toolbar>
+                                <kendo-toolbar-button kendoEditorBoldButton></kendo-toolbar-button>
+                                <kendo-toolbar-button kendoEditorItalicButton></kendo-toolbar-button>
+                                <kendo-toolbar-button kendoEditorUnderlineButton></kendo-toolbar-button>
+                                <kendo-toolbar-button kendoEditorStrikethroughButton></kendo-toolbar-button>
+                                <kendo-toolbar-button kendoEditorInsertImageButton></kendo-toolbar-button>
+                                <kendo-toolbar-button
+                                text="Export as PDF"
+                                icon="pdf"
+                                (click)="pdf.saveAs('editor-content.pdf')"
+                                ></kendo-toolbar-button>
+                            </kendo-toolbar>
+                        </kendo-editor>
+                    </kendo-pdf-export>-->
+
+
+
+
+<!--
+<kendo-dialog
+title="Create A New Template" *ngIf="opened" (close)="close('cancel')"
+[minWidth]="250" [width]="1000">
+<div class="card m-3" >
+    <div class="card-body">
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Language</label>
+                    <kendo-dropdownlist  
+                     [data]="languages" class="form-control" id="language" 
+                     name="language" [(ngModel)]="addTemplateRequest.language">
+                    </kendo-dropdownlist>
+                </div>
+                <div class="form-group col-5">
+                    <label>Name</label>
+                    <input kendoTextBox  class="form-control" id="name"
+                    name="name" [(ngModel)]="addTemplateRequest.name"> 
+                </div>
+                <div class="form-group col-5">
+                    <label>Employee Name</label>
+                    <kendo-dropdownlist 
+                    [data]="employeNames" class="form-control" id="EmployeeName"
+                    name="employeeName"  [(ngModel)]="employee.EmployeeName">
+                   </kendo-dropdownlist>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Project Name</label>
+                    <kendo-dropdownlist 
+                    [data]="projectNames" class="form-control" id="ProjectName"
+                    name="ProjectName"  [(ngModel)]="project.ProjectName">
+                   </kendo-dropdownlist>
+              
+                </div>
+                <div class="form-group col">
+                    <label>Content</label>
+                    <kendo-editor
+                    class="form-control"  id="content"
+                    name="content" [(ngModel)]="addTemplateRequest.content">                 
+                   </kendo-editor>
+      
+    
+                </div>
+            </div>
+            <kendo-dialog-actions>
+                <button kendoButton  type="submit" >Register</button>
+                <button kendoButton type="reset" (click)="close('no')">Cancel</button>
+              </kendo-dialog-actions>
+        </form>
+    </div>
+</div>
+</kendo-dialog>
+-->
+
+
+
+    <!--  <kendo-dropdownlist 
+                    [data]="projectNames" class="form-control" id="projectId"
+                    name="projectId"  [(ngModel)]="addTemplateRequest.projectId" >
+                   </kendo-dropdownlist>-->

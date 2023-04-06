@@ -1,0 +1,39 @@
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+  <div class="title">
+    <h2>List Of Projects</h2>
+    <h2>List Of Projects</h2>
+ </div>  
+<div class="container" >
+  <div class="row">
+    <div class="col-md-6" data-wow-delay=".2s"
+    style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;  "
+    
+    *ngFor="let i of list"
+    >
+        <div class="team-style07">
+            <div class="team-thumb mb-1-9"> <!--style="min-height:300px; min-width:300px"-->
+                <div class="thumb" >
+                  <div class="row">
+                    <div class="col-md-12">
+                      <img src="assets/images/project.jpg" class="rounded-circle" height="150px" width="150px"> 
+                        <h3 class="name">
+                          {{i.projectName}}
+                          <h3 class="name0">{{i.createdBy}}</h3>
+                        </h3>                 
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+            <p class="name0" style="text-align: center; padding-bottom: 2%;">{{i.createdDate}}</p>
+        </div> <br>   
+    </div>
+  </div>
+</div>
+
+
+
+
+
