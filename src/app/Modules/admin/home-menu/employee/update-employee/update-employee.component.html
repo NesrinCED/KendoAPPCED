@@ -5,7 +5,13 @@
         Type Correct Recent Password !
     </ngb-alert>
 </div>
-<div class="card" >
+<div class="card" style="    min-height:35% ;
+width:60% ;
+margin-left: 20%;
+margin-right: 20%;
+margin-top: 1%;
+box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
+">
   <div class="card-body">
     <div class="card-header" style="height: 12%;margin-bottom: 2%; background-color: #fdf9ff;">
         <div class="container">
@@ -18,10 +24,10 @@
         <div class="col-md-4" style="padding-top: 1px">
             <img src="assets/images/user.jpg" class="rounded-circle" style="text-align: center;" >
         </div>
-        <div class="col-md-8" style="padding-left: 5%;">
+        <div class="col-md-8" >
             <form [formGroup]="ngForm" (ngSubmit)="edit()" >
                 <div class="form-group ">
-                    <label>Name</label>
+                    <label class="labelC">Name</label>
                     <div class="input-field" >
                         <span class="k-icon k-i-user" style="color: #4c036d;font-size: 20px;"></span>
                         <input class="form-control" id="employeeName"
@@ -30,7 +36,7 @@
                     </div>
                 </div>
                 <div class="form-group ">
-                    <label>Recent Password</label>
+                    <label  class="labelC">Recent Password</label>
                     <div class="input-field" >
                         <span class="k-icon k-i-lock" style="color: #4c036d;font-size: 20px;"></span>
                         <input class="form-control" id="currentPassword" [type]="type"
@@ -41,14 +47,13 @@
                     </div>
                 </div>
                 <div class="form-group ">
-                    <label>New Password</label>
+                    <label  class="labelC">New Password</label>
                     <div class="input-field" >
                         <span class="k-icon k-i-lock"style="color: #4c036d;font-size: 20px;"></span>
                         <input class="form-control" id="newPassword" [type]="type"
                          formControlName="newPassword"  placeholder="New Password" 
                          [(ngModel)]="employeeDetails.employeePassword">
                          <span (click)="hideshowPass()" class="fa {{eyeIcon}}" style=" color: #4c036d;"></span>
-
                     </div>
                 </div>
             </form>
@@ -58,7 +63,7 @@
                     <button kendoButton (click)="edit()" type="submit" class="updateButton">Save</button>
                 </div>
                 <div class="col-6">
-                    <button kendoButton  type="reset" class="updateButton">Cancel</button>
+                    <button kendoButton (click)="onReset()" type="reset" class="updateButton">Cancel</button>
                 </div>
 
             </div>

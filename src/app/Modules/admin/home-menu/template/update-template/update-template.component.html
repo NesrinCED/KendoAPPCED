@@ -1,43 +1,78 @@
 
-<div class="card m-3" >
-    <div class="card-body">
-        <h1>Edit Template</h1>
-        <form #form="ngForm" (ngSubmit)="updateTempate()">
-            <div class="form-row">
-                <div class="form-group col-5">
-                    <label>Language</label>
-                    <input kendoTextBox  class="form-control" id="language"
-                    name="language" [(ngModel)]="templateDetails.language"> 
-                </div>
-                <div class="form-group col-5">
+<div class="card" style="    width:85% ;
+margin-left: 5%;
+margin-top: 0.5%;
+box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);" >
+  <div class="card-body">
+    <div class="card-header" style=" background-color: #fdf9ff;">
+        <div class="container">
+        <span class="k-icon k-i-edit" style="padding-left: 2%;padding-bottom: 2%;font-size: 30px; color: #8d0f8b "></span> 
+        <div class="titleT"> Edit Template</div>
+    </div>      
+    </div>      
+    <!--row word is important not form-row !!!!-->
+    <div class="form-row row">
+        <div class="col-md" >
+            <form [formGroup]="ngForm" (ngSubmit)="updateTemplate()" >
+                <div class="form-group1" style="margin-top: 2%;">
                     <label>Name</label>
-                    <input kendoTextBox  class="form-control" id="name"
-                    name="name" [(ngModel)]="templateDetails.name"> 
+                    <div class="input-field" style="margin-left: 7.5%;" >
+                        <input class="form-control" id="name"
+                        formControlName="name" type="text" placeholder="Name" 
+                        [(ngModel)]="templateDetails.name" >
+                    </div>
                 </div>
-                <div class="form-group col-5">
-                    <label>modifiedBy</label>
-                    <input kendoTextBox  class="form-control"  id="modifiedBy"
-                    name="modifiedBy" [(ngModel)]="templateDetails.modifiedBy"> 
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>project</label>
-                    <kendo-dropdownlist 
-                    [data]="projectNames" class="form-control" id="ProjectName"
-                    name="ProjectName"  [(ngModel)]="project.projectName">
+                <div class="form-group1 ">
+                    <label>Language</label>
+                    <kendo-dropdownlist  style="margin-left: 5%;"
+                    [data]="languages" class="form-control" id="language" 
+                    formControlName="language" [(ngModel)]="templateDetails.language">                
                    </kendo-dropdownlist>
                 </div>
-                <div class="form-group col">
-                    <label>Content</label>
-                    <kendo-editor
-                    class="form-control"  id="content"
-                    name="content" [(ngModel)]="templateDetails.content"></kendo-editor>
+                <div class="form-group1 ">
+                    <label>Modified By</label>
+                    <div class="input-field" style="margin-left: 3%;" >
+                        <input class="form-control" id="modifiedBy" type="text" 
+                         formControlName="modifiedBy" [(ngModel)]="employee.employeeName"
+                         readonly
+                        >
+                    </div>
+                </div>
+                <div class="form-group1">
+                    <label>Project Name</label>
+                    <kendo-dropdownlist style="margin-left: 2%;"
+                    [data]="projectNames" class="form-control" id="projectName"
+                    formControlName="projectName"  [(ngModel)]="project.projectName">
+                   </kendo-dropdownlist>
+                </div>
+                <div class="form-group1">
+                    <kendo-editor class="form-control"  id="content" [iframe]="false" name="content"
+                    #editor
+                     [(ngModel)]="templateDetails.content" [(value)]="templateDetails.content" >
+                        <kendo-toolbar>
+                            <kendo-toolbar-button kendoEditorBoldButton></kendo-toolbar-button>
+                            <kendo-toolbar-button kendoEditorItalicButton></kendo-toolbar-button>
+                            <kendo-toolbar-button kendoEditorUnderlineButton></kendo-toolbar-button>
+                            <kendo-toolbar-button kendoEditorStrikethroughButton></kendo-toolbar-button>
+                            <kendo-upload></kendo-upload>
+                            <kendo-toolbar-button
+                            text="Upload Image"
+                            (click)="openImage()"
+                          ></kendo-toolbar-button>                                                      
+                        </kendo-toolbar>
+                    </kendo-editor>
+                    <app-image-dialog #upload [editor]="editor"></app-image-dialog>
+                </div>
+            </form>
+            <div class="row" style="padding-top: 1%;">
+                <div class="col-6">
+                    <button kendoButton (click)="updateTemplate()" type="submit" class="editButton">Save</button>
+                </div>
+                <div class="col-6">
+                    <button kendoButton routerLink="/admin/AllTemplates" type="reset" class="editButton">Cancel</button>
                 </div>
             </div>
-            <kendo-dialog-actions>
-                <button kendoButton  type="submit" >Save</button>
-                <button kendoButton routerLink="ListTemplate" >Cancel</button>
-              </kendo-dialog-actions>
-        </form>
+
     </div>
+
+</div>

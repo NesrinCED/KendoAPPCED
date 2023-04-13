@@ -19,7 +19,7 @@ export class SignupComponent {
   alert: { type: string, message: string } = { type: '', message: '' };
 
   showAlert() {
-    this.alert.type = 'primary';
+    this.alert.type = 'success';
     this.alert.message = 'Your signed up successufully !';
   }  
   constructor(private fb:FormBuilder, private employeeService:EmployeeService, private router:Router){}

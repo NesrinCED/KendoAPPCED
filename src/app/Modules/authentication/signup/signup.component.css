@@ -1,7 +1,7 @@
 .panel{
     min-height: 400px;
-    width: 1000px;
-    box-shadow: 20px 20px 80px rgb(142, 176, 203);
+    width: 1010px;
+    box-shadow: 20px 20px 80px rgb(196, 174, 200);
     border-radius: 12px;
     margin-top: 8%;
     margin-left: 15%;
@@ -10,17 +10,14 @@
 .panel-body {
     display: flex;
 }
-.login{
-    height: 450px;
-    min-width:550px; 
-}
+
 /****************form**************/
 /*Blue #3899DD Green #86BC35Purple #56248C*/
 .loginT{
-    font-size: 40px;
+    font-size: 39px;
     color: #48545e;
     text-align: center;
-    padding-top: 5%;
+    padding-top: 3%;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 .form{
@@ -50,7 +47,7 @@ a:hover{
     margin-top: 5%;
     border-radius: 25px;
     color:  #f6f6f6;
-    background-color: #987ce0;
+    background-color: #8a3c9a;
     border: none;
     cursor: pointer;
 }
@@ -62,7 +59,7 @@ a:hover{
     display: flex;
     align-items: center;
     cursor: pointer;
-    border: 1px solid #987ce0;
+    border: 1px solid #743c9a;
     color: #585858;
 }
 .input-field.error{

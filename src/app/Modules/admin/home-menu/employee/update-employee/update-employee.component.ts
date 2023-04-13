@@ -47,18 +47,22 @@ export class UpdateEmployeeComponent {
     var employee=this.employeeDetails;
     this.typedPassword=this.ngForm.controls['currentPassword'].value;
     this.same=this.typedPassword===this.recentPassword; 
-
-    /*this.employeeService.updateEmployee(id,employee).subscribe(
+    if(this.same){
+      this.employeeService.updateEmployee(id,employee).subscribe(
       (res:any)=>{
         console.log("result :",res);
         this.employeeService.logout();
         this.router.navigate(['/login']);
       },
       error=>{console.error("error in updating")}
-    )*/
+    )
+    }
+ 
   }
 
-
+  onReset() {
+    this.ngForm.reset();
+ }
   hideshowPass(){
     this.isText= !this.isText;
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon= "fa-eye-slash" ;

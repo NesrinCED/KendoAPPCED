@@ -10,75 +10,69 @@ import { trigger, transition, style, animate } from '@angular/animations';
   templateUrl: './home-menu.component.html',
   styleUrls: ['./home-menu.component.css'],
   encapsulation: ViewEncapsulation.None,
-  animations: [
-    trigger('slideInFromRight', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate('600ms ease-in', style({ transform: 'translateX(0%)' })),
-      ]),
-      transition(':leave', [
-        animate('600ms ease-in', style({ transform: 'translateX(100%)' }))
-      ])
-    ]),
-    trigger('slideInFromLeft', [
-      transition(':enter', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('600ms ease-in', style({ transform: 'translateX(0%)' })),
-      ]),
-      transition(':leave', [
-        animate('600ms ease-in', style({ transform: 'translateX(100%)' }))
-      ])
-    ])
-  ]
 })
 export class HomeMenuComponent implements OnInit {
 
 public expanded = false;
 
-public selectedItem:string="Home";
-
+public selectedItem:string="";
 
 public items = [
   {
     title: "Home",
     iconDrawer: "k-i-home",
-    selected: true,
+    selected: false,
+    link: "Home",
+
   },
   { separator: true },
   {
     title: "Developers",
     description: "Manage Users",
     iconDrawer: "k-i-myspace",
+    link: "Developers",
+    selected: false,
+
   },
   { separator: true },
   {
     title: "Projects",
     description: "List Of Projects",
     iconDrawer: "k-i-clipboard-code",
+    link: "Projects",
+    selected: false,
   },
   { separator: true },
   {
     title: "Template",
     description: "Go To Template Space",
     iconDrawer: "k-i-track-changes",
+    link: "AllTemplates",
+    selected: false,
   },
   { separator: true },
   {
     title: "My Templates",
-    description: "Manage Your Created Templates",
+    description: "Manage Your Templates",
     iconDrawer: "k-i-track-changes-accept-all",
+    link: "MyTemplates",
+    selected: false,
   },
   { separator: true },
   {
     title: "New Template",
     description: "Create New Template",
     iconDrawer: "k-i-file-add",
+    link: "AddTemplate",
+    selected: false,
   },
   { separator: true },
   {
     title: "Settings",
     description: "Manage Your Account",
     iconDrawer: "k-i-settings",
+    link: "Settings",
+    selected: false,
   },
   
 ];
@@ -90,10 +84,16 @@ constructor(private router : Router, private fb:FormBuilder, public employeeServ
 ngOnInit(): void {
 }
 
-public onSelect(ev: DrawerSelectEvent): void {
-  this.selectedItem=ev.item.title;
-  console.log(this.selectedItem)
+public onSelect(event: any): void {
+  this.selectedItem = event.item.title;
+
+  this.items.forEach(item => {
+    if (item.title ===  this.selectedItem ) {
+      item.selected = true;
+    } 
+  });
 }
+
 
 logout(){
   this.employeeService.logout();

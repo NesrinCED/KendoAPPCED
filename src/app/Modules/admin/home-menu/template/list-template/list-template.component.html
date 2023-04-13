@@ -13,10 +13,10 @@
   <kendo-grid 
 [kendoGridBinding]="gridData" 
 [style]="{'width':'100%'}">
-  <kendo-grid-column field="name" title="Name" [width]="150" > 
+  <kendo-grid-column field="name" title="Name" [width]="130" > 
 </kendo-grid-column>
 
-  <kendo-grid-column field="language" title="Language" [width]="140"></kendo-grid-column>
+  <kendo-grid-column field="language" title="Language" [width]="120"></kendo-grid-column>
 
   <kendo-grid-column field="modifiedBy" title="Modified By" [width]="140"
 > 
@@ -27,7 +27,7 @@
 
   <kendo-grid-column field="createdDate" title="CreatedDate" [width]="200"> </kendo-grid-column>
 
-  <kendo-grid-column field="modifiedDate" title="ModifiedDate" [width]="150"> </kendo-grid-column>
+  <kendo-grid-column field="modifiedDate" title="ModifiedDate" [width]="200"> </kendo-grid-column>
 
   <kendo-grid-column field="createdBy" title="Created By" [width]="140">
     <ng-template kendoGridCellTemplate let-dataItem>
@@ -40,7 +40,6 @@
       {{dataItem?.project?.projectName}}
     </ng-template>  
   </kendo-grid-column>
-
   <kendo-grid-column field="action" title="Actions" [width]="200"> 
     <ng-template kendoGridCellTemplate let-dataItem>
       <button kendoButton icon="pencil" class="button" (click)="updateTemplate(this.dataItem.templateId)" >Edit</button>

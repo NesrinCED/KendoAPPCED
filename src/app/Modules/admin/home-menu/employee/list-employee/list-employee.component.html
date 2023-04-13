@@ -1,20 +1,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+ 
+<div class="title">
+    <h2>List Of Employees</h2>
+    <h2>List Of Employees</h2>
+</div> 
 
 <div class="container" >
-    <div class="title">
-        <h2>List Of Employees</h2>
-        <h2>List Of Employees</h2>
-    </div>   
-    <div class="row mt-n1-9">
-        <div class="col-md-6 col-xl-3 mt-1-9 wow fadeInUp" data-wow-delay=".2s"
-        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp; "
+    <div class="row">
+        <div class="col-sm-3" data-wow-delay=".2s"
+        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;  "
         
         *ngFor="let i of list"
         >
             <div class="team-style07">
                 <div class="team-thumb mb-1-9">
                     <div class="thumb">
-                        <img src="assets/images/user.jpg" class="rounded-circle" alt="...">
+                        <img src="assets/images/user.jpg" class="rounded-circle"
+                        style="  max-width: 50%;
+                        height: auto;
+                        vertical-align: top;"
+                        >
                     </div>
                 </div>
                 <h3 class="name">{{i.employeeName}}</h3>
@@ -23,8 +28,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-

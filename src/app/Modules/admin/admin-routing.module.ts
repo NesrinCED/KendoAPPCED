@@ -5,24 +5,39 @@ import { HomeMenuComponent } from './home-menu/home-menu.component';
 import { HomeComponent } from './home-menu/home/home.component';
 import { ListProjectComponent } from './home-menu/list-project/list-project.component';
 import { ListTemplateComponent } from './home-menu/template/list-template/list-template.component';
+import { ListEmployeeComponent } from './home-menu/employee/list-employee/list-employee.component';
+import { ListTemplatesEmployeeComponent } from './home-menu/employee/list-templates-employee/list-templates-employee.component';
+import { AddTemplateComponent } from './home-menu/template/add-template/add-template.component';
+import { UpdateEmployeeComponent } from './home-menu/employee/update-employee/update-employee.component';
+import { UpdateTemplateComponent } from './home-menu/template/update-template/update-template.component';
 
 
 
 const routes: Routes =  [
-  { path: 'admin', component: HomeMenuComponent,
+  { path: '', component: HomeMenuComponent, 
     children: [
-      {path: 'contentHome', component: HomeComponent },
-      { path: 'contentProject', component: ListProjectComponent },
-      {path: 'contentTemplate',component: ListTemplateComponent
-      },
+      {path: '', redirectTo: 'Home', pathMatch: 'full' },
+      {path: 'Home', component: HomeComponent },
+      {path: 'Developers', component: ListEmployeeComponent },
+      {path: 'Projects', component: ListProjectComponent },
+      {path: 'AllTemplates',component: ListTemplateComponent},
+      {path: 'AllTemplates/UpdateTemplate/:id',component: UpdateTemplateComponent},
+      {path: 'MyTemplates', component: ListTemplatesEmployeeComponent },
+      {path: 'AddTemplate',component: AddTemplateComponent},
+      {path: 'Settings',component: UpdateEmployeeComponent},
+
     ]
   }
 ];
-
+/*,
+      children: [
+        {path: 'UpdateTemplate/:id',component: UpdateTemplateComponent},
+      ]*/
 
   
   @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forChild(routes)],
+    //imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
   })
 export class AdminRoutingModule { }

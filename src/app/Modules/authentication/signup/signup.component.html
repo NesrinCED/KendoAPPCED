@@ -4,7 +4,7 @@
     <ngb-alert [dismissible]="false" [type]="alert.type">{{ alert.message }}</ngb-alert>
     <div class="panel-body">
         <div class="left-section">
-            <img src="assets/images/auth.jpg" alt="login" class="login" >
+            <img src="assets/images/signup.jpg" alt="login" class="login" height="400" width="500">
         </div>
         <div class="right-section" >
             <div class="loginT">
@@ -14,14 +14,14 @@
               <form [formGroup]="signUpForm"  class="form">
                 <div class="form-group pt-3">
                     <div class="input-field" [class.error]="signUpForm.controls['EmployeeName'].dirty && signUpForm.hasError('required','EmployeeName')" >
-                        <span class="k-icon k-i-user"></span>
+                        <span class="k-icon k-i-user" style="color: #743c9a; font-size: 20px;"></span>
                         <input formControlName="EmployeeName" type="text" placeholder="Username" >
                     </div>
                 </div>
                 <small *ngIf="signUpForm.controls['EmployeeName'].dirty && signUpForm.hasError('required','EmployeeName')" class="text-danger">*Username is required </small>
                 <div class="form-group pt-3">
                     <div class="input-field" [class.error]="signUpForm.controls['EmployeePassword'].dirty && signUpForm.hasError('required','EmployeePassword')" >
-                        <span class="k-icon k-i-lock"></span>
+                        <span class="k-icon k-i-lock" style="color: #743c9a; font-size: 20px;"></span>
                         <input  formControlName="EmployeePassword" [type]="type" placeholder="Password">
                         <span (click)="hideshowPass()" class="fa {{eyeIcon}}"></span>
                     </div>

@@ -29,21 +29,29 @@ import { ListTemplatesEmployeeComponent } from './home-menu/employee/list-templa
 import { ListProjectComponent } from './home-menu/list-project/list-project.component';
 import { HomeComponent } from './home-menu/home/home.component';
 import { ListEmployeeComponent } from './home-menu/employee/list-employee/list-employee.component';
-
+import { ImageDialogComponent } from './home-menu/template/add-template/image-dialog-add/image-dialog.component';
+import { ImageUploadComponent } from './home-menu/template/add-template/image-upload-add/image-upload.component';
+import { UploadsModule } from '@progress/kendo-angular-upload';
+import { AdminRoutingModule } from './admin-routing.module';
+import { ImageUploadUpdateComponent } from './home-menu/template/update-template/image-upload-update/image-upload-update.component';
+import { ImageDialogUpdateComponent } from './home-menu/template/update-template/image-dialog-update/image-dialog-update.component';
 
 
 @NgModule({
   declarations: [ 
-   /* AddTemplateComponent,
+    ListEmployeeComponent,
+    AddTemplateComponent,
     ListTemplateComponent,
     ListProjectComponent,
     UpdateTemplateComponent,
     ViewTemplateComponent,
     UpdateEmployeeComponent,
     ListTemplatesEmployeeComponent,
-    CreatedTemplateEmployeeComponent,
-    HomeComponent,*/
-  
+    HomeComponent,
+    ImageDialogComponent, 
+    ImageUploadComponent,
+    ImageUploadUpdateComponent,
+    ImageDialogUpdateComponent,
   ],
   imports: [
     CommonModule,
@@ -64,7 +72,9 @@ import { ListEmployeeComponent } from './home-menu/employee/list-employee/list-e
     PDFExportModule,
     NavigationModule,
     IndicatorsModule,
-    NgbModule
+    NgbModule,
+    UploadsModule,
+    AdminRoutingModule
   ]
 })
 export class AdminModule { }

@@ -27,13 +27,12 @@ export class ListTemplateComponent {
     this.router.navigate(["ListProject"]);
    }
   getalltemp(){
-    console.log("IN   list-temp.ts");
     this.templateService
     .getAllTemp()
     .subscribe( (result: any[]) => {
       this.gridData=result;  
-      console.log(this.gridData);
-      console.log(this.gridData[0]);
+      //console.log(this.gridData);
+      //console.log(this.gridData[0]);
 
     } 
     );
@@ -55,12 +54,12 @@ export class ListTemplateComponent {
   deleteTemplate(id : string){
     console.log(id);
     this.templateService.deleteTemplate(id).subscribe
-    ( (result) => (console.log(result),this.getalltemp()))
+    ( (result) => (
+      //console.log(result),
+      this.getalltemp()))
   }
   updateTemplate(id : string){
-    this.router.navigate(['UpdateTemplate',id]);
-
-    //this.templateService.updateTemplate(id).subscribe( (result) => (console.log(result)))
+    this.router.navigate(['admin/AllTemplates/UpdateTemplate',id]); 
   }
  
 }

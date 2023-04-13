@@ -2,6 +2,7 @@
 .container{
     height: 600px;
     overflow: auto;
+    /*min-width: 1200px;*/
   }
 .title {
     padding-bottom: 4%;

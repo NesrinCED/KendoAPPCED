@@ -35,14 +35,16 @@ import { ListTemplateComponent } from './Modules/admin/home-menu/template/list-t
 import { UpdateTemplateComponent } from './Modules/admin/home-menu/template/update-template/update-template.component';
 import { ViewTemplateComponent } from './Modules/admin/home-menu/template/view-template/view-template.component';
 import { ListEmployeeComponent } from './Modules/admin/home-menu/employee/list-employee/list-employee.component';
+import { ImageDialogComponent } from './Modules/admin/home-menu/template/add-template/image-dialog-add/image-dialog.component';
+import { ImageUploadComponent } from './Modules/admin/home-menu/template/add-template/image-upload-add/image-upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeMenuComponent,
     LoginComponent,
     SignupComponent,
-    HomeMenuComponent,
-    ListEmployeeComponent,
+/*    ListEmployeeComponent,
     AddTemplateComponent,
     ListTemplateComponent,
     ListProjectComponent,
@@ -51,6 +53,9 @@ import { ListEmployeeComponent } from './Modules/admin/home-menu/employee/list-e
     UpdateEmployeeComponent,
     ListTemplatesEmployeeComponent,
     HomeComponent,
+    ImageDialogComponent, 
+    ImageUploadComponent*/
+
   ],
   imports: [
     BrowserModule,

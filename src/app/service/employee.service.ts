@@ -49,7 +49,6 @@ export class EmployeeService {
 
   signUp(addEmployeeRequest:Employee){
     addEmployeeRequest.employeeId='00000000-0000-0000-0000-000000000000';
-    console.log("sign up in service ", addEmployeeRequest);
     return this.http.post<Employee>("https://localhost:7176/api/Employee/register",addEmployeeRequest);
   }
 
@@ -62,11 +61,9 @@ export class EmployeeService {
     return this.http.get<Employee[]>(`${this.apiURL}/${this.url}`);
   }
   public getEmployee(id :string): Observable<Employee>{
-    console.log("hekislash importanteeeeeeeee");
     return this.http.get<Employee>(`${this.apiURL}/${this.url}/` + id);
   }
   public getEmployeeByName(name :string): Observable<Employee>{
-    console.log("get employee name in service angular");
     return this.http.get<Employee>(`${this.apiURL}/${this.url}/` + name);
   }
   public updateEmployee(id :string, employee : Employee): Observable<Employee>{

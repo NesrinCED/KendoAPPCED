@@ -1,13 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EditorComponent } from '@progress/kendo-angular-editor';
 import { Employee } from 'src/app/model/employee';
 import { Project } from 'src/app/model/project';
 import { Template } from 'src/app/model/template';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
+import { ImageDialogComponent } from './image-dialog-add/image-dialog.component';
 
 @Component({
   selector: 'app-add-template',
@@ -28,10 +30,13 @@ import { TemplateService } from 'src/app/service/template.service';
   ],
 })
 export class AddTemplateComponent {
+  
+  @ViewChild("upload") public dialog: ImageDialogComponent;
+  @Output() @ViewChild("editor") public editor: EditorComponent;
 
   registerForm: FormGroup;
   submitted = false;
-  languages = ['Arabic', 'French', 'English'];
+  languages = ['Arabic', 'French', 'English','Korean','Turkish','Chinese','Punjabi','German', 'Japanese', 'Indonesian', 'Portuguese', 'Russian', 'Spanish', 'Hindi'];
   public gridData: any[] ;
   employeNames : string[]=[];
   projectNames : string[]=[];
@@ -56,21 +61,23 @@ export class AddTemplateComponent {
     createdDate: undefined
   };
   
-  employee : Employee={
-    employeeId:'',
-    employeeName:'',
-    employeePassword:''
-  };
-  
+ user:any;
+
+ ngForm!:FormGroup;
  
-
-
   ngOnInit() {
+    this.user=this.employeeService.GetUser();
     this.getAllEmp();
     this.getAllProj();
+    this.ngForm=this.fb.group({
+      name: ['', Validators.required],
+      language: ['', Validators.required],
+      content: ['', Validators.required],
+      projectName: ['', Validators.required]
+    });
   }
 
-  constructor(private router:Router,private formBuilder: FormBuilder,
+  constructor(private router:Router,private fb: FormBuilder,
      private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
     
   getAllEmp(){
@@ -78,10 +85,12 @@ export class AddTemplateComponent {
     .subscribe( (result: any[]) => (result.forEach(x=>this.employeNames.push(x.employeeName)) ));
   
   }
+
   getAllProj(){
     this.projectService.getAllProj()
     .subscribe( (result: any[]) => (  
-    result.forEach( x=>this.projectNames.push(x.projectName)) ));  
+    result.forEach( x=>this.projectNames.push(x.projectName))
+    ));  
   }
   onSubmit() {
     this.addTemplate();
@@ -95,40 +104,21 @@ addTemplate() {
     ,   console.log("id project",this.id),
     this.addTemplateRequest.projectId=this.id
     ));
-    //for employeId
-    this.employeeService.getEmployeeByName(this.employee.employeeName)
-    .subscribe((result:any)=>(
-      this.id=result.employeeId,
-      this.addTemplateRequest.createdBy=this.id,  
-      console.log("0000000000", this.addTemplateRequest),    
-      //for template
-      this.templateService.CreateTemplate(this.addTemplateRequest).subscribe
-      (
-        (result: any) => {
-          console.log(result);
-          this.submitted = false;
-          this.router.navigate(['ListTemplate']);
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      )
-  ));
-  
-  //ki 5rajt lbara yet3adew null les id donc da5alt de5el addtemplateservice
+    this.addTemplateRequest.createdBy=this.user.employeeId;
+//    console.log("!!!!!!!!!!!!!",this.addTemplateRequest.createdBy)
 
-/*
+  //for template
   this.templateService.CreateTemplate(this.addTemplateRequest).subscribe
   (
     (result: any) => {
-      console.log("ena chnod5ol service",result);
       this.submitted = false;
-      this.router.navigate(['ListTemplate']);
+      this.router.navigate(['admin/MyTemplates']);
     },
     (error: HttpErrorResponse) => {
-      alert(error.message);
+      console.log("errrorr !!")
     }
-  );*/
+  )
+  
 }
 
 onReset() {
@@ -139,12 +129,15 @@ public opened = true;
 public close(status: string): void {
   console.log(`Dialog result: ${status}`);
   this.opened = false;
-  //this.router.navigate(['home']);
+ // this.router.navigate(['Home']);
 }
 
 public open(): void {
   this.opened = true;
 }
 
+public openImage() {
+  this.dialog.open();
+}
 
 }

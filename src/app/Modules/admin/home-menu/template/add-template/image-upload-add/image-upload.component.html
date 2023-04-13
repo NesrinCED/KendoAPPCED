@@ -1,0 +1,10 @@
+<kendo-upload
+[saveUrl]="uploadSaveUrl"
+[removeUrl]="uploadRemoveUrl"
+(select)="onSelect($event)"
+(remove)="onRemove()"
+[multiple]="false"
+[withCredentials]="true">
+<kendo-upload-messages select="Select image">
+</kendo-upload-messages>
+</kendo-upload>

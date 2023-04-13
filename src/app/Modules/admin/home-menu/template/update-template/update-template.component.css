@@ -1,0 +1,85 @@
+.k-dropdownlist {
+    background-color: #f7eefc;
+    border: 1px solid #8142a3;
+    border-radius: 10px;
+    width: 80%;
+    height: 45px;
+  }
+  .k-dropdownlist:hover{
+    background-color: #efe1f8;
+  }
+  .k-dropdownlist .k-icon {
+    color:#510e75;
+  }
+  
+  .k-editor{
+    background-color: #fdfafe;
+    border: 1px solid #8142a3;
+    border-radius: 10px;
+    height: 250px;
+    width:90%;
+    margin-left: 5%;
+}
+
+/************/
+
+/*.card{
+    width:85% ;
+    margin-left: 5%;
+    margin-top: 0.5%;
+    box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
+}*/
+.titleT{
+    display: inline-block;  
+    background: linear-gradient(to right, #743c9a 25%, #e93be6  ); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+
+    padding-left: 3%;
+    font-size: 37px;
+    font-weight: bolder;
+    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.form-group1 {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1%;
+}
+label{
+    color: #743c9a;
+    font-size: 20px; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.input-field{
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid #441097;
+    color: #585858;
+    width: 80%;
+}
+.input-field.error{
+    border : 1px solid red;
+    color: red;
+}
+
+input[type='text']{
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+}
+.editButton{
+    text-align: center;
+    font-size: 25px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    padding: 6px 35%;
+    margin-top: 2%;
+    border-radius: 25px;
+    color:  #f6f6f6;
+    background: linear-gradient(to right, #743c9a 25%, #e93be6  ); 
+    border: none;
+    cursor: pointer;
+}

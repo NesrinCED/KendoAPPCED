@@ -1,7 +1,7 @@
 .panel{
     min-height: 400px;
     width: 1000px;
-    box-shadow: 20px 20px 80px rgb(142, 176, 203);
+    box-shadow: 20px 20px 80px rgb(196, 174, 200);
     border-radius: 12px;
     margin-top: 8%;
     margin-left: 15%;
@@ -49,7 +49,7 @@ a:hover{
     margin-top: 2%;
     border-radius: 25px;
     color:  #f6f6f6;
-    background-color: #378ed6;
+    background-color: #863c9a;
     border: none;
     cursor: pointer;
 }
@@ -60,7 +60,7 @@ a:hover{
     display: flex;
     align-items: center;
     cursor: pointer;
-    border: 1px solid #399ed8;
+    border: 1px solid #743c9a;
     color: #585858;
 }
 .input-field.error{

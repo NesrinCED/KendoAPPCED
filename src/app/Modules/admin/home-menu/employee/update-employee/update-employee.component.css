@@ -2,7 +2,7 @@
     width:78% ;
     margin-left: 11%;    
 }
-.card{
+/*.card{
     min-height:35% ;
     width:60% ;
     margin-left: 20%;
@@ -10,7 +10,7 @@
     margin-top: 1%;
     box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
 
-}
+}*/
 .titleT{
     display: inline-block;  
     background: linear-gradient(to right, #743c9a 25%, #e93be6  ); 
@@ -24,13 +24,11 @@
     font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
-label{
 
+.labelC{
     font-size: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-
-
 .input-field{
     border-radius: 10px;
     padding: 5px;
