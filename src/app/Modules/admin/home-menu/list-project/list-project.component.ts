@@ -20,7 +20,7 @@ export class ListProjectComponent {
       this.list=result;  
       console.log(this.list);
     /* this.list.forEach(i => {
-          console.log("!!!!!!!",i.employeeId);
+          console.log("!!!",i.employeeId);
       });*/
       console.log("nommmmm",this.list[0].projectId);
     } 

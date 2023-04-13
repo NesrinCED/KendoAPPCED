@@ -16,7 +16,7 @@ export class ProjectService {
     return this.http.get<Project[]>(`${this.apiURL}/${this.url}`);
   }
   public getProject(id :string): Observable<Project>{
-    //console.log("hekislash importanteeeeeeeee");
+    //console.log("slash importanteeeee");
     return this.http.get<Project>(`${this.apiURL}/${this.url}/` + id);
   }
   public getProjectByName(name :string): Observable<Project>{

@@ -17,22 +17,12 @@ import { ImageDialogComponent } from './Modules/admin/home-menu/template/add-tem
 const routes: Routes =  [
 /* {path: 'home', component:HomeMenuComponent,canActivate:[AuthGaurdService] ,children : [
 
-  ]},*/  { path: 'admin',loadChildren:()=>import('./Modules/admin/admin.module')
+  ]},*/  
+  { path: 'admin',loadChildren:()=>import('./Modules/admin/admin.module')
   .then((m)=>m.AdminModule)},
   { path: '', redirectTo:'login',pathMatch:'full' },
   { path: 'login', component: LoginComponent }, 
   { path: 'signup', component: SignupComponent},
-  /*{ path: 'admin', component: HomeMenuComponent},
-  { path: 'home', component: HomeComponent},
-  { path: 'listTempEmp/:employeeId', component: ListTemplatesEmployeeComponent},//,canActivate:[AuthGaurdService] 
-  { path: 'AddTemplate', component: AddTemplateComponent},
-  { path: 'ListTemplate', component: ListTemplateComponent },
-  { path: 'ListProject', component: ListProjectComponent },
-  { path: 'ImageUpload', component: ImageUploadComponent },
-  { path: 'ImageDialog', component: ImageDialogComponent },
-  { path: 'UpdateTemplate/:templateId', component: UpdateTemplateComponent },
-  { path: 'updateEmployee/:employeeId', component: UpdateEmployeeComponent },*/
-
 
   ];
 

@@ -25,18 +25,6 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeComponent } from './Modules/admin/home-menu/home/home.component';
-import { CommonModule } from '@angular/common';
-import { ListTemplatesEmployeeComponent } from './Modules/admin/home-menu/employee/list-templates-employee/list-templates-employee.component';
-import { UpdateEmployeeComponent } from './Modules/admin/home-menu/employee/update-employee/update-employee.component';
-import { ListProjectComponent } from './Modules/admin/home-menu/list-project/list-project.component';
-import { AddTemplateComponent } from './Modules/admin/home-menu/template/add-template/add-template.component';
-import { ListTemplateComponent } from './Modules/admin/home-menu/template/list-template/list-template.component';
-import { UpdateTemplateComponent } from './Modules/admin/home-menu/template/update-template/update-template.component';
-import { ViewTemplateComponent } from './Modules/admin/home-menu/template/view-template/view-template.component';
-import { ListEmployeeComponent } from './Modules/admin/home-menu/employee/list-employee/list-employee.component';
-import { ImageDialogComponent } from './Modules/admin/home-menu/template/add-template/image-dialog-add/image-dialog.component';
-import { ImageUploadComponent } from './Modules/admin/home-menu/template/add-template/image-upload-add/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -44,18 +32,6 @@ import { ImageUploadComponent } from './Modules/admin/home-menu/template/add-tem
     HomeMenuComponent,
     LoginComponent,
     SignupComponent,
-/*    ListEmployeeComponent,
-    AddTemplateComponent,
-    ListTemplateComponent,
-    ListProjectComponent,
-    UpdateTemplateComponent,
-    ViewTemplateComponent,
-    UpdateEmployeeComponent,
-    ListTemplatesEmployeeComponent,
-    HomeComponent,
-    ImageDialogComponent, 
-    ImageUploadComponent*/
-
   ],
   imports: [
     BrowserModule,

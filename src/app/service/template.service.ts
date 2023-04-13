@@ -18,7 +18,6 @@ export class TemplateService {
     return this.http.get<Template[]>(`${this.apiURL}/${this.url}`);
   }
   public getTemplate(id :string): Observable<Template>{
-   // console.log("hekislash importanteeeeeeeee");
     return this.http.get<Template>(`${this.apiURL}/${this.url}/` + id);
   }
   public getTemplateByName(name :string): Observable<Template>{

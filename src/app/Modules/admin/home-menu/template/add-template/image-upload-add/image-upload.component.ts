@@ -67,26 +67,3 @@ export class ImageUploadComponent {
         this.valueChange.emit();
     }
 }
-
-
-/*    public onSelect(ev: SelectEvent): void {
-        ev.files.forEach((file: FileInfo) => {
-            if (file.rawFile) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const img = new Image();
-
-                    img.src = <string>reader.result;
-                    img.onload = () => {
-                        this.valueChange.emit({
-                            src: img.src,
-                            height: img.height,
-                            width: img.width
-                        });
-                    };
-                };                    
-                console.log("0000000",file.rawFile)
-                reader.readAsDataURL(file.rawFile);
-            }
-        });
-    }*/

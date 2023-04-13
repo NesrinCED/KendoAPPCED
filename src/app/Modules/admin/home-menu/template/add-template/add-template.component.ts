@@ -105,8 +105,6 @@ addTemplate() {
     this.addTemplateRequest.projectId=this.id
     ));
     this.addTemplateRequest.createdBy=this.user.employeeId;
-//    console.log("!!!!!!!!!!!!!",this.addTemplateRequest.createdBy)
-
   //for template
   this.templateService.CreateTemplate(this.addTemplateRequest).subscribe
   (

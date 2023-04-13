@@ -22,14 +22,11 @@ export class EmployeeService {
   private apiURL="https://localhost:7176/api";
   private url='Employee';
 
-  constructor(private http : HttpClient
-    //,private router : Router, 
-     ,private authGaurdService: AuthGaurdService) {  }
+  constructor(private http : HttpClient ,private authGaurdService: AuthGaurdService) {  }
 
   logout() {
     localStorage.removeItem('user');
     console.log("logged out !!!");
-   // this.router.navigate(['login'])
   }
   
   GetUser(){
@@ -53,8 +50,6 @@ export class EmployeeService {
   }
 
   login(addEmployeeRequest:Employee){
-    console.log("hetheyya request",addEmployeeRequest);
-    var x:any;
     return this.http.post<Employee>("https://localhost:7176/api/Employee/authenticate",addEmployeeRequest);
   }
   public getAllemp(): Observable<Employee[]>{

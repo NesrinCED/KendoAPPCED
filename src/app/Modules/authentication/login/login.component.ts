@@ -11,9 +11,6 @@ import { EmployeeService } from 'src/app/service/employee.service';
 })
 export class LoginComponent implements OnInit {
   
-  //@Input() idInput !:string; // decorate the property with @Input()
-
-
    id:string="";
 
   loginForm! : FormGroup;
@@ -23,10 +20,6 @@ export class LoginComponent implements OnInit {
 
   showSuccessAlert = false;
   showDangerAlert = false;
-
-  showAlert() {
- 
-  }  
 
   constructor(private router : Router, private fb:FormBuilder, private employeeService:EmployeeService){}
   

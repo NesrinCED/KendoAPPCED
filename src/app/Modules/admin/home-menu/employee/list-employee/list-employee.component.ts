@@ -41,9 +41,6 @@ export class ListEmployeeComponent {
     .getAllemp()
     .subscribe( (result: any[]) => {
       this.list=result;  
-     /* this.list.forEach(i => {
-          console.log("!!!!!!!",i.employeeId);
-      });*/
     } 
     );
 
