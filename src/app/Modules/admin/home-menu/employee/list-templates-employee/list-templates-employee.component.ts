@@ -61,8 +61,6 @@ export class ListTemplatesEmployeeComponent {
                   }
                   ));
                   this.projectName=this.gridData[0].projectId;
-                  console.log("000",this.employeeDetails);
-                  console.log("111",this.employeeName);
                  }
               }
             );

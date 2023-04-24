@@ -1,10 +1,10 @@
 <!--link for fa-eye slash-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <div class="panel"> 
-    <ngb-alert *ngIf="showSuccessAlert" type="success" >
+    <ngb-alert *ngIf="showSuccessAlert" type="success" style="font-size: 20px;">
         Your logged in successufully !
     </ngb-alert>
-    <ngb-alert *ngIf="showDangerAlert" type="danger" >
+    <ngb-alert *ngIf="showDangerAlert" type="danger" style="font-size: 20px;" >
         User Not Found !
     </ngb-alert>
     <div class="panel-body">
@@ -31,9 +31,10 @@
                     </div>
                 </div>
                 <small *ngIf="loginForm.controls['EmployeePassword'].dirty && loginForm.hasError('required','EmployeePassword')" class="text-danger">*Password is required </small>
-            <div class="">
+                <!--<div class="">
                     <a id="forget" class="font-weight-bold">Forget Password?</a>
-                </div>
+                </div>-->
+                <br>
                 <button kendoButton (click)="onLogin()" type="submit" class="loginButton">Login</button>
 
                 <div  class="text-center pt-4 text-muted">

@@ -1,0 +1,73 @@
+<kendo-dialog 
+ *ngIf="opened" 
+[minWidth]="250" [width]="1100" [height]="700" >
+<div >
+    <ngb-alert *ngIf="showSuccessAlert" type="success" style="font-size: 20px;" >
+       Email Sent successufully !
+    </ngb-alert>
+    <ngb-alert *ngIf="showDangerAlert" type="danger" style="font-size: 20px;" >
+        Your Form is invalid ! Please fill up all fields !
+    </ngb-alert>
+    <ngb-alert *ngIf="showDangerAlertJson" type="danger" style="font-size: 20px;" >
+        Type Correct JSON Data !
+    </ngb-alert>
+    <div  style=" background-color: #fdf9ff; ">
+        <div class="container">
+        <span class="k-icon k-i-envelop-link" style="font-size: 30px; color: #8d0f8b "></span> 
+        <div class="titleT"> Send Your Email</div>
+        </div>
+    </div>      
+    <div>
+        <form  [formGroup]="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Project Name</label>
+                    <kendo-dropdownlist 
+                    [data]="projects" textField="projectName" formControlName="projectName"
+                    [(ngModel)]="project" id="project.projectId" (valueChange)="onProjectChange($event)">
+                    </kendo-dropdownlist>
+                </div>   
+                <div class="form-group">
+                    <label>Template Name</label>
+                    <kendo-dropdownlist 
+                    [data]="filteredTemplates" textField="name" formControlName="name"
+                    [(ngModel)]="templateRequest" id="templateRequest.templateId"
+                    [disabled]="!selectedProject">
+                    </kendo-dropdownlist>
+                </div>
+                <div class="row">
+                    <div class="form-group" class="col-6">
+                    <label>Subject</label>
+                    <div class="input-field" >
+                        <span class="k-icon k-i-edit-tools" style="color: #4c036d;font-size: 20px;"></span>
+                        <input class="form-control" id="subject"
+                        formControlName="subject" type="text" placeholder="subject" 
+                        [(ngModel)]="subject" >
+                    </div>
+                </div>
+                <div class="form-group" class="col-6">
+                    <label>To</label>
+                    <div class="input-field" >
+                        <span class="k-icon k-i-user" style="color: #4c036d;font-size: 20px;"></span>
+                        <input class="form-control" id="to"
+                        formControlName="to" type="email" placeholder="to" 
+                        [(ngModel)]="to" >
+                    </div>
+                    </div>
+                
+                </div>
+                
+                <div class="form-group">
+                    <label>JSON Data</label> <br>
+                    <textarea kendoTextArea  style="border-radius: 10px; margin-left: 5%; height: 200px; width: 800px;background-color:#f7eefc;"
+                    [(ngModel)]="jsonData" (valueChange)="onTextChange($event)"
+                    formControlName="jsonData" id="jsonData"  ></textarea>
+                </div>    
+            <kendo-dialog-actions>
+                <button kendoButton  type="submit" class="addButton">Send Email</button>
+                <button kendoButton type="reset" (click)="close()" class="addButton">Cancel</button>
+              </kendo-dialog-actions>
+        </form>
+    </div>
+</div>
+</kendo-dialog>
+

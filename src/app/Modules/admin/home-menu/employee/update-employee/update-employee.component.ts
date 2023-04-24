@@ -24,6 +24,7 @@ export class UpdateEmployeeComponent {
   ngForm!:FormGroup;
   typedPassword:string="";
   same:boolean=true;
+  dangerAlert:boolean=false;
 
   constructor(private router:Router, private activatedRoute: ActivatedRoute,
      private employeeService:EmployeeService, private fb:FormBuilder){
@@ -43,20 +44,27 @@ export class UpdateEmployeeComponent {
   }
 
   edit(){
-    var id=this.employeeDetails.employeeId;
-    var employee=this.employeeDetails;
-    this.typedPassword=this.ngForm.controls['currentPassword'].value;
-    this.same=this.typedPassword===this.recentPassword; 
-    if(this.same){
-      this.employeeService.updateEmployee(id,employee).subscribe(
-      (res:any)=>{
-        console.log("result :",res);
-        this.employeeService.logout();
-        this.router.navigate(['/login']);
-      },
-      error=>{console.error("error in updating")}
-    )
+    if (this.ngForm.valid){
+      this.dangerAlert=false;
+      var id=this.employeeDetails.employeeId;
+      var employee=this.employeeDetails;
+      this.typedPassword=this.ngForm.controls['currentPassword'].value;
+      this.same=this.typedPassword===this.recentPassword; 
+      if(this.same){
+        this.employeeService.updateEmployee(id,employee).subscribe(
+        (res:any)=>{
+          console.log("result :",res);
+          this.employeeService.logout();
+          this.router.navigate(['/login']);
+        },
+        error=>{console.error("error in updating")}
+      )
+      }
     }
+    else{
+      this.dangerAlert=true;
+    }
+
  
   }
 

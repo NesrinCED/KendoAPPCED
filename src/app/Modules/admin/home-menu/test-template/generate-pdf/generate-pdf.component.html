@@ -1,0 +1,54 @@
+<kendo-dialog 
+ *ngIf="opened" 
+[minWidth]="250" [width]="1100" [height]="700" >
+<div  >
+    <ngb-alert *ngIf="showSuccessAlert" type="success" style="font-size: 20px;" >
+       PDF Document Generated successufully !
+    </ngb-alert>
+    <ngb-alert *ngIf="showDangerAlert" type="danger" style="font-size: 20px;" >
+        Your Form is invalid ! Please fill up all fields !
+    </ngb-alert>
+    <ngb-alert *ngIf="showDangerAlertJson" type="danger" style="font-size: 20px;" >
+        Type Correct JSON Data !
+    </ngb-alert>
+    <div style=" background-color: #fdf9ff; ">
+        <div >
+        <span class="k-icon k-i-file-pdf" style="padding-bottom: 2%; font-size: 30px; color: #8d0f8b "></span> 
+        <div class="titleT"> Generate PDF Document</div>
+        </div>
+    </div>      
+    <div>
+        <form  [formGroup]="ngForm" (ngSubmit)="onSubmit1()">
+                <div class="form-group">
+                    <label>Project Name</label>
+                    <kendo-dropdownlist 
+                    [data]="projects" textField="projectName" formControlName="projectName"
+                    [(ngModel)]="project" id="project.projectId" (valueChange)="onProjectChange($event)">
+                    </kendo-dropdownlist>
+                </div>   
+                <div class="form-group">
+                    <label>Template Name</label>
+                    <kendo-dropdownlist 
+                    [data]="filteredTemplates" textField="name" formControlName="name"
+                    [(ngModel)]="templateRequest" id="templateRequest.templateId"
+                    [disabled]="!selectedProject">
+                    </kendo-dropdownlist>
+                </div>
+                <div class="form-group">
+                    <label>JSON Data</label> <br>
+                    <textarea kendoTextArea  style="height: 200px; width: 400px;background-color:#f7eefc;"
+                    [(ngModel)]="jsonData" (valueChange)="onTextChange($event)"
+                    formControlName="jsonData" id="jsonData"  ></textarea>
+                </div>
+                <kendo-button icon="download" class="downloadPDFButton" *ngIf="generatedPDF"
+                (click)="onSubmit()">Download PDF Document</kendo-button>     
+            <kendo-dialog-actions>
+                <!-- dont do it ngsubmit and click (click)="onSubmit()"==>2rows added-->
+                <button kendoButton  type="submit" class="addButton">Register</button>
+                <button kendoButton type="reset" (click)="close()" class="addButton">Cancel</button>
+              </kendo-dialog-actions>
+        </form>
+    </div>
+</div>
+</kendo-dialog>
+

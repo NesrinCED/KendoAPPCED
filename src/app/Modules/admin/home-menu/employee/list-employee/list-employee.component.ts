@@ -36,7 +36,6 @@ export class ListEmployeeComponent {
   constructor(private router:Router, private employeeService:EmployeeService){}
 
   getAll(){
-    console.log("IN   list-emp.ts");
     this.employeeService
     .getAllemp()
     .subscribe( (result: any[]) => {

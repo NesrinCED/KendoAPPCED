@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Template } from '../model/template';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,8 @@ export class TemplateService {
 
   private apiURL="https://localhost:7176/api";
   private url='Template';
+  private urlG='Template/pdf';
+  private urlS='Template/email';
 
   public list: Template[];
   constructor(private http : HttpClient) {  }
@@ -33,4 +35,14 @@ export class TemplateService {
   public deleteTemplate(id :string): Observable<Template>{
     return this.http.delete<Template>(`${this.apiURL}/${this.url}/` + id);
   }
+  public SendEmail(id :string, body: any): any{
+    return this.http.post(`${this.apiURL}/${this.urlS}/${id}`, body);
+  }  
+  public GeneratePDF(id :string, jsonData : any): any{
+    const options = {
+      responseType: 'blob' as const // response type is blob
+    };
+    return this.http.post(`${this.apiURL}/${this.urlG}/${id}` , jsonData,options);
+  }
+
 }

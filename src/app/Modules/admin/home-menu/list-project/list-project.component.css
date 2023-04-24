@@ -1,12 +1,105 @@
-/*.container{
-    height: 600px;
-    overflow: auto;
-  }*/
+
+.titleP{
+  display: inline-block;  
+  background: linear-gradient(to right, #941e9a 25%, #d394d3  ); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+
+  padding-left: 5%;
+  font-size: 37px;
+  font-weight: bolder;
+  font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+label{
+  font-size: 20px;
+  color: #510e75;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.input-field{
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #8142a3;
+  color: #585858;
+  width: 100%;
+}
+.input-field.error{
+  border : 1px solid red;
+  color: red;
+}
+
+input[type='text'],
+input[type='password']{
+  border: none;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
+}
+
+.k-dropdownlist {
+  background-color: #f7eefc;
+  border: 1px solid #8142a3;
+  border-radius: 10px;
+  width: 100%;
+  height: 45px;
+}
+.k-dropdownlist:hover{
+  background-color: #efe1f8;
+}
+.k-dropdownlist .k-icon {
+  color:#510e75;
+}
+/* .k-dropdownlist .k-icon::before {
+  margin-left: 150%;
+  margin-bottom: 100%;
+}
+*/
+
+.k-editor{
+  background-color: #fdfafe;
+  border: 1px solid #8142a3;
+  border-radius: 10px;
+  height: 250px
+}
+
+
+.addButton{
+  text-align: center;
+  font-size: 35px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  padding: 6px 5%;
+  margin-top: 2%;
+  border-radius: 25px;
+  color:  #b31bb0 ;
+  background: linear-gradient(to right, #ebb3fb , #fcefff , #ebb3fb  ); 
+  border: none;
+  cursor: pointer;
+}
+.kendoAction{
+  text-align: center;
+  font-size: 35px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  padding: 6px 5%;
+  margin-top: 2%;
+  border-radius: 25px;
+  color:  #ffffff ;
+  background: linear-gradient(to right, #941e9a , #e0c1f4 ); 
+  border: none;
+  cursor: pointer;
+}
+
+
 
 .title {
     padding-bottom: 4%;
-    padding-left: 50%;  
-    padding-top: 3%;
+    padding-left: 45%;  
+    padding-top: 5%;
     letter-spacing: 0.5em; 
   }
   

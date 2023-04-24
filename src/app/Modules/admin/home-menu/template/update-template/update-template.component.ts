@@ -9,6 +9,7 @@ import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
 import { ImageDialogUpdateComponent } from './image-dialog-update/image-dialog-update.component';
 import { Employee } from 'src/app/model/employee';
+import ValidateForm from 'src/app/helpers/ValidateForm';
 
 @Component({
   selector: 'app-update-template',
@@ -23,10 +24,9 @@ export class UpdateTemplateComponent {
 
   languages = ['Arabic', 'French', 'English','Korean','Turkish','Chinese','Punjabi','German', 'Japanese', 'Indonesian', 'Portuguese', 'Russian', 'Spanish', 'Hindi'];
   ngForm!:FormGroup;
-  projectNames : string[]=[];
+  projects : string[]=[];
   id:any;
   user:any;
-  projectName:any;
 
   templateDetails :  Template={
     templateId: '',
@@ -59,9 +59,7 @@ export class UpdateTemplateComponent {
 
   getAllProj(){
     this.projectService.getAllProj()
-    .subscribe( (result: any[]) => (
-     result.forEach( x=>this.projectNames.push(x.projectName))
-      ));
+    .subscribe( (result: any[]) => (this.projects=result));
   
   }
   ngOnInit(): void {
@@ -81,14 +79,11 @@ export class UpdateTemplateComponent {
       
     });
 
-
     this.activatedRoute.paramMap.subscribe(
       {
         next: (params) => {
           const id = params.get('id');
           if (id){
-            
-           
             this.templateService.getTemplate(id).subscribe(
               {
                 next: (result) => { 
@@ -96,12 +91,13 @@ export class UpdateTemplateComponent {
                   //hethi blastha houni car ki getTemplat modifiedBy null bdd
                   this.templateDetails.modifiedBy=this.user.employeeId;
                   this.employee.employeeName=this.user.employeeName;
-                    this.projectService.getProject(this.templateDetails.projectId).subscribe(
+                  // to show projectname in dropdownlist
+                   this.projectService.getProject(this.templateDetails.projectId).subscribe(
                       (res:any)=>(
-                        this.projectName=res.projectName,
-                        this.project.projectName=this.projectName
+                        this.project=res
+                       // console.log(this.project)
                         )
-                    );                    
+                    );           
                  }
               }
             );
@@ -113,22 +109,30 @@ export class UpdateTemplateComponent {
       }
     )
   }
-
+  onSubmit() {
+    this.updateTemplate();
+  } 
   updateTemplate(){
-  //for projectId
-    this.projectService.getProjectByName(this.project.projectName)
-    .subscribe((result:any)=>(
-      this.id=result.projectId,
-      this.templateDetails.projectId=this.id,
+    this.templateDetails.projectId=this.project.projectId;
+    this.templateService.updateTemplate(this.templateDetails.templateId, this.templateDetails)
+    .subscribe(
+      {
+      next : (result) =>{this.router.navigate(['admin/AllTemplates']);}
+      },);
+    /*if (this.ngForm.valid){
+      this.templateDetails.projectId=this.project.projectId;
       this.templateService.updateTemplate(this.templateDetails.templateId, this.templateDetails)
       .subscribe(
         {
         next : (result) =>{this.router.navigate(['admin/AllTemplates']);}
-        },
-        
-     // error:()=>{}
-      )
-      ));    
+        },);
+    }
+    else{
+      console.log("form invalid")
+      ValidateForm.validateAllFormFileds(this.ngForm);
+      window.alert("Your form is invalid");
+    }*/
+ 
   }
 
  public openImage() {

@@ -1,9 +1,54 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
-
+<div class="row">
+  <div class="col-md-6" >
 <div class="title">
     <h2>List Of Projects</h2>
     <h2>List Of Projects</h2>
  </div>  
+  </div>
+  <div class="col-md-6" >
+     <kendo-button (click)="openDialog()" class="addButton" >
+      <span class="k-icon k-i-plus"  style="font-size: 30px; color:  #b31bb0 "></span> 
+      Add Project
+    </kendo-button>
+  </div>
+</div>
+
+<kendo-dialog *ngIf="opened" [width]="500" [height]="500" >
+  <ngb-alert *ngIf="dangerAlert" type="danger" style="font-size: 20px;" >
+    Please Fill All Fields !
+</ngb-alert>
+  <div class="container">
+    <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 3%;font-size: 30px; color: #941e9a "></span> 
+    <div class="titleP"> Add A New Project</div>
+  </div>
+  <img src="assets/images/project.jpg" class="rounded-circle" height="200px" width="200px" style="margin-left: 28%;"> 
+  <form  [formGroup]="ngForm" (ngSubmit)="onSubmit()">        
+    <div class="form-group">
+        <label> Name</label>
+        <div class="input-field" >
+            <input class="form-control"
+            formControlName="projectName" type="text"
+             id="projectName" [(ngModel)]="project.projectName" >
+        </div>
+    </div>
+    <div class="form-group">
+      <label> Manager</label>
+      <div class="input-field" >
+          <input class="form-control"
+          formControlName="createdBy" type="text"
+           id="createdBy" [(ngModel)]="project.createdBy" >
+      </div>
+    </div>
+     
+    <kendo-dialog-actions>
+        <button kendoButton  type="submit" class="kendoAction">Save</button>
+        <button kendoButton type="reset" (click)="closeDialog()" class="kendoAction">Cancel</button>
+      </kendo-dialog-actions>
+    </form>
+</kendo-dialog>
+
+
 <div class="container" >
   <div class="row">
     <div class="col-md-6" data-wow-delay=".2s"

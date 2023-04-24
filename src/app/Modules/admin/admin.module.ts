@@ -35,6 +35,9 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
 import { AdminRoutingModule } from './admin-routing.module';
 import { ImageUploadUpdateComponent } from './home-menu/template/update-template/image-upload-update/image-upload-update.component';
 import { ImageDialogUpdateComponent } from './home-menu/template/update-template/image-dialog-update/image-dialog-update.component';
+import { TestTemplateComponent } from './home-menu/test-template/test-template.component';
+import { SendEmailComponent } from './home-menu/test-template/send-email/send-email.component';
+import { GeneratePdfComponent } from './home-menu/test-template/generate-pdf/generate-pdf.component';
 
 
 @NgModule({
@@ -52,6 +55,9 @@ import { ImageDialogUpdateComponent } from './home-menu/template/update-template
     ImageUploadComponent,
     ImageUploadUpdateComponent,
     ImageDialogUpdateComponent,
+    TestTemplateComponent,
+    SendEmailComponent,
+    GeneratePdfComponent,
   ],
   imports: [
     CommonModule,

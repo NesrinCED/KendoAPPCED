@@ -10,6 +10,7 @@ import { EmployeeService } from 'src/app/service/employee.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
 import { ImageDialogComponent } from './image-dialog-add/image-dialog.component';
+import ValidateForm from 'src/app/helpers/ValidateForm';
 
 @Component({
   selector: 'app-add-template',
@@ -39,7 +40,7 @@ export class AddTemplateComponent {
   languages = ['Arabic', 'French', 'English','Korean','Turkish','Chinese','Punjabi','German', 'Japanese', 'Indonesian', 'Portuguese', 'Russian', 'Spanish', 'Hindi'];
   public gridData: any[] ;
   employeNames : string[]=[];
-  projectNames : string[]=[];
+  projects : string[]=[];
   id:any;
 
   addTemplateRequest : Template={
@@ -88,54 +89,71 @@ export class AddTemplateComponent {
 
   getAllProj(){
     this.projectService.getAllProj()
-    .subscribe( (result: any[]) => (  
-    result.forEach( x=>this.projectNames.push(x.projectName))
-    ));  
+    .subscribe( (result: any[]) =>{
+     (this.projects=result),
+      console.log(this.projects)
+    });
   }
   onSubmit() {
     this.addTemplate();
   } 
 
-addTemplate() {
+  addTemplate() {
+    if (this.ngForm.valid){
+      this.addTemplateRequest.createdBy=this.user.employeeId;
+      this.addTemplateRequest.projectId=this.project.projectId;
+      //for template
+      this.templateService.CreateTemplate(this.addTemplateRequest).subscribe
+      (
+        (result: any) => {
+          this.submitted = false;
+          this.router.navigate(['admin/MyTemplates']);
+        },
+        (error: HttpErrorResponse) => {
+          console.log("errrorr !!")
+        }
+      )
+    }
+    else{
+      console.log("form invalid")
+      ValidateForm.validateAllFormFileds(this.ngForm);
+      window.alert("Your form is invalid");
+    }
+
+    
+  }
+
+  onReset() {
+    this.registerForm.reset();
+  }
+  public opened = true;
+
+  public close(status: string): void {
+    console.log(`Dialog result: ${status}`);
+    this.opened = false;
+  // this.router.navigate(['Home']);
+  }
+
+  public open(): void {
+    this.opened = true;
+  }
+
+  public openImage() {
+    this.dialog.open();
+  }
+   public cancel(){
+    this.router.navigate(['admin/Home'])
+   }
+
+
+}
+
+
+  //in addTemplate
   //for projectId
-  this.projectService.getProjectByName(this.project.projectName)
+  /*this.projectService.getProjectByName(this.project.projectName)
   .subscribe((result:any)=>(
     this.id=result.projectId
     ,   console.log("id project",this.id),
     this.addTemplateRequest.projectId=this.id
-    ));
-    this.addTemplateRequest.createdBy=this.user.employeeId;
-  //for template
-  this.templateService.CreateTemplate(this.addTemplateRequest).subscribe
-  (
-    (result: any) => {
-      this.submitted = false;
-      this.router.navigate(['admin/MyTemplates']);
-    },
-    (error: HttpErrorResponse) => {
-      console.log("errrorr !!")
-    }
-  )
-  
-}
-
-onReset() {
-   this.registerForm.reset();
-}
-public opened = true;
-
-public close(status: string): void {
-  console.log(`Dialog result: ${status}`);
-  this.opened = false;
- // this.router.navigate(['Home']);
-}
-
-public open(): void {
-  this.opened = true;
-}
-
-public openImage() {
-  this.dialog.open();
-}
-
-}
+    ));*/

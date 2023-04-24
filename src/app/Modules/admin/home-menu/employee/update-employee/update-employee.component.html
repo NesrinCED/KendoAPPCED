@@ -1,8 +1,11 @@
 <!--link for fa-eye slash-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <div class="alert">
-    <ngb-alert *ngIf="!same" type="danger" >
+    <ngb-alert *ngIf="!same" type="danger" style="font-size: 20px;" >
         Type Correct Recent Password !
+    </ngb-alert>
+    <ngb-alert *ngIf="dangerAlert" type="danger" style="font-size: 20px;" >
+        Please Fill All Fields !
     </ngb-alert>
 </div>
 <div class="card" style="    min-height:35% ;
@@ -26,7 +29,7 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
         </div>
         <div class="col-md-8" >
             <form [formGroup]="ngForm" (ngSubmit)="edit()" >
-                <div class="form-group ">
+                <div class="form-group">
                     <label class="labelC">Name</label>
                     <div class="input-field" >
                         <span class="k-icon k-i-user" style="color: #4c036d;font-size: 20px;"></span>
@@ -35,7 +38,7 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
                         [(ngModel)]="employeeDetails.employeeName" >
                     </div>
                 </div>
-                <div class="form-group ">
+                <div class="form-group">
                     <label  class="labelC">Recent Password</label>
                     <div class="input-field" >
                         <span class="k-icon k-i-lock" style="color: #4c036d;font-size: 20px;"></span>
@@ -46,7 +49,7 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
 
                     </div>
                 </div>
-                <div class="form-group ">
+                <div class="form-group">
                     <label  class="labelC">New Password</label>
                     <div class="input-field" >
                         <span class="k-icon k-i-lock"style="color: #4c036d;font-size: 20px;"></span>

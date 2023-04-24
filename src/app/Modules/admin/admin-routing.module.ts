@@ -10,6 +10,9 @@ import { ListTemplatesEmployeeComponent } from './home-menu/employee/list-templa
 import { AddTemplateComponent } from './home-menu/template/add-template/add-template.component';
 import { UpdateEmployeeComponent } from './home-menu/employee/update-employee/update-employee.component';
 import { UpdateTemplateComponent } from './home-menu/template/update-template/update-template.component';
+import { TestTemplateComponent } from './home-menu/test-template/test-template.component';
+import { SendEmailComponent } from './home-menu/test-template/send-email/send-email.component';
+import { GeneratePdfComponent } from './home-menu/test-template/generate-pdf/generate-pdf.component';
 
 
 
@@ -24,6 +27,9 @@ const routes: Routes =  [
       {path: 'AllTemplates/UpdateTemplate/:id',component: UpdateTemplateComponent},
       {path: 'MyTemplates', component: ListTemplatesEmployeeComponent },
       {path: 'AddTemplate',component: AddTemplateComponent},
+      {path: 'TestTemplate',component: TestTemplateComponent},
+      {path: 'TestTemplate/SendEmail',component: SendEmailComponent},
+      {path: 'TestTemplate/GeneratePDF',component: GeneratePdfComponent},
       {path: 'Settings',component: UpdateEmployeeComponent},
 
     ]

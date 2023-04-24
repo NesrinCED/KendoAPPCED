@@ -10,6 +10,8 @@ export class ProjectService {
 
   private apiURL="https://localhost:7176/api";
   private url='Project';
+  private urlF='Project/filteredTemplates';
+
   constructor(private http : HttpClient) {  }
   
   public getAllProj(): Observable<Project[]>{
@@ -19,6 +21,10 @@ export class ProjectService {
     //console.log("slash importanteeeee");
     return this.http.get<Project>(`${this.apiURL}/${this.url}/` + id);
   }
+  public getFilteredTemplates(id :string): Observable<any>{
+    //console.log("slash importanteeeee");
+    return this.http.get<any>(`${this.apiURL}/${this.urlF}/` + id);
+  }
   public getProjectByName(name :string): Observable<Project>{
     return this.http.get<Project>(`${this.apiURL}/${this.url}/` + name);
   }
@@ -27,6 +33,7 @@ export class ProjectService {
   }
   public CreateProject(addProjectRequest : Project): Observable<Project>{
     addProjectRequest.projectId='00000000-0000-0000-0000-000000000000';
+    console.log("ppp",addProjectRequest)
     return this.http.post<Project>(`${this.apiURL}/${this.url}`,addProjectRequest);
   }
   public deleteProject(id :string): Observable<Project>{

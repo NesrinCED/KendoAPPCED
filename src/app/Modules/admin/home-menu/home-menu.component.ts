@@ -68,6 +68,14 @@ public items = [
   },
   { separator: true },
   {
+    title: "Test Template",
+    description: "Test Template",
+    iconDrawer: "k-i-data-json",
+    link: "TestTemplate",
+    selected: false,
+  },
+  { separator: true },
+  {
     title: "Settings",
     description: "Manage Your Account",
     iconDrawer: "k-i-settings",
