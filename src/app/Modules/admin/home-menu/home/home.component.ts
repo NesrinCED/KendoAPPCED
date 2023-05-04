@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { Observable, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -25,11 +26,14 @@ export class HomeComponent implements OnInit {
       this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
     });
   }
-  
+  public showSuccess(): void {
+    this.toastr.success('Message Success!', 'Title Success!');
+  }
   
 
 
-constructor(private router : Router, private fb:FormBuilder, public employeeService:EmployeeService){}
+constructor(private router : Router, private fb:FormBuilder, public employeeService:EmployeeService
+  ,private toastr:ToastrService){}
 
 }
 

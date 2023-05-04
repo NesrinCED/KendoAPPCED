@@ -6,8 +6,6 @@ import { UpdateTemplateComponent } from './home-menu/template/update-template/up
 import { ViewTemplateComponent } from './home-menu/template/view-template/view-template.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
@@ -80,7 +78,9 @@ import { GeneratePdfComponent } from './home-menu/test-template/generate-pdf/gen
     IndicatorsModule,
     NgbModule,
     UploadsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    
+    
   ]
 })
 export class AdminModule { }

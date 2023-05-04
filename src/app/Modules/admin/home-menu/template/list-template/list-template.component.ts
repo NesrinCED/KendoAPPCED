@@ -11,7 +11,7 @@ import { DropDownListComponent } from '@progress/kendo-angular-dropdowns';
 import { SortDescriptor } from '@progress/kendo-data-query';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { EmployeeService } from 'src/app/service/employee.service';
-import { ToasterService } from 'src/app/service/ToasterService/toaster.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-template',
@@ -52,7 +52,7 @@ export class ListTemplateComponent {
   
   constructor(private router:Router, private templateService:TemplateService,
     private projectService : ProjectService, private employeeService:EmployeeService
-    //,private toasterService:ToasterService
+    ,private toastr:ToastrService
     ){}
 
   ngOnInit() : void{
@@ -60,6 +60,7 @@ export class ListTemplateComponent {
     this.getAllProj();
     this.user=this.employeeService.GetUser() ;
   }
+
   
   onLanguageChange(event:any) {
     if(this.isSelectedProject){
