@@ -65,9 +65,16 @@ export class SendEmailComponent {
   user:any;
   ngForm!:FormGroup;
   selectedProject: any; 
+  selectedTemplate: any; 
+  isSelectedTemplate=false;
+  list : string[]=[];
+  values:string[]=[];
+  jsonData0 :any;
   showSuccessAlert = false;
   showDangerAlert = false;
   showDangerAlertJson=false;
+  dangerAlertV=false;
+  jsonForm!:FormGroup;
 
   ngOnInit() {
     this.user=this.employeeService.GetUser();
@@ -75,9 +82,10 @@ export class SendEmailComponent {
     this.ngForm=this.fb.group({
       name: ['', Validators.required],
       projectName: ['', Validators.required],
-      jsonData: ['', Validators.required],
       subject: ['', Validators.required],
       to: ['', Validators.required],
+    });
+    this.jsonForm=this.fb.group({
     });
   }
   constructor(private router:Router,private fb: FormBuilder,
@@ -101,19 +109,18 @@ export class SendEmailComponent {
     this.projectService.getAllProj()
     .subscribe( (result: any[]) =>{
      (this.projects=result)
-    //,console.log(this.projects)
     });
   }
   onTextChange(event:any) {
    // console.log(event); 
   }
   onSubmit() {
+
     if(this.ngForm.valid){
-      const jsonDataTextArea = document.getElementById('jsonData') as HTMLTextAreaElement;
       const subjectTextArea=document.getElementById('subject') as HTMLTextAreaElement;
       const toTextArea=document.getElementById('to') as HTMLTextAreaElement;
       try {
-        const jsonData = JSON.parse(jsonDataTextArea.value);
+        const jsonData=this.jsonData0;
         const subject = subjectTextArea.value;
         const to = toTextArea.value;
         this.showDangerAlert=false;
@@ -124,20 +131,20 @@ export class SendEmailComponent {
           to,
           jsonData
         };
-        console.log(body)
+        console.log("body",body)
         this.templateService.
         SendEmail(this.templateRequest.templateId,body)
-        .subscribe((result: any) => {
-        console.log("sent success")
-        this.showSuccessAlert=true;
-        this.router.navigate(['/admin/TestTemplate']);
-
-        },
-        (error: HttpErrorResponse) => {
-          console.log("errrorr !!",error)
-        });
+        .subscribe(
+          (result: any) => {
+            this.showSuccessAlert=true;
+            this.router.navigate(['/admin/TestTemplate']);
+          },
+          (error: HttpErrorResponse) => {
+            console.log("errrorr !!",error)
+          });
       } catch (error) {
-        this.showDangerAlertJson=true;
+        console.log("catch",error)
+       // this.showDangerAlert=true;
       } 
     }
     else{
@@ -163,6 +170,42 @@ export class SendEmailComponent {
     this.opened = true;
   }
 
+  onTemplateChange(event:any) {
+    this.selectedTemplate = event;
+    var content!:string;
+    content=this.selectedTemplate.content;
+    var index=content.indexOf("{");
+    var end=content.indexOf("}");
+    while(index!=-1 && end!=-1){
+      this.list.push(content.substring(index+1,end))
+      content=content.substring(end+1,content.length);
+      index=content.indexOf("{");
+      end=content.indexOf("}");
+    }
+    this.isSelectedTemplate=true;
 
+  }
+
+  onSubmitJson(){
+    if(this.ngForm.value){
+      this.jsonData0={};
+      this.showDangerAlertJson=false;
+      this.list.forEach(i=>{
+        const inputElement = document.getElementById(i) as HTMLInputElement;
+        const inputValue = inputElement.value;
+        this.values.push(inputValue) 
+      });
+      for (let i = 0; i < this.list.length; i++) {
+        const key = this.list[i];
+        const value = this.values[i];
+        this.jsonData0[key] =value;
+      }
+      console.log("onSubmitJson",this.jsonData0)
+      this.isSelectedTemplate=false;
+    }
+    else{
+      this.showDangerAlertJson=true;
+    }
+  }
 
 }

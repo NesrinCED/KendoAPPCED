@@ -15,13 +15,9 @@ export class SignupComponent {
   type: string="password";
   isText: boolean=false;
   eyeIcon: string = "fa-eye-slash";
+  showSuccessAlert = false;
 
-  alert: { type: string, message: string } = { type: '', message: '' };
 
-  showAlert() {
-    this.alert.type = 'success';
-    this.alert.message = 'Your signed up successufully !';
-  }  
   constructor(private fb:FormBuilder, private employeeService:EmployeeService, private router:Router){}
   
   
@@ -44,17 +40,18 @@ export class SignupComponent {
       this.employeeService.signUp(this.signUpForm.value)
       .subscribe({
         next:(res)=>{
+          this.showSuccessAlert=true;
           console.log("this is res in sign component",res)
           this.signUpForm.reset();
           this.router.navigate(['login']);
         },
         error:(err)=>{
-          alert(err?.error.message)
+          this.showSuccessAlert=false;
+         console.log(err?.error.message)
         }
       })
     }
     else{
-      //throw error using toaster and with required fields
       ValidateForm.validateAllFormFileds(this.signUpForm);
     }
   }

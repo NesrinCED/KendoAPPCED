@@ -22,7 +22,6 @@ export class ProjectService {
     return this.http.get<Project>(`${this.apiURL}/${this.url}/` + id);
   }
   public getFilteredTemplates(id :string): Observable<any>{
-    //console.log("slash importanteeeee");
     return this.http.get<any>(`${this.apiURL}/${this.urlF}/` + id);
   }
   public getProjectByName(name :string): Observable<Project>{

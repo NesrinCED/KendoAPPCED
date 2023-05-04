@@ -52,22 +52,6 @@ public items = [
   },
   { separator: true },
   {
-    title: "My Templates",
-    description: "Manage Your Templates",
-    iconDrawer: "k-i-track-changes-accept-all",
-    link: "MyTemplates",
-    selected: false,
-  },
-  { separator: true },
-  {
-    title: "New Template",
-    description: "Create New Template",
-    iconDrawer: "k-i-file-add",
-    link: "AddTemplate",
-    selected: false,
-  },
-  { separator: true },
-  {
     title: "Test Template",
     description: "Test Template",
     iconDrawer: "k-i-data-json",

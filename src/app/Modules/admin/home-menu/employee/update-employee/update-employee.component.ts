@@ -70,6 +70,8 @@ export class UpdateEmployeeComponent {
 
   onReset() {
     this.ngForm.reset();
+    this.dangerAlert=false;
+    this.same=true;
  }
   hideshowPass(){
     this.isText= !this.isText;

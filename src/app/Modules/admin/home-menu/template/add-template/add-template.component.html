@@ -1,6 +1,9 @@
 <kendo-dialog 
  *ngIf="opened" (close)="close('cancel')"
 [minWidth]="250" [width]="1100" [height]="700" >
+<ngb-alert *ngIf="dangerAlert" type="danger" class="alertDesignD" >
+    Please Fill All Fields !
+  </ngb-alert>
 <div>
     <div style=" background-color: #fdf9ff; ">
         <div class="container">
@@ -35,7 +38,7 @@
                 <div class="form-group">
                     <label>Content</label>
                     <kendo-editor class="form-control"  id="content" [iframe]="false" name="content"
-                    #editor
+                    #editor 
                      [(ngModel)]="addTemplateRequest.content" [(value)]="addTemplateRequest.content" >
                         <kendo-toolbar>
                             <kendo-toolbar-button kendoEditorBoldButton></kendo-toolbar-button>
@@ -46,7 +49,11 @@
                             <kendo-toolbar-button
                             text="Upload Image"
                             (click)="openImage()"
-                          ></kendo-toolbar-button>                                                      
+                            ></kendo-toolbar-button>       
+                            <kendo-toolbar-button
+                            text="Add Feature"
+                            (click)="openFeature()"
+                            ></kendo-toolbar-button>           
                         </kendo-toolbar>
                     </kendo-editor>
                     
@@ -55,12 +62,38 @@
                 </div>      
             <kendo-dialog-actions>
                 <!-- dont do it ngsubmit and click (click)="onSubmit()"==>2rows added-->
+                <button kendoButton type="reset" (click)="cancel()" class="cancelButton">Cancel</button>
                 <button kendoButton  type="submit" class="addButton">Register</button>
-                <!--(click)="close('no')"-->
-                <button kendoButton type="reset" (click)="cancel()" class="addButton">Cancel</button>
               </kendo-dialog-actions>
         </form>
     </div>
 </div>
 </kendo-dialog>
 
+<kendo-dialog *ngIf="openedFeature" [width]="400" [height]="250" >
+    <ngb-alert *ngIf="dangerAlertF" type="danger" class="alertDesignD" >
+      Please Fill the Feature Field !
+    </ngb-alert>
+    <div class="container" style="margin-bottom: 5%;">
+      <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 3%;font-size: 25px; color: #941e9a "></span> 
+      <div class="titleP"> Add A New Feature</div>
+    </div>
+    <form  [formGroup]="featureForm" (ngSubmit)="onSubmitFeature()">
+        <div class="form-group" style="
+             display: flex;
+             justify-content: flex-start;
+            ">
+            <label style="font-size: 20px;  padding-right: 5%; padding-top: 2%; ">Feature Name</label>
+            <div class="input-field" style="width: 50%;" >
+                <input class="form-control"
+                formControlName="featureName" type="text"
+                id="featureName" [(ngModel)]="featureName" >
+            </div>
+        </div> 
+           
+      <kendo-dialog-actions>
+          <button kendoButton  type="submit" class="kendoAction">Add Feature</button>
+          <button kendoButton type="reset" (click)="closeDialog()" class="kendoAction">Cancel</button>
+        </kendo-dialog-actions>
+    </form>
+</kendo-dialog>

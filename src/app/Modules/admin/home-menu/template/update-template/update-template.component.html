@@ -66,10 +66,10 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);" >
             </form>
             <div class="row" style="padding-top: 1%;">
                 <div class="col-6">
-                    <button kendoButton (click)="onSubmit()" type="submit" class="editButton">Save</button>
+                    <button kendoButton routerLink="/admin/AllTemplates" type="reset" class="cancelButton">Cancel</button>
                 </div>
                 <div class="col-6">
-                    <button kendoButton routerLink="/admin/AllTemplates" type="reset" class="editButton">Cancel</button>
+                    <button kendoButton (click)="onSubmit()" type="submit" class="saveButton">Save</button>
                 </div>
             </div>
 

@@ -11,6 +11,7 @@ import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
 import { ImageDialogComponent } from './image-dialog-add/image-dialog.component';
 import ValidateForm from 'src/app/helpers/ValidateForm';
+//import { NotificationService } from "@progress/kendo-angular-notification";
 
 @Component({
   selector: 'app-add-template',
@@ -42,6 +43,14 @@ export class AddTemplateComponent {
   employeNames : string[]=[];
   projects : string[]=[];
   id:any;
+  openedFeature:boolean=false;
+  user:any;
+  ngForm!:FormGroup;
+  dangerAlert=false;
+  dangerAlertF=false;
+  featureForm!:FormGroup;
+  featureName:string;
+  currentPosition:any;
 
   addTemplateRequest : Template={
     templateId: '',
@@ -62,9 +71,7 @@ export class AddTemplateComponent {
     createdDate: undefined
   };
   
- user:any;
 
- ngForm!:FormGroup;
  
   ngOnInit() {
     this.user=this.employeeService.GetUser();
@@ -74,8 +81,11 @@ export class AddTemplateComponent {
       name: ['', Validators.required],
       language: ['', Validators.required],
       content: ['', Validators.required],
-      projectName: ['', Validators.required]
+      projectName: ['']
     });
+    this.featureForm=this.fb.group({
+      featureName: ['',Validators.required]
+    })
   }
 
   constructor(private router:Router,private fb: FormBuilder,
@@ -100,24 +110,33 @@ export class AddTemplateComponent {
 
   addTemplate() {
     if (this.ngForm.valid){
+      this.dangerAlert=false;
       this.addTemplateRequest.createdBy=this.user.employeeId;
-      this.addTemplateRequest.projectId=this.project.projectId;
+            
+      if(this.project.projectId!=""){      
+        this.addTemplateRequest.projectId=this.project.projectId;
+      }
+      else{
+        this.addTemplateRequest.projectId="";
+        delete (this.addTemplateRequest as {[key: string]: any}).projectId;
+      }
       //for template
       this.templateService.CreateTemplate(this.addTemplateRequest).subscribe
       (
         (result: any) => {
           this.submitted = false;
-          this.router.navigate(['admin/MyTemplates']);
+          this.router.navigate(['admin/AllTemplates']);
         },
         (error: HttpErrorResponse) => {
-          console.log("errrorr !!")
+          console.log("errrorr !!",error)
         }
       )
     }
     else{
+      this.dangerAlert=true;
       console.log("form invalid")
       ValidateForm.validateAllFormFileds(this.ngForm);
-      window.alert("Your form is invalid");
+     // window.alert("Your form is invalid");
     }
 
     
@@ -141,19 +160,35 @@ export class AddTemplateComponent {
   public openImage() {
     this.dialog.open();
   }
-   public cancel(){
-    this.router.navigate(['admin/Home'])
-   }
+  public cancel(){
+  this.router.navigate(['admin/AllTemplates'])
+  }
 
+  openFeature(){
+    this.currentPosition = this.editor.view.state.selection.$anchor?.pos;
+    this.openedFeature=true;
+  }
+
+  closeDialog(){
+    this.openedFeature=false;
+  }
+
+  onSubmitFeature(){
+    if(this.featureForm.valid){
+      if (this.currentPosition !== undefined) {
+        var text= '${'+this.featureName+'}';
+        const tr = this.editor.view.state.tr.insertText(text, this.currentPosition);
+        this.editor.view.dispatch(tr);
+      }
+      this.dangerAlertF=false;
+      this.openedFeature=false;     
+      console.log("final content",  this.addTemplateRequest.content)
+    }
+    else{
+      this.dangerAlertF=true;
+    }
+  }
+
+  
 
 }
-
-
-  //in addTemplate
-  //for projectId
-  /*this.projectService.getProjectByName(this.project.projectName)
-  .subscribe((result:any)=>(
-    this.id=result.projectId
-    ,   console.log("id project",this.id),
-    this.addTemplateRequest.projectId=this.id
-    ));*/

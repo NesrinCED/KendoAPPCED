@@ -5,14 +5,41 @@
     <h2>List Of Employees</h2>
 </div> 
 
+<kendo-dialog *ngIf="opened" [width]="500" [height]="500"  >
+    <kendo-button (click)="close()" class="closeButton" >
+         <span class="k-icon k-i-x" style="font-size: 20px;"></span>
+    </kendo-button>
+    <br><br>
+    
+    <div class="project-progress pull-left">
+        <span class="task-title"> {{name}} have created : 
+            <span class="percentage">{{ percentageTemplatesCreated }}%</span>
+        </span><br>
+        <div class="progress">
+            <div class="analytics-line" role="progressbar"  aria-valuemin="0" aria-valuemax="100"[style.width.%]="percentageTemplatesCreated"></div>
+        </div>
+        <br><br>
+    </div>
+    <div class="project-progress pull-left">
+        <span class="task-title"> {{name}} have modified : 
+            <span class="percentage">{{ numTemplatesModified }}%</span>
+        </span><br>
+        <div class="progress">
+            <div class="analytics-line" role="progressbar"  aria-valuemin="0" aria-valuemax="100"[style.width.%]="numTemplatesModified">
+            </div>
+        </div>
+        </div>
+    
+</kendo-dialog>
+
 <div class="container" >
     <div class="row">
-        <div class="col-sm-3" data-wow-delay=".2s"
+        <div class="col-sm-3" data-wow-delay=".2s" 
         style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;  "
-        
         *ngFor="let i of list"
         >
-            <div class="team-style07">
+            <div class="team-style07" (click)="over(i.employeeName,i.createdTemplatesDTO,i.modifiedTemplatesDTO
+            )">
                 <div class="team-thumb mb-1-9">
                     <div class="thumb">
                         <img src="assets/images/user.jpg" class="rounded-circle"

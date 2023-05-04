@@ -12,8 +12,9 @@ export class TemplateService {
   private url='Template';
   private urlG='Template/pdf';
   private urlS='Template/email';
-
+  private urlF="Template/filteredTemplatesByLanguage";
   public list: Template[];
+
   constructor(private http : HttpClient) {  }
   
   public getAllTemp(): Observable<Template[]>{
@@ -30,6 +31,8 @@ export class TemplateService {
   }
   public CreateTemplate(addTemplateRequest : Template): Observable<Template>{
     addTemplateRequest.templateId='00000000-0000-0000-0000-000000000000';
+    console.log("ssssssssssss",addTemplateRequest);
+
     return this.http.post<Template>("https://localhost:7176/api/Template",addTemplateRequest);
   }
   public deleteTemplate(id :string): Observable<Template>{
@@ -44,5 +47,7 @@ export class TemplateService {
     };
     return this.http.post(`${this.apiURL}/${this.urlG}/${id}` , jsonData,options);
   }
-
+  public getFilteredTemplatesByLanguage(language :string): Observable<any>{
+    return this.http.get<any>(`${this.apiURL}/${this.urlF}/` + language);
+  }
 }

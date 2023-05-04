@@ -1,16 +1,14 @@
 <kendo-dialog 
  *ngIf="opened" 
-[minWidth]="250" [width]="1100" [height]="700" >
+[minWidth]="250" [width]="1100" [height]="500" >
 <div  >
-    <ngb-alert *ngIf="showSuccessAlert" type="success" style="font-size: 20px;" >
+    <ngb-alert *ngIf="showSuccessAlert" type="success" class="alertDesignS" >
        PDF Document Generated successufully !
     </ngb-alert>
-    <ngb-alert *ngIf="showDangerAlert" type="danger" style="font-size: 20px;" >
+    <ngb-alert *ngIf="showDangerAlert" type="danger" class="alertDesignD" >
         Your Form is invalid ! Please fill up all fields !
     </ngb-alert>
-    <ngb-alert *ngIf="showDangerAlertJson" type="danger" style="font-size: 20px;" >
-        Type Correct JSON Data !
-    </ngb-alert>
+
     <div style=" background-color: #fdf9ff; ">
         <div >
         <span class="k-icon k-i-file-pdf" style="padding-bottom: 2%; font-size: 30px; color: #8d0f8b "></span> 
@@ -31,14 +29,8 @@
                     <kendo-dropdownlist 
                     [data]="filteredTemplates" textField="name" formControlName="name"
                     [(ngModel)]="templateRequest" id="templateRequest.templateId"
-                    [disabled]="!selectedProject">
+                    [disabled]="!selectedProject" (valueChange)="onTemplateChange($event)" >
                     </kendo-dropdownlist>
-                </div>
-                <div class="form-group">
-                    <label>JSON Data</label> <br>
-                    <textarea kendoTextArea  style="height: 200px; width: 400px;background-color:#f7eefc;"
-                    [(ngModel)]="jsonData" (valueChange)="onTextChange($event)"
-                    formControlName="jsonData" id="jsonData"  ></textarea>
                 </div>
                 <kendo-button icon="download" class="downloadPDFButton" *ngIf="generatedPDF"
                 (click)="onSubmit()">Download PDF Document</kendo-button>     
@@ -52,3 +44,29 @@
 </div>
 </kendo-dialog>
 
+<kendo-dialog *ngIf="isSelectedTemplate" [width]="500" [height]="350" >
+    <ngb-alert *ngIf="showDangerAlertJson" type="danger" class="alertDesignD" >
+        Please All Features !
+    </ngb-alert>
+    <div class="container" style="margin-bottom: 5%;">
+      <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 3%;font-size: 25px; color: #941e9a "></span> 
+      <div class="titleP"> Add The required Features</div>
+    </div>
+    <form  [formGroup]="jsonForm" (ngSubmit)="onSubmitJson()">
+        <div *ngFor="let item of list" class="form-group" style="
+             display: flex;
+             justify-content: flex-start;
+            ">
+            <label style="font-size: 20px;  padding-right: 5%; padding-top: 2%; ">{{item}}</label>
+            <div class="input-field" style="width: 50%; margin-top: 5%" >
+                <input class="form-control"
+                type="text"
+                id="{{item}}"  > 
+            </div>
+        </div> 
+           
+      <kendo-dialog-actions>
+          <button kendoButton  type="submit" class="kendoAction">Add Features</button>
+        </kendo-dialog-actions>
+    </form>
+</kendo-dialog>

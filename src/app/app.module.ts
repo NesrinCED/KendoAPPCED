@@ -25,6 +25,8 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilterModule } from '@progress/kendo-angular-filter';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NavigationModule,
     IndicatorsModule,
     NgbModule,
+    FilterModule,
+    
   ],
   providers: [  ],
   bootstrap: [AppComponent]

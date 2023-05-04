@@ -2,6 +2,9 @@
     width:78% ;
     margin-left: 11%;    
 }
+.alertDesign{
+    font-size: 20px; background-color: #E03616; color: #fff; 
+}
 /*.card{
     min-height:35% ;
     width:60% ;
@@ -13,7 +16,7 @@
 }*/
 .titleT{
     display: inline-block;  
-    background: linear-gradient(to right, #743c9a 25%, #e93be6  ); 
+    background: linear-gradient(to right, #4c036d  25%, #9659c0 ); 
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent;
 
@@ -67,7 +70,20 @@ input[type='password']{
     margin-top: 2%;
     border-radius: 25px;
     color:  #f6f6f6;
-    background: linear-gradient(to right, #743c9a 25%, #e93be6  ); 
+    background: linear-gradient(to right,#4c036d  25%, #9659c0 ); 
+    border: none;
+    cursor: pointer;
+}
+.cancelButton{
+    text-align: center;
+    font-size: 25px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    padding: 6px 35%;
+    margin-top: 2%;
+    border-radius: 25px;
+    color:  #f6f6f6;
+    background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
     border: none;
     cursor: pointer;
 }

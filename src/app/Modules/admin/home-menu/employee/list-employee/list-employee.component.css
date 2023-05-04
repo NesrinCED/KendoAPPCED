@@ -1,8 +1,4 @@
 
-/*.container{
-  height: 600px;
-  overflow: auto;
-}*/
 .title {
     padding-bottom: 3%;
       padding-top: 2%;
@@ -21,11 +17,11 @@
   }
   .title h2:nth-child(1) {
     color: transparent;
-    -webkit-text-stroke: 2px #b31bb0 ;
+    -webkit-text-stroke: 2px  #611186 ;
   }
   
   .title h2:nth-child(2) {
-    color:  #b31bb0 ;
+    color:   #701a98 ;
     animation: animate 4s ease-in-out infinite;
   }
   
@@ -64,7 +60,7 @@
     text-transform: uppercase;
     font-weight: bolder;
     font-size: 50px;
-    background: linear-gradient(to right, #743c9a 25%, #e93be6  ); 
+    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent;
 
@@ -74,7 +70,7 @@
 {
     font-weight: lighter;
     font-size: 20px;
-    background: linear-gradient(to right, #743c9a 25%, #760a75  ); 
+    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent;
 
@@ -106,3 +102,41 @@
 .mb-1-9, .my-1-9 {
     margin-bottom: 1.9rem;
 }
+
+.closeButton{
+  float: right;
+  background: #fff;
+  border-color: #fff;
+}
+.closeButton:hover{
+  background: #fff;
+  border-color: #fff;
+}
+/************/
+
+.analytics-line {
+  
+  border-radius: 10px;
+  background-color: #ff6384;
+  position: relative;
+  animation: animateLine 2s ease;
+}
+
+.analytics-line .percentage {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #36a2eb;
+}
+/*
+@keyframes animateLine {
+  from {
+    width: 0%;
+  }
+  to {
+    width: {{ percentageTemplatesCreated }}%
+  }
+}
+*/

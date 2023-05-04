@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EditorComponent } from '@progress/kendo-angular-editor';
 import * as saveAs from 'file-saver';
@@ -59,10 +59,17 @@ export class GeneratePdfComponent {
   user:any;
   ngForm!:FormGroup;
   selectedProject: any; 
+  selectedTemplate: any; 
+  isSelectedTemplate=false;
   generatedPDF:boolean=false;
   showSuccessAlert = false;
   showDangerAlert = false;
   showDangerAlertJson=false;
+  dangerAlertV=false;
+  jsonForm!:FormGroup;
+  list:string[]=[];
+  values:string[]=[];
+  jsonData0 :any;
 
   ngOnInit() {
     this.user=this.employeeService.GetUser();
@@ -70,8 +77,10 @@ export class GeneratePdfComponent {
     this.ngForm=this.fb.group({
       name: ['', Validators.required],
       projectName: ['', Validators.required],
-      jsonData: ['', Validators.required],
     });
+    this.jsonForm=this.fb.group({
+    });
+ 
   }
   constructor(private router:Router,private fb: FormBuilder,
      private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
@@ -79,7 +88,7 @@ export class GeneratePdfComponent {
   onProjectChange(event:any) {
     this.selectedProject = event; 
     this.getFilteredTemplates(this.selectedProject?.projectId);
-  }
+  } 
   getFilteredTemplates(projectId:string){
     if (projectId) {
       this.projectService.getFilteredTemplates(projectId)
@@ -97,30 +106,35 @@ export class GeneratePdfComponent {
     //,console.log(this.projects)
     });
   }
-  onTextChange(event:any) {
-   // console.log(event); 
+  onTemplateChange(event:any) {
+    this.selectedTemplate = event;
+    var content!:string;
+    content=this.selectedTemplate.content;
+    var index=content.indexOf("{");
+    var end=content.indexOf("}");
+    while(index!=-1 && end!=-1){
+      this.list.push(content.substring(index+1,end))
+      content=content.substring(end+1,content.length);
+      index=content.indexOf("{");
+      end=content.indexOf("}");
+    }
+    console.log(this.list);
+    this.isSelectedTemplate=true;
+
   }
+
   onSubmit1() {
-    if(this.ngForm.valid){
-      const jsonTextArea = document.getElementById('jsonData') as HTMLTextAreaElement;
-      try {
-        const jsonData = JSON.parse(jsonTextArea.value);
+    if( this.templateRequest.templateId!=""){
         this.generatedPDF=true;
         this.showSuccessAlert=true;
         this.showDangerAlert=false;
-        this.showDangerAlertJson=false;
-      } catch (error) {
-        this.generatedPDF=false;
-        this.showDangerAlertJson=true;
-      } 
     }
-    else{
+    else {
       this.generatedPDF=false;
       this.showDangerAlert=true;
       this.showSuccessAlert=false;
-      console.log("form invalid")
+      console.log("form invalid",this.ngForm.value)
       ValidateForm.validateAllFormFileds(this.ngForm);
-//      window.alert("Your form is invalid");
     }
 
   } 
@@ -128,8 +142,10 @@ export class GeneratePdfComponent {
     this.generatePDF();
   } 
   generatePDF() {
-    const json=JSON.parse(this.jsonData);
-    this.templateService.GeneratePDF(this.templateRequest.templateId,json).subscribe((blob: Blob) => {
+    console.log("dddd",this.templateRequest.templateId)
+    console.log("dddd",this.jsonData0)
+
+    this.templateService.GeneratePDF(this.templateRequest.templateId,this.jsonData0).subscribe((blob: Blob) => {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -156,7 +172,30 @@ export class GeneratePdfComponent {
     this.opened = true;
   }
 
+  onSubmitJson(){
+    console.log("enter !")
 
-
+    if(this.ngForm.value){
+      console.log("valid !")
+      this.jsonData0={};
+      this.showDangerAlertJson=false;
+      this.list.forEach(i=>{
+        const inputElement = document.getElementById(i) as HTMLInputElement;
+        const inputValue = inputElement.value;
+        this.values.push(inputValue) 
+      });
+      console.log(this.values)
+      for (let i = 0; i < this.list.length; i++) {
+        const key = this.list[i];
+        const value = this.values[i];
+        this.jsonData0[key] =value;
+      }
+      console.log(this.jsonData0)
+      this.isSelectedTemplate=false;
+    }
+    else{
+      this.showDangerAlertJson=true;
+    }
+  }
 }
 

@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
         },
         error:(err:any)=>{
           this.showDangerAlert=true;
+          this.showSuccessAlert=false;
           console.error("cannot find user !!")
         }
       })
@@ -59,7 +60,6 @@ export class LoginComponent implements OnInit {
       //throw error using toaster and with required fields
       console.log("form invalid")
       ValidateForm.validateAllFormFileds(this.loginForm);
-      alert("Your form is invalid");
     }
   }
 

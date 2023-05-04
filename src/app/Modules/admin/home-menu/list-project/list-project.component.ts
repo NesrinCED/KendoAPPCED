@@ -58,7 +58,7 @@ export class ListProjectComponent {
   } 
 
   addProject() {
-  if (this.ngForm.valid){
+  if (this.ngForm.value){
     this.dangerAlert=false;
     console.log("ppp",this.project)
     this.projectService.CreateProject(this.project).subscribe

@@ -9,7 +9,7 @@
 }
 .homeT1{
   display: inline-block;  
-  background: linear-gradient(to right, #6d3ac4 25%, #3ba3e9  ); 
+  background: linear-gradient(to right, #286ea1 25%, #849199  ); 
   -webkit-background-clip: text; 
   -webkit-text-fill-color: transparent;
 
@@ -81,7 +81,19 @@
 
 
 
-/*Blue #3899DD Green #86BC35Purple #56248C*/
+/*Blue #3899DD Green #86BC35Purple #56248C
+  $CED-blue:                              #3899DD !default;
+    $CED-bluelight:                         #9BCCEE !default;
+    $CED-blueultralight:                    #CDE5F6 !default;
+    $CED-green:                             #86BC35 !default;
+    $CED-purple:                            #56238E !default;
+    $CED-success:                           #29BF12 !default;
+    $CED-warning:                           #FF9933 !default;
+    $CED-danger:                            #E03616 !default;
+    $CED-pink:                              #f01a7d !default;
+    $CED-lightPurple:                       #9C03C1 !default;
+    $CED-greenlight:                        #29bf1233 !default; 
+*/
 
 
 

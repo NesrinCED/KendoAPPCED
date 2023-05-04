@@ -1,11 +1,21 @@
+.alerts{
+    width: 80%;
+    padding-left:15% ;
+    padding-top: 3%;
+}
+.alertDesignD{
+    font-size: 20px; background-color: #E03616; color: #fff; 
+}
+.alertDesignS{
+    font-size: 20px; background-color: #29BF12; color: #fff; 
+}
 .panel{
-    min-height: 400px;
+    max-height: 370px;
     width: 1000px;
-    box-shadow: 20px 20px 80px rgb(196, 174, 200);
+    box-shadow: 20px 20px 80px #627d94;
     border-radius: 12px;
-    margin-top: 8%;
+    margin-top: 5%;
     margin-left: 15%;
-
 }
 .panel-body {
     display: flex;
@@ -49,7 +59,7 @@ a:hover{
     margin-top: 2%;
     border-radius: 25px;
     color:  #f6f6f6;
-    background-color: #863c9a;
+    background-color: #48545e;
     border: none;
     cursor: pointer;
 }

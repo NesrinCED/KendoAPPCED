@@ -1,10 +1,10 @@
 <!--link for fa-eye slash-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <div class="alert">
-    <ngb-alert *ngIf="!same" type="danger" style="font-size: 20px;" >
+    <ngb-alert *ngIf="!same" type="danger" class="alertDesign" >
         Type Correct Recent Password !
     </ngb-alert>
-    <ngb-alert *ngIf="dangerAlert" type="danger" style="font-size: 20px;" >
+    <ngb-alert *ngIf="dangerAlert" type="danger" class="alertDesign" >
         Please Fill All Fields !
     </ngb-alert>
 </div>
@@ -63,10 +63,10 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
 
             <div class="row" style="padding-top: 5%;">
                 <div class="col-6">
-                    <button kendoButton (click)="edit()" type="submit" class="updateButton">Save</button>
+                    <button kendoButton (click)="onReset()" type="reset" class="cancelButton">Cancel</button>
                 </div>
                 <div class="col-6">
-                    <button kendoButton (click)="onReset()" type="reset" class="updateButton">Cancel</button>
+                    <button kendoButton (click)="edit()" type="submit" class="updateButton">Save</button>
                 </div>
 
             </div>
