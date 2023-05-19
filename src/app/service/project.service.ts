@@ -21,8 +21,21 @@ export class ProjectService {
     //console.log("slash importanteeeee");
     return this.http.get<Project>(`${this.apiURL}/${this.url}/` + id);
   }
-  public getFilteredTemplates(id :string): Observable<any>{
-    return this.http.get<any>(`${this.apiURL}/${this.urlF}/` + id);
+  public getFilteredTemplates(id :string | null, language:string | null): Observable<any>{
+    let url = `${this.apiURL}/${this.urlF}`;
+    if (id != null && language != null ){
+      url+=`?projectId=${id}&language=${language}`;
+    }
+    else if (id != null) {
+      url += `/${id}`;
+    }
+    else{
+      url += `/?language=${language}`;
+    }
+    return this.http.get<any>(url);
+  }
+  public getFilteredTemplatesByProject(id :string): Observable<any>{
+    return this.http.get<any>(`${this.apiURL}/${this.urlF}/` + id );
   }
   public getProjectByName(name :string): Observable<Project>{
     return this.http.get<Project>(`${this.apiURL}/${this.url}/` + name);

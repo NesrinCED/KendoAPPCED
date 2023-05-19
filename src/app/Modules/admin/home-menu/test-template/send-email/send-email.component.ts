@@ -97,7 +97,7 @@ export class SendEmailComponent {
   }
   getFilteredTemplates(projectId:string){
     if (projectId) {
-      this.projectService.getFilteredTemplates(projectId)
+      this.projectService.getFilteredTemplatesByProject(projectId)
         .subscribe((result: any[]) => {
           this.filteredTemplates = result; 
         });
@@ -137,7 +137,7 @@ export class SendEmailComponent {
         .subscribe(
           (result: any) => {
             this.showSuccessAlert=true;
-            this.router.navigate(['/admin/TestTemplate']);
+            this.router.navigate(['TestTemplate']);
           },
           (error: HttpErrorResponse) => {
             console.log("errrorr !!",error)
@@ -163,7 +163,7 @@ export class SendEmailComponent {
 
   public close(): void {
     this.opened = false;
-    this.router.navigate(['/admin/TestTemplate']);
+    this.router.navigate(['TestTemplate']);
   }
 
   public open(): void {

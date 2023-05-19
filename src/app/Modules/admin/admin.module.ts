@@ -36,6 +36,8 @@ import { ImageDialogUpdateComponent } from './home-menu/template/update-template
 import { TestTemplateComponent } from './home-menu/test-template/test-template.component';
 import { SendEmailComponent } from './home-menu/test-template/send-email/send-email.component';
 import { GeneratePdfComponent } from './home-menu/test-template/generate-pdf/generate-pdf.component';
+import { UpdateUserByAdminComponent } from './home-menu/employee/update-user-by-admin/update-user-by-admin.component';
+import { AccessedWriteTemplatesComponent } from './home-menu/employee/accessed-write-templates/accessed-write-templates.component';
 
 
 @NgModule({
@@ -56,6 +58,8 @@ import { GeneratePdfComponent } from './home-menu/test-template/generate-pdf/gen
     TestTemplateComponent,
     SendEmailComponent,
     GeneratePdfComponent,
+    UpdateUserByAdminComponent,
+    AccessedWriteTemplatesComponent,
   ],
   imports: [
     CommonModule,

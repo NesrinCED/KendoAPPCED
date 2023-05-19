@@ -55,8 +55,18 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
                         <span class="k-icon k-i-lock"style="color: #4c036d;font-size: 20px;"></span>
                         <input class="form-control" id="newPassword" [type]="type"
                          formControlName="newPassword"  placeholder="New Password" 
-                         [(ngModel)]="employeeDetails.employeePassword">
-                         <span (click)="hideshowPass()" class="fa {{eyeIcon}}" style=" color: #4c036d;"></span>
+                         [(ngModel)]="employeeDetails.employeePassword"
+                           > 
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="isUser" >
+                    <label  class="labelC">Email</label>
+                    <div class="input-field" >
+                        <span class="k-icon k-i-envelop-link"style="color: #4c036d;font-size: 20px;"></span>
+                        <input class="form-control" id="employeeEmail" type="email"
+                         formControlName="employeeEmail"  placeholder="Email Account" 
+                         [(ngModel)]="employeeDetails.employeeEmail"
+                           >
                     </div>
                 </div>
             </form>
@@ -68,7 +78,6 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
                 <div class="col-6">
                     <button kendoButton (click)="edit()" type="submit" class="updateButton">Save</button>
                 </div>
-
             </div>
 
     </div>

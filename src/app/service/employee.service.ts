@@ -14,7 +14,6 @@ export class EmployeeService {
 
   islogin = false;
   admin = false;
-  suser = false;
   choixmenu : string  = 'A';
   listData : Employee[];
   public dataForm:  FormGroup;
@@ -26,6 +25,7 @@ export class EmployeeService {
 
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('role');
     console.log("logged out !!!");
   }
   
@@ -33,20 +33,34 @@ export class EmployeeService {
     var x=JSON.parse(localStorage.getItem('user')|| '{}');
     return x;
   }
-  StoreUser(user : any){
+  GetRole(){
+    var x=JSON.parse(localStorage.getItem('role')|| '{}');
+    //console.log("ahouwa getRole !!!",x);
+    return x;
+  }
+  storeRole(role:any){
+    localStorage.setItem('role',JSON.stringify(role))
+  }
+  StoreUser(user : any, role:any){
     localStorage.setItem('user',JSON.stringify(user))
+    //localStorage.setItem('role',JSON.stringify(role))
+   // console.log("ahouwa storeUSer !!!",user);
+    //console.log("ahouwa storeRole !!!",role);
+
   }
   IsLoggedIn(){
-   var x=JSON.parse(localStorage.getItem('user')|| '{}');
-    return !!localStorage.getItem('user');
+   //var x=JSON.parse(localStorage.getItem('user')|| '{}');
+   return !!localStorage.getItem('user');
   }
+
   public getAllTemplatesById(id :string): Observable<any[]>{
     return this.http.get<any[]>("https://localhost:7176/api/Employee/AllTemplates/" + id);
   }
 
-  signUp(addEmployeeRequest:Employee){
+  add(addEmployeeRequest:Employee){
+    addEmployeeRequest.projectAuthorizationsDTO.forEach( a => a.projectAuthorizationId='00000000-0000-0000-0000-000000000000');
     addEmployeeRequest.employeeId='00000000-0000-0000-0000-000000000000';
-    return this.http.post<Employee>("https://localhost:7176/api/Employee/register",addEmployeeRequest);
+    return this.http.post<Employee>("https://localhost:7176/api/Employee/Add",addEmployeeRequest);
   }
 
   login(addEmployeeRequest:Employee){
@@ -64,8 +78,12 @@ export class EmployeeService {
   public updateEmployee(id :string, employee : Employee): Observable<Employee>{
     return this.http.put<Employee>(`${this.apiURL}/${this.url}/` + id, employee);
   }
-
   public deleteEmployee(id :string): Observable<Employee>{
     return this.http.delete<Employee>(`${this.apiURL}/${this.url}/` + id);
   }
+  /*************/
+  public updateUserByAdmin(id :string, employee : Employee): Observable<Employee>{
+    return this.http.put<Employee>(`${this.apiURL}/${this.url}/UpdateUserByAdmin/` + id, employee);
+  }
+  
 }

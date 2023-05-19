@@ -1,19 +1,19 @@
 <!--link for fa-eye slash-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-<div class="alerts" >
+<!--<div class="alerts" >
     <ngb-alert *ngIf="showSuccessAlert" type="success" class="alertDesignS">
         Your logged in successufully !
     </ngb-alert>
     <ngb-alert *ngIf="showDangerAlert" type="danger" class="alertDesignD">
         User Not Found !
     </ngb-alert>
-</div>
+</div>-->
 
 <div class="panel"> 
     <div class="panel-body">
         <div class="left-section">
-            <img src="assets/images/login.png" alt="login" class="login" style="height: 370px; width: 200px; padding-right: 5%; " >
+            <img src="assets/images/authentication.jpg" alt="login" class="login" style="height: 370px; width: 200px; padding-right: 5%; " >
         </div>
         <div class="right-section" >
             <div class="loginT">
@@ -42,8 +42,8 @@
                 <button kendoButton (click)="onLogin()" type="submit" class="loginButton">Login</button>
 
                 <div  class="text-center pt-4 text-muted">
-                    Dont you have an account?
-                    <a id="forget" routerLink="/signup">Sign Up</a>
+                    Dont you have an account? <!--routerLink="/signup"-->
+                    <a id="forget" >Sign Up</a>
                 </div>  
             
         </form>

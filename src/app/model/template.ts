@@ -5,9 +5,7 @@ export class Template {
     content:string;
     createdDate? :Date;
     modifiedDate? : Date;
-    
     modifiedBy :string="";
     createdBy: string="";
-
     projectId : string="";
 }

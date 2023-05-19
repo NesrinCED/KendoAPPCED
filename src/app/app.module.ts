@@ -27,6 +27,8 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterModule } from '@progress/kendo-angular-filter';
 import { ToastrModule } from 'ngx-toastr';
+import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+
 
 @NgModule({
   declarations: [
@@ -61,10 +63,11 @@ import { ToastrModule } from 'ngx-toastr';
     NgbModule,
     FilterModule,
     ToastrModule.forRoot({
-      timeOut: 15000, // 15 seconds
+      timeOut: 2000, // 3 seconds
       closeButton: true,
       progressBar: true,
     }),
+    ProgressBarModule,
   ],
   providers: [  ],
   bootstrap: [AppComponent]

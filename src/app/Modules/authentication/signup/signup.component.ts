@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import ValidateForm from 'src/app/helpers/ValidateForm';
 import { EmployeeService } from 'src/app/service/employee.service';
 
@@ -11,14 +12,15 @@ import { EmployeeService } from 'src/app/service/employee.service';
 })
 export class SignupComponent {
 
-  signUpForm! : FormGroup;
+  /*signUpForm! : FormGroup;
   type: string="password";
   isText: boolean=false;
   eyeIcon: string = "fa-eye-slash";
   showSuccessAlert = false;
 
 
-  constructor(private fb:FormBuilder, private employeeService:EmployeeService, private router:Router){}
+  constructor(private fb:FormBuilder, private employeeService:EmployeeService, private router:Router
+    ,private toastr:ToastrService){}
   
   
   ngOnInit():void {
@@ -36,24 +38,40 @@ export class SignupComponent {
   onSignUp() {
     if(this.signUpForm.valid){
       //send object to database
-      console.log("this is res in sign component before service",this.signUpForm.value)
       this.employeeService.signUp(this.signUpForm.value)
       .subscribe({
         next:(res)=>{
           this.showSuccessAlert=true;
-          console.log("this is res in sign component",res)
           this.signUpForm.reset();
-          this.router.navigate(['login']);
+          this.showSuccess()
+          setTimeout(() => {
+            this.router.navigate(['login']);
+          }, 3000);
+          
         },
         error:(err)=>{
-          this.showSuccessAlert=false;
+          this.showError()
+          //this.showSuccessAlert=false;
          console.log(err?.error.message)
         }
       })
     }
     else{
+      this.showWarning()
       ValidateForm.validateAllFormFileds(this.signUpForm);
     }
   }
- 
+  public showSuccess(): void {
+    this.toastr.success('You Signed Up Successefully !', 'SIGNUP Message');
+  }
+  public showError(): void {
+    this.toastr.error('User Not Signed Up ', 'SIGNUP Message');
+  }
+  public showInfo(): void {
+    this.toastr.info('Message Info!', 'Title Info!');
+  }
+  public showWarning(): void {
+    this.toastr.warning('Please Fill All Fields  !', 'FORM Warning');
+  }*/
+
 }

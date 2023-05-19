@@ -1,19 +1,29 @@
-<div class="title">
-  <h2>List Of My Templates</h2>
-  <h2>List Of My Templates</h2>
-</div>  
-<div class="container">
+<!--<kendo-dialog *ngIf="isOpened"  >
+  <div class="row">
+    <div class="col">
+      <div class="title">
+        <h2>{{employee.employeeName}} Templates</h2>
+        <h2> {{employee.employeeName}} Templates</h2>
+      </div>  
+    </div>
+    <div class="col">
+      <kendo-button icon="x" (click)="returnToList()" class="xButton" >
+      </kendo-button>
+    </div>
+  </div>
+  <kendo-grid 
+  [kendoGridBinding]="gridData"
+  class="kendoGrid"
+  [style]="{'width':'100%'}" >
+    <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
+    <kendo-grid-column field="language" title="Language"></kendo-grid-column>
+    <kendo-grid-column field="createdDate" title="CreatedDate"> </kendo-grid-column>
+    <kendo-grid-column field="projectId" title="Project Name"> </kendo-grid-column>
+  </kendo-grid>
+</kendo-dialog>
 
-<kendo-grid 
-[kendoGridBinding]="gridData"
-class="kendoGrid"
-[style]="{'width':'100%'}" >
-  <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
-  <kendo-grid-column field="language" title="Language"></kendo-grid-column>
-  <kendo-grid-column field="createdDate" title="CreatedDate"> </kendo-grid-column>
-  <kendo-grid-column field="projectId" title="Project Name"> </kendo-grid-column>
-</kendo-grid>
-</div>
+-->
+
 <!--<div class="wrapper">
   
   <kendo-tabstrip (tabSelect)="onTabSelect($event)">

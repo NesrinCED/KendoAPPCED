@@ -91,7 +91,7 @@ export class GeneratePdfComponent {
   } 
   getFilteredTemplates(projectId:string){
     if (projectId) {
-      this.projectService.getFilteredTemplates(projectId)
+      this.projectService.getFilteredTemplatesByProject(projectId)
         .subscribe((result: any[]) => {
           this.filteredTemplates = result; 
         });
@@ -165,7 +165,7 @@ export class GeneratePdfComponent {
 
   public close(): void {
     this.opened = false;
-    this.router.navigate(['/admin/TestTemplate']);
+    this.router.navigate(['TestTemplate']);
   }
 
   public open(): void {

@@ -10,6 +10,7 @@ import { TemplateService } from 'src/app/service/template.service';
 import { ImageDialogUpdateComponent } from './image-dialog-update/image-dialog-update.component';
 import { Employee } from 'src/app/model/employee';
 import ValidateForm from 'src/app/helpers/ValidateForm';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-template',
@@ -27,6 +28,8 @@ export class UpdateTemplateComponent {
   projects : string[]=[];
   id:any;
   user:any;
+  recentTemplate:any;
+  roleName:any;
 
   templateDetails :  Template={
     templateId: '',
@@ -48,24 +51,26 @@ export class UpdateTemplateComponent {
   };
   
   employee : Employee={
-    employeeId:'',
-    employeeName:'',
-    employeePassword:''
+    employeeId: '',
+    employeeName: '',
+    employeePassword: '',
+    role: '',
+    employeeEmail: '',
+    projectAuthorizationsDTO: []
   };
   
   constructor(private router:Router,private activatedRoute: ActivatedRoute,  private fb:FormBuilder
      ,private templateService : TemplateService,private projectService : ProjectService
-     ,private employeeService:EmployeeService){}
+     ,private employeeService:EmployeeService ,private toastr:ToastrService){}
 
   getAllProj(){
     this.projectService.getAllProj()
     .subscribe( (result: any[]) => (this.projects=result));
-  
   }
   ngOnInit(): void {
 
     this.user=this.employeeService.GetUser();
-    
+    this.roleName=this.employeeService.GetUser().roleDTO.roleName;    
     this.templateDetails.modifiedBy=this.user;
   
     this.getAllProj();
@@ -88,6 +93,8 @@ export class UpdateTemplateComponent {
               {
                 next: (result) => { 
                   this.templateDetails=result;
+                  this.recentTemplate=result;
+                  console.log("reccccc",this.recentTemplate)
                   //hethi blastha houni car ki getTemplat modifiedBy null bdd
                   this.templateDetails.modifiedBy=this.user.employeeId;
                   this.employee.employeeName=this.user.employeeName;
@@ -110,6 +117,7 @@ export class UpdateTemplateComponent {
     )
   }
   onSubmit() {
+   // console.log("8888",this.recentTemplate)
     this.updateTemplate();
   } 
   updateTemplate(){
@@ -117,7 +125,21 @@ export class UpdateTemplateComponent {
     this.templateService.updateTemplate(this.templateDetails.templateId, this.templateDetails)
     .subscribe(
       {
-      next : (result) =>{this.router.navigate(['admin/AllTemplates']);}
+      next : (result) =>{
+       /* if (this.templateDetails==this.recentTemplate){
+          this.showInfo()
+          console.log("new",this.templateDetails,"rece,t",this.recentTemplate)
+        }
+        else{
+          this.showSuccessUpdate()
+        }*/this.showSuccessUpdate()
+        if(this.roleName=="Admin"){
+          this.router.navigate(['AllTemplates']);                  
+        }
+        else{
+          this.router.navigate(['Templates']);                  
+        }
+      }
       },);
     /*if (this.ngForm.valid){
       this.templateDetails.projectId=this.project.projectId;
@@ -135,9 +157,29 @@ export class UpdateTemplateComponent {
  
   }
 
- public openImage() {
-  this.dialog.open();
-}
+  cancel(){
+    if(this.roleName=="Admin"){
+      this.router.navigate(['AllTemplates']);                  
+    }
+    else{
+      this.router.navigate(['Templates']);                  
+    }
+  }
+  public openImage() {
+    this.dialog.open();
+  }
+  public showSuccessUpdate(): void {
+    this.toastr.success('Template Updated Successefully !', 'Update Message');
+  }
+  public showErrorDelete(): void {
+    this.toastr.error('Template Not Updated ', 'Update Message');
+  }
+  public showInfo(): void {
+    this.toastr.info('No Changes To Update !', 'Update Info!');
+  }
+  public showWarning(): void {
+    this.toastr.warning('Please Fill All Fields  !', 'Update Warning');
+  }
 }
 
 

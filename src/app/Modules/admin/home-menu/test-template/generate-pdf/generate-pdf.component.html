@@ -33,13 +33,12 @@
                     </kendo-dropdownlist>
                 </div>
                 <kendo-button icon="download" class="downloadPDFButton" *ngIf="generatedPDF"
-                (click)="onSubmit()">Download PDF Document</kendo-button>     
-            <kendo-dialog-actions>
-                <!-- dont do it ngsubmit and click (click)="onSubmit()"==>2rows added-->
-                <button kendoButton  type="submit" class="addButton">Register</button>
-                <button kendoButton type="reset" (click)="close()" class="addButton">Cancel</button>
-              </kendo-dialog-actions>
+                (click)="onSubmit()">Download PDF Document</kendo-button>   
         </form>
+        <kendo-dialog-actions>
+            <button kendoButton type="reset" (click)="close()" class="kendoActionCancel">Cancel</button>
+            <button kendoButton  type="submit" class="kendoActionSave">Generate PDF</button>
+        </kendo-dialog-actions>
     </div>
 </div>
 </kendo-dialog>

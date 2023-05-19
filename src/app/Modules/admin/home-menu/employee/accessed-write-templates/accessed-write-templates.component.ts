@@ -13,37 +13,35 @@ import { GridDataResult } from '@progress/kendo-angular-grid';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { ProjectAuthService } from 'src/app/service/projectAuth.service';
+import { Template } from 'src/app/model/template';
 
 @Component({
-  selector: 'app-list-template',
+  selector: 'app-accessed-write-templates',
   providers: [DatePipe],
-  templateUrl: './list-template.component.html',
-  styleUrls: ['./list-template.component.css']
+  templateUrl: './accessed-write-templates.component.html',
+  styleUrls: ['./accessed-write-templates.component.css']
 })
 
-export class ListTemplateComponent {
-  @ViewChild('projectList', { static: false }) projectList: DropDownListComponent;
-  @ViewChild('languageList', { static: false }) languageList: DropDownListComponent;
+export class AccessedWriteTemplatesComponent {
   
-  user:any;
   public gridView: GridDataResult;
+  public gridDataUser: any[]=[] ;
   public gridData: any[]=[] ;
   public pageSize = 20;
   public buttonCount = 2;
   public sizes = [5,10, 20, 50];
   public opened = true;
-  selectedProject:any;
-  isSelectedProject=false;
-  selectedLanguage:any;
-  isSelectedLanguage=false;
   filteredTemplates : string[]=[];
   projects : string[]=[];
-  initialLanguages= ['Arabic', 'French', 'English','Korean','Turkish','Chinese','Punjabi','German', 'Japanese', 'Indonesian', 'Portuguese', 'Russian', 'Spanish', 'Hindi'];
-  languages = this.initialLanguages;
-  filteredTemplatesLangauage : string[]=[];
   dialogDelete=false;
   canceledDelete=true;
   idToDelete:any;
+
+  roleName:any;
+  user:any;
+  employeeId:any;
+  listAccessedWriteTemplates:any;
 
   project : Project={
     projectId:'',
@@ -54,60 +52,34 @@ export class ListTemplateComponent {
 
   constructor(private router:Router, private templateService:TemplateService,
     private projectService : ProjectService, private employeeService:EmployeeService
-    ,private datePipe: DatePipe,private toastr:ToastrService
+    ,private datePipe: DatePipe,private toastr:ToastrService, private projectAuthService:ProjectAuthService
     ){}
 
   ngOnInit() : void{
-    console.log("list template",this.employeeService.GetUser())
-    this.getalltemp();
-    this.getAllProj();
+    this.user=this.employeeService.GetUser();
+    this.roleName=this.employeeService.GetUser().roleDTO.roleName;
+    this.getAccessedWriteTemplate();
     this.user=this.employeeService.GetUser() ;
+      this.templateService
+      .getAllTemp()
+      .subscribe(
+         (result: any[]) => {
+          this.gridData=result;
+              
+      } 
+      );
+    
   }
-  onProjectChange(event:any) {
-    this.isSelectedProject=true;
-    this.selectedProject = event; 
-    this.onFilterChange() 
-  } 
-  onLanguageChange(event:any) {
-    this.isSelectedLanguage=true;
-    this.selectedLanguage = event; 
-    this.onFilterChange() 
-  } 
-/* if(this.isSelectedLanguage){
-  this.languageList.reset()
-}*/
-   onFilterChange() {
-    this.getFilteredTemplates(this.selectedProject?.projectId, this.selectedLanguage);
-  } 
-  getFilteredTemplates(projectId:string, language:string){
-    this.projectService.getFilteredTemplates(projectId,language)
-      .subscribe((result: any[]) => {
-        this.filteredTemplates = result; 
-        //console.log(this.filteredTemplates);
-        this.gridData=this.filteredTemplates;
-        const newLang:string[]=[]
-        if (this.filteredTemplates.length > 0) {
-          this.filteredTemplates.forEach((a: any) => {
-            if(!newLang.includes(a.language)){
-              newLang.push(a.language);
-            }
-          });
-        }
-        this.languages=newLang;
-        //console.log("modified Lang",this.languages)
-   });
-   
-  }
-   goListProj(){
-    this.router.navigate(["ListProject"]);
-   }
-  getalltemp(){
-    this.templateService
-    .getAllTemp()
-    .subscribe(
-       (result: any[]) => {
-        this.gridData=result;
-        this.gridData.forEach(
+  getAccessedWriteTemplate(){
+    console.log("access", this.roleName);
+    console.log("access", this.user);
+    this.employeeId=this.user.employeeId;
+    this.projectAuthService.getEmployeeAccessdProjectAuth(this.employeeId).subscribe(
+      (result: any[][]) => {
+        this.gridDataUser = result.flat();
+        this.listAccessedWriteTemplates = result;
+        console.log("templates AccessedWriteTemplatesComponent ", this.gridDataUser);
+        this.gridDataUser.forEach(
           (a:any) => {
             const formattedCreatedDate = this.datePipe.transform(a.createdDate, 'dd MMMM yyyy');
             const formattedModifiedDate = this.datePipe.transform(a.modifiedDate, 'dd MMMM yyyy');
@@ -116,21 +88,15 @@ export class ListTemplateComponent {
           }
         )
         this.sortData()  
-            
-    } 
-    );
+      },
+      (error) => {
+        console.log("error in fillteredTemplates",error)
+      }
+    )
   }
   sortData() {
-   // console.log("before sort",this.gridData)
-    this.gridData.sort((a:any, b:any) => {
+    this.gridDataUser.sort((a:any, b:any) => {
       return a.templateCreatedBy.employeeName != this.user.employeeName ? 1 : -1;
-    });
-  //  console.log("afetr sort",this.gridData)
-  }
-  getAllProj(){
-    this.projectService.getAllProj()
-    .subscribe( (result: any[]) =>{
-     (this.projects=result)
     });
   }
 
@@ -152,7 +118,7 @@ export class ListTemplateComponent {
       this.templateService.deleteTemplate(id).subscribe
       ( (result) => (
         console.log(result),
-        this.getalltemp(),
+        this.getAccessedWriteTemplate(),
         this.showSuccessDelete(),
         this.dialogDelete=false
         ),
@@ -180,16 +146,6 @@ export class ListTemplateComponent {
   }
   closeDialog(){
     this.opened = false;
-  }
-  reset(){
-    this.getalltemp();
-    this.projectList.reset();
-    this.languageList.reset();
-    this.isSelectedLanguage=false;
-    this.isSelectedProject=false;
-    this.languages = this.initialLanguages;
-    this.selectedLanguage=null;
-    this.selectedProject=null;
   }
   public showSuccessDelete(): void {
     this.toastr.success('Template Deleted Successefully !', 'Delete Message');

@@ -63,7 +63,7 @@ export class ImageUploadComponent {
       );
 }
     
-    public onRemove(): void {
-        this.valueChange.emit();
-    }
+public onRemove(): void {
+    this.valueChange.emit();
+}
 }

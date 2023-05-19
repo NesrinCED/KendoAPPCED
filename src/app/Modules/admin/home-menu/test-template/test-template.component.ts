@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EmployeeService } from 'src/app/service/employee.service';
 
 @Component({
   selector: 'app-test-template',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./test-template.component.css']
 })
 export class TestTemplateComponent {
+
+  constructor( public employeeService:EmployeeService    ){}
+
+  ngOnInit(){
+    console.log("test template",this.employeeService.GetUser())
+  }
 
 }

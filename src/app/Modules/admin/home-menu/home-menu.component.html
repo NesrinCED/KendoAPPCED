@@ -1,9 +1,11 @@
+
 <div class="custom-toolbar">
   <button kendoButton (click)="drawer.toggle()">
     <img src="assets/images/CED_Img.png" alt="CED"  height="40" width="100">
   </button>
   <div style="float: right;">
     <kendo-avatar  [imageSrc]="'assets/images/imageUser.png'" shape="circle"></kendo-avatar>
+    <input class="input-role" value="{{roleName}}" disabled>
     <button kendoButton *ngIf="employeeService.IsLoggedIn()" (click)="logout()">
      <kendo-icon name="logout" style="color: #24558c;"></kendo-icon>
     </button> 
@@ -34,9 +36,11 @@
     
     </kendo-drawer>
     <kendo-drawer-content style=" background-color: #fff; height: 100%; "> 
-    
+
+      
       <router-outlet></router-outlet>
       
-      <!--<app-home *ngIf="selectedItem === 'Home'"></app-home>-->
     </kendo-drawer-content>
 </kendo-drawer-container>
+
+      <!--<app-home *ngIf="selectedItem === 'Home'"></app-home>-->

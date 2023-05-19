@@ -6,46 +6,89 @@ import { Template } from 'src/app/model/template';
 import { ProjectService } from 'src/app/service/project.service';
 import ValidateForm from 'src/app/helpers/ValidateForm';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { ProjectAuthService } from 'src/app/service/projectAuth.service';
 
 @Component({
   selector: 'app-list-project',
+  providers: [DatePipe],
   templateUrl: './list-project.component.html',
   styleUrls: ['./list-project.component.css']
 })
 export class ListProjectComponent {
-
-  public list: any[] ;
+  showUsers = false;
+  showTemplates = false;
+  filteredTemplates : any[];
+  filteredUsers : any[];
+  selectedProjectId:any;
+  list: any[] ;
   opened:boolean=false;
+  user:any;
+ submitted = false;
+ ngForm!:FormGroup;
+ dangerAlert=false;
 
   project : Project={
     projectId:'',
     projectName:'',
     createdBy:'',
     createdDate: undefined
-  };
-  
- user:any;
- submitted = false;
- ngForm!:FormGroup;
- dangerAlert=false;
+  }; 
 
-  constructor(private router:Router, private projectService:ProjectService, private fb:FormBuilder){
+  public onToggleUser(projectId:string): void {
+    this.selectedProjectId = projectId;
+    this.showUsers = !this.showUsers;
+    this.getFilteredUsers(projectId,"");   
   }
-  getAll(){
-    this.projectService
-    .getAllProj()
-    .subscribe( (result: any[]) => {
-      this.list=result;  
-      console.log(this.list);
-    } 
-    );
+  public onToggleTemplates(projectId:string) {
+    this.selectedProjectId = projectId;
+    this.showTemplates = !this.showTemplates;
+    this.getFilteredTemplates(projectId,"");
   }
+  
+  constructor(private router:Router, private projectService:ProjectService, private fb:FormBuilder
+    ,private datePipe: DatePipe, private projectAuthService:ProjectAuthService){
+  }
+
   ngOnInit() : void{
     this.getAll();
     this.ngForm=this.fb.group({
       projectName: ['',Validators.required],
       createdBy: ['',Validators.required]
   });
+  }
+  getAll(){
+    this.projectService
+    .getAllProj()
+    .subscribe( (result: any[]) => {
+      this.list=result;  
+      this.list.forEach(
+        (a:any) => {
+          const formattedDate = this.datePipe.transform(a.createdDate, 'dd MMMM yyyy');
+          a.createdDate=formattedDate
+        }
+      )
+      //console.log(this.list);
+    } 
+    );
+  }
+  getFilteredTemplates(projectId:string, language:string){
+    this.projectService.getFilteredTemplates(projectId,language)
+      .subscribe((result: any[]) => {
+        this.filteredTemplates = result; 
+        console.log("**filtered***",this.filteredTemplates);
+      });
+  }
+  getFilteredUsers(projectId:string, language:string){
+    this.projectAuthService.getEmployeesProjectAuth(projectId)
+      .subscribe((result: any[]) => {
+        this.filteredUsers = result; 
+        if(this.filteredUsers.length ==0)
+        {
+          this.filteredUsers.push("No Employees For Project")
+        }
+        console.log("**filtered***",this.filteredUsers);
+      });
   }
   openDialog(){
     this.opened = true;
@@ -56,7 +99,6 @@ export class ListProjectComponent {
   onSubmit() {
     this.addProject();
   } 
-
   addProject() {
   if (this.ngForm.value){
     this.dangerAlert=false;
@@ -74,10 +116,7 @@ export class ListProjectComponent {
   }
   else{
     this.dangerAlert=true;
-
   }
-
-  
 }
 
 onReset() {

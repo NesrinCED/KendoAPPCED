@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component , Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Employee } from 'src/app/model/employee';
 import { EmployeeService } from 'src/app/service/employee.service';
 
@@ -12,9 +13,12 @@ import { EmployeeService } from 'src/app/service/employee.service';
 export class UpdateEmployeeComponent {
 
   employeeDetails : Employee={
-    employeeId:'',
-    employeeName:'',
-    employeePassword:''
+    employeeId: '',
+    employeeName: '',
+    employeePassword: '',
+    role: '',
+    employeeEmail: '',
+    projectAuthorizationsDTO: []
   };
   
   recentPassword:string="";
@@ -25,21 +29,35 @@ export class UpdateEmployeeComponent {
   typedPassword:string="";
   same:boolean=true;
   dangerAlert:boolean=false;
+  recentAccount:any;
+  isUser=false;
+  roleName:any;
 
   constructor(private router:Router, private activatedRoute: ActivatedRoute,
-     private employeeService:EmployeeService, private fb:FormBuilder){
+     private employeeService:EmployeeService, private fb:FormBuilder,  private toastr:ToastrService,){
    }
 
-
   ngOnInit() : void{
+    //console.log("update employee",this.employeeService.GetUser())
+    this.roleName=this.employeeService.GetUser().roleDTO.roleName;
+    console.log("update employee",this.employeeService.GetUser().roleDTO.roleName)
+    if(this.roleName=="Admin"){
+      this.isUser=false;
+    }
+    else{
+      this.isUser=true;
+    }
     this.employeeDetails=this.employeeService.GetUser();
+    this.recentAccount=this.employeeService.GetUser();
     this.recentPassword=this.employeeDetails.employeePassword;
 
     this.ngForm=this.fb.group({
       employeeName: ['', Validators.required],
       currentPassword: ['', Validators.required],
-      newPassword: ['', Validators.required]
+      newPassword: ['', Validators.required],
+      employeeEmail:['',Validators.required]
     });
+    this.employeeDetails.employeePassword=""
 
   }
 
@@ -52,17 +70,24 @@ export class UpdateEmployeeComponent {
       this.same=this.typedPassword===this.recentPassword; 
       if(this.same){
         this.employeeService.updateEmployee(id,employee).subscribe(
-        (res:any)=>{
-          console.log("result :",res);
-          this.employeeService.logout();
-          this.router.navigate(['/login']);
+        (res:any)=>{          
+            this.employeeService.logout();
+            this.showSuccessUpdate()
+            setTimeout(() => {
+              this.showInfoLoggedOut()
+              this.router.navigate(['/login']);
+            }, 3000);
         },
-        error=>{console.error("error in updating")}
+        error=>{
+          this.showErrorUpdate()
+          console.error("error in updating")
+        }
       )
       }
     }
     else{
-      this.dangerAlert=true;
+      this.showErrorPassword()
+     // this.dangerAlert=true;
     }
 
  
@@ -78,28 +103,23 @@ export class UpdateEmployeeComponent {
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon= "fa-eye-slash" ;
     this.isText ? this.type= "text" : this.type= "password";
  }
- 
+  public showSuccessUpdate(): void {
+    this.toastr.success('Account Updated Successefully !', 'Update Message');
+  }
+  public showErrorUpdate(): void {
+    this.toastr.error('Account Not Updated ', 'Update Message');
+  }
+  public showErrorPassword(): void {
+    this.toastr.error('Type Correct Recent Password ! ', 'Password Message');
+  }
+  public showInfo(): void {
+    this.toastr.info('No Changes To Update !', 'Update Info!');
+  }
+  public showInfoLoggedOut(): void {
+    this.toastr.info('Message Info!', 'You Have Logged Out !');
+  }
+  public showWarning(): void {
+    this.toastr.warning('Please Fill All Fields  !', 'Update Warning');
+  }
  
 }
-
-    /*this.activatedRoute.paramMap.subscribe(
-      {
-        next: (params) => {
-          const id = params.get('employeeId');
-          console.log("aaaaa",id);
-          if (id){
-            this.employeeService.getEmployee(id).subscribe(
-              {
-                next: (result) => { 
-                  this.employeeDetails=result;
-                  console.log("bbb",this.employeeDetails);
-                 }
-              }
-            );
-          }
-          else{
-            console.log("id fera8");
-          }
-        }
-      }
-    )  */

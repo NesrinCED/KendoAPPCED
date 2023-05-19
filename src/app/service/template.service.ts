@@ -12,7 +12,6 @@ export class TemplateService {
   private url='Template';
   private urlG='Template/pdf';
   private urlS='Template/email';
-  private urlF="Template/filteredTemplatesByLanguage";
   public list: Template[];
 
   constructor(private http : HttpClient) {  }
@@ -46,8 +45,5 @@ export class TemplateService {
       responseType: 'blob' as const // response type is blob
     };
     return this.http.post(`${this.apiURL}/${this.urlG}/${id}` , jsonData,options);
-  }
-  public getFilteredTemplatesByLanguage(language :string): Observable<any>{
-    return this.http.get<any>(`${this.apiURL}/${this.urlF}/` + language);
   }
 }

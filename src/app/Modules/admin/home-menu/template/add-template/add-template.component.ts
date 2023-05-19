@@ -11,10 +11,13 @@ import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
 import { ImageDialogComponent } from './image-dialog-add/image-dialog.component';
 import ValidateForm from 'src/app/helpers/ValidateForm';
-//import { NotificationService } from "@progress/kendo-angular-notification";
+import { ToastrService } from 'ngx-toastr';
+import { ProjectAuthService } from 'src/app/service/projectAuth.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-template',
+  providers: [DatePipe],
   templateUrl: './add-template.component.html',
   styleUrls: ['./add-template.component.css'],
   encapsulation: ViewEncapsulation.None,
@@ -44,13 +47,17 @@ export class AddTemplateComponent {
   projects : string[]=[];
   id:any;
   openedFeature:boolean=false;
-  user:any;
   ngForm!:FormGroup;
   dangerAlert=false;
   dangerAlertF=false;
   featureForm!:FormGroup;
   featureName:string;
   currentPosition:any;
+
+  roleName:any;
+  user:any;
+  employeeId:any;
+  listAccessedWriteTemplates:any;
 
   addTemplateRequest : Template={
     templateId: '',
@@ -75,8 +82,15 @@ export class AddTemplateComponent {
  
   ngOnInit() {
     this.user=this.employeeService.GetUser();
+    this.employeeId=this.user.employeeId;
+    this.roleName=this.employeeService.GetUser().roleDTO.roleName;
     this.getAllEmp();
-    this.getAllProj();
+    if(this.roleName=="Admin"){
+      this.getAllProj();
+    }
+    else{
+      this.getFilteredProjects(this.employeeId);
+    }
     this.ngForm=this.fb.group({
       name: ['', Validators.required],
       language: ['', Validators.required],
@@ -88,15 +102,16 @@ export class AddTemplateComponent {
     })
   }
 
-  constructor(private router:Router,private fb: FormBuilder,
-     private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
+  constructor(private router:Router, private templateService:TemplateService,
+    private projectService : ProjectService, private employeeService:EmployeeService
+    ,private fb:FormBuilder
+    ,private datePipe: DatePipe,private toastr:ToastrService, private projectAuthService:ProjectAuthService) { }
     
   getAllEmp(){
     this.employeeService.getAllemp()
     .subscribe( (result: any[]) => (result.forEach(x=>this.employeNames.push(x.employeeName)) ));
   
   }
-
   getAllProj(){
     this.projectService.getAllProj()
     .subscribe( (result: any[]) =>{
@@ -111,8 +126,7 @@ export class AddTemplateComponent {
   addTemplate() {
     if (this.ngForm.valid){
       this.dangerAlert=false;
-      this.addTemplateRequest.createdBy=this.user.employeeId;
-            
+      this.addTemplateRequest.createdBy=this.user.employeeId;  
       if(this.project.projectId!=""){      
         this.addTemplateRequest.projectId=this.project.projectId;
       }
@@ -125,10 +139,19 @@ export class AddTemplateComponent {
       (
         (result: any) => {
           this.submitted = false;
-          this.router.navigate(['admin/AllTemplates']);
+          this.showSuccess();
+          setTimeout(() => {
+            if(this.roleName=="Admin"){
+              this.router.navigate(['AllTemplates']);                  
+            }
+            else{
+              this.router.navigate(['Templates']);                  
+            }
+          }, 3000);              
         },
         (error: HttpErrorResponse) => {
-          console.log("errrorr !!",error)
+          this.showError()
+          console.log("errrorr in the back!!",error)
         }
       )
     }
@@ -136,21 +159,13 @@ export class AddTemplateComponent {
       this.dangerAlert=true;
       console.log("form invalid")
       ValidateForm.validateAllFormFileds(this.ngForm);
-     // window.alert("Your form is invalid");
-    }
-
-    
-  }
-
-  onReset() {
-    this.registerForm.reset();
+    }    
   }
   public opened = true;
 
   public close(status: string): void {
     console.log(`Dialog result: ${status}`);
     this.opened = false;
-  // this.router.navigate(['Home']);
   }
 
   public open(): void {
@@ -161,7 +176,12 @@ export class AddTemplateComponent {
     this.dialog.open();
   }
   public cancel(){
-  this.router.navigate(['admin/AllTemplates'])
+    if(this.roleName=="Admin"){
+      this.router.navigate(['AllTemplates']);                  
+    }
+    else{
+      this.router.navigate(['Templates']);                  
+    }
   }
 
   openFeature(){
@@ -188,7 +208,32 @@ export class AddTemplateComponent {
       this.dangerAlertF=true;
     }
   }
+  /*****for user */
+  getFilteredProjects(id:string){
+    this.projectAuthService.getEmployeeAccessdProjects(this.employeeId).subscribe(
+      (result: any[]) => {
+        this.projects = result;
+        this.listAccessedWriteTemplates = result;
+        console.log("templates Accessedprojects ", this.projects);
+      },
+      (error) => {
+        console.log("error in Accessedprojects",error)
+      }
+    )
+  }
 
-  
+/******alerts****/
+  public showSuccess(): void {
+    this.toastr.success('Template Created Successefully !', 'Save Message');
+  }
+  public showError(): void {
+    this.toastr.error('Template Not Created ', 'Save Message');
+  }
+  public showInfo(): void {
+    this.toastr.info('Message Info!', 'Title Info!');
+  }
+  public showWarning(): void {
+    this.toastr.warning('Please Fill All Fields  !', 'FORM Warning');
+  }
 
 }

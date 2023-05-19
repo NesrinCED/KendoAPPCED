@@ -13,6 +13,8 @@ import { UpdateTemplateComponent } from './home-menu/template/update-template/up
 import { TestTemplateComponent } from './home-menu/test-template/test-template.component';
 import { SendEmailComponent } from './home-menu/test-template/send-email/send-email.component';
 import { GeneratePdfComponent } from './home-menu/test-template/generate-pdf/generate-pdf.component';
+import { UpdateUserByAdminComponent } from './home-menu/employee/update-user-by-admin/update-user-by-admin.component';
+import { AccessedWriteTemplatesComponent } from './home-menu/employee/accessed-write-templates/accessed-write-templates.component';
 
 
 
@@ -22,15 +24,17 @@ const routes: Routes =  [
       {path: '', redirectTo: 'Home', pathMatch: 'full' },
       {path: 'Home', component: HomeComponent },
       {path: 'Developers', component: ListEmployeeComponent },
+      {path: 'Developers/UpdateUserByAdmin/:id', component: UpdateUserByAdminComponent },
       {path: 'Projects', component: ListProjectComponent },
       {path: 'AllTemplates',component: ListTemplateComponent},
-      {path: 'AllTemplates/UpdateTemplate/:id',component: UpdateTemplateComponent},
-      {path: 'MyTemplates', component: ListTemplatesEmployeeComponent },
+      {path: 'UpdateTemplate/:id',component: UpdateTemplateComponent},
+      {path: 'EmployeeTemplates/:id', component: ListTemplatesEmployeeComponent },
       {path: 'AddTemplate',component: AddTemplateComponent},
       {path: 'TestTemplate',component: TestTemplateComponent},
       {path: 'TestTemplate/SendEmail',component: SendEmailComponent},
       {path: 'TestTemplate/GeneratePDF',component: GeneratePdfComponent},
       {path: 'Settings',component: UpdateEmployeeComponent},
+      {path: 'Templates', component: AccessedWriteTemplatesComponent },
 
     ]
   }

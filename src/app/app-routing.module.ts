@@ -18,7 +18,7 @@ const routes: Routes =  [
 /* {path: 'home', component:HomeMenuComponent,canActivate:[AuthGaurdService] ,children : [
 
   ]},*/  
-  { path: 'admin',loadChildren:()=>import('./Modules/admin/admin.module')
+  { path: '',loadChildren:()=>import('./Modules/admin/admin.module')
   .then((m)=>m.AdminModule)},
   { path: '', redirectTo:'login',pathMatch:'full' },
   { path: 'login', component: LoginComponent }, 

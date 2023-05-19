@@ -117,3 +117,28 @@ input[type='password']{
     font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
+.kendoActionCancel{
+    text-align: center;
+    font-size: 25px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    margin-top: 2%;
+    border-radius: 25px;
+    color:  #f6f6f6;
+    background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
+    border: none;
+    cursor: pointer;
+  }
+  .kendoActionSave{
+    text-align: center;
+    font-size: 25px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    padding: 6px 5%;
+    margin-top: 2%;
+    border-radius: 25px;
+    color:  #ffffff ;
+    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
+    border: none;
+    cursor: pointer;
+  }

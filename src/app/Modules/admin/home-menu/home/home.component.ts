@@ -21,16 +21,12 @@ export class HomeComponent implements OnInit {
   timer$: Observable<number> = timer(0, 3000);
 
   ngOnInit() {
+   console.log("in home welcome",this.employeeService.GetUser())
     this.userName = this.employeeService.GetUser().employeeName;
     this.timer$.subscribe(() => {
       this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
     });
   }
-  public showSuccess(): void {
-    this.toastr.success('Message Success!', 'Title Success!');
-  }
-  
-
 
 constructor(private router : Router, private fb:FormBuilder, public employeeService:EmployeeService
   ,private toastr:ToastrService){}

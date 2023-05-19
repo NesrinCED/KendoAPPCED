@@ -1,6 +1,6 @@
 <kendo-dialog 
  *ngIf="opened" 
-[minWidth]="250" [width]="1100" [height]="700" >
+[minWidth]="250" [width]="700" [height]="400" >
 <div >
     <ngb-alert *ngIf="showSuccessAlert" type="success" class="alertDesignS" >
         PDF Document Generated successufully !
@@ -60,11 +60,11 @@
                     [(ngModel)]="jsonData" (valueChange)="onTextChange($event)"
                     formControlName="jsonData" id="jsonData"  ></textarea>
                 </div>    -->
-            <kendo-dialog-actions>
-                <button kendoButton  type="submit" class="addButton">Send Email</button>
-                <button kendoButton type="reset" (click)="close()" class="addButton">Cancel</button>
-              </kendo-dialog-actions>
         </form>
+        <kendo-dialog-actions>
+            <button kendoButton type="reset" (click)="close()" class="kendoActionCancel">Cancel</button>
+            <button kendoButton  type="submit" class="kendoActionSave">Send Email</button>
+          </kendo-dialog-actions>
     </div>
 </div>
 </kendo-dialog>
