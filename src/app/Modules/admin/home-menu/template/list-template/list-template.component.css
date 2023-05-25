@@ -192,6 +192,33 @@
     color: #510e75;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
+  .xButton{
+    background-color:#fff ;
+    border-color: #fff;
+    color: #585858;
+    float: right;
+  }
+  .titleEmployeeTemplates{
+    display: inline-block;  
+    background: linear-gradient(to right, #4c036d  25%, #9659c0 ); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+  
+    padding-left: 5%;
+    padding-bottom: 2%;
+    font-size: 37px;
+    font-weight: bolder;
+    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
+  }
 
 
-
+  .custom-editor {
+    height: auto !important; /* Set height to auto to adjust based on content */
+    min-height: 100px; /* Set a minimum height for the editor */
+  }
+  
+  .custom-editor .k-editor-toolbar {
+    display: none; /* Hide the toolbar */
+  }
+  

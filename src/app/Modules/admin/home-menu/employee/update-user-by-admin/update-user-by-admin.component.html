@@ -52,6 +52,7 @@
                     <ng-template kendoGridCellTemplate let-dataItem>
                         <div  class="form-group" >
                             <input type="checkbox"  kendoCheckBox
+                            [disabled]="!dataItem.read"
                             (click)="changeStatus(dataItem, 'write')"
                              id="projectAuthorization.write" 
                              [checked]="dataItem.write" />

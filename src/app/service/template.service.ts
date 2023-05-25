@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Template } from '../model/template';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { TemplateHistory } from '../model/templatehistory';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class TemplateService {
 
   private apiURL="https://localhost:7176/api";
   private url='Template';
+  private urlTH='TemplateHistory/historic';
   private urlG='Template/pdf';
   private urlS='Template/email';
   public list: Template[];
@@ -45,5 +47,8 @@ export class TemplateService {
       responseType: 'blob' as const // response type is blob
     };
     return this.http.post(`${this.apiURL}/${this.urlG}/${id}` , jsonData,options);
+  }
+  public getHistoricByTemplateId(id:string): Observable<TemplateHistory[]>{
+    return this.http.get<TemplateHistory[]>(`${this.apiURL}/${this.urlTH}/` + id);
   }
 }

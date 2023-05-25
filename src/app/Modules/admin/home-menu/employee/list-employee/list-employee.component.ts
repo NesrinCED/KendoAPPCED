@@ -63,6 +63,7 @@ export class ListEmployeeComponent {
   canceledDelete=true;
   idToDelete:any;
   viewOpened=false;
+  disabledWrite: boolean = true;
 
   employee : Employee={
     employeeId: '',
@@ -122,10 +123,10 @@ export class ListEmployeeComponent {
     this.templateService.getAllTemp().subscribe(
       (res:any) => {
         this.totalNumTemplates=res.length;
-        console.log("total************ res ",this.totalNumTemplates);
+    //    console.log("total************ res ",this.totalNumTemplates);
       }
     )
-    console.log("total ",this.totalNumTemplates)
+  //  console.log("total ",this.totalNumTemplates)
     this.loggedEmployee=this.employeeService.GetUser()
     this.getAllemp();
     
@@ -140,7 +141,7 @@ export class ListEmployeeComponent {
   }
 
   addEmployee() {
-    console.log("addEmployeeFunction",this.gridData)    
+    this.projectAuthorizationsRequest=[]
     if (!this.ngForm.controls['employeeEmail'].valid){
       this.showErrorEmail()
     }
@@ -177,6 +178,7 @@ export class ListEmployeeComponent {
     }
   }
   fillGridData(){
+    this.gridData=[]
     this.projectService.getAllProj().subscribe(
       (res:any) => {
         res.forEach(
@@ -185,7 +187,7 @@ export class ListEmployeeComponent {
             this.project=a.projectName
           }
         )
-        console.log("griddata",this.gridData)
+       // console.log("griddata",this.gridData)
       }
     )
   }
@@ -212,6 +214,14 @@ export class ListEmployeeComponent {
   }
 
   openAddDialog(){
+    this.employee={
+      employeeId: '',
+      employeeName: '',
+      employeePassword: '',
+      role: '',
+      employeeEmail: '',
+      projectAuthorizationsDTO: []
+    };
     this.fillGridData();
     this.openedAdd = true;
   }
@@ -223,15 +233,18 @@ export class ListEmployeeComponent {
   yes(){
     this.canceledDelete=false;
     this.deleteEmployee(this.idToDelete);
+
   }
   cancelDelete(){
     this.canceledDelete=true;
     this.dialogDelete=false;
 
   }
-  deleteEmployee(id : string){
-    this.idToDelete=id;
+  showDeletePopup(id:string){
     this.dialogDelete=true;
+    this.idToDelete =id
+  }
+  deleteEmployee(id : string){
     if(!this.canceledDelete){
      // console.log("iiiiiii",id)
       this.employeeService.deleteEmployee(id).subscribe(
@@ -246,8 +259,11 @@ export class ListEmployeeComponent {
 
   }
   public changeStatus(dataItem: any, field: string): void {
-    console.log("changestatus",dataItem)
     dataItem[field] = !dataItem[field];
+    //console.log("changestatus",dataItem)
+    //console.log("read",dataItem.read)
+  //  console.log("write",dataItem.write)
+
   }
   /***** For Edit ******* */
   editEmployee(id:string){

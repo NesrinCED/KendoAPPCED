@@ -25,8 +25,11 @@ export class ProjectAuthService {
   public getEmployeeAccessdProjectAuth(id :string): Observable<Template[][]>{
     return this.http.get<Template[][]>(`${this.apiURL}/${this.url}/filteredAccessedProjectAuth/` + id);
   }
-  public getEmployeeAccessdProjects(id :string): Observable<Project[]>{
-    return this.http.get<Project[]>(`${this.apiURL}/${this.url}/filteredAccessedProjects/` + id);
+  public getWriteAccessedProjectsByEmployee(id :string): Observable<Project[]>{
+    return this.http.get<Project[]>(`${this.apiURL}/${this.url}/WriteAccessedProjects/` + id);
+  }
+  public getReadAccessedProjectsByEmployee(id :string): Observable<Project[]>{
+    return this.http.get<Project[]>(`${this.apiURL}/${this.url}/ReadAccessedProjects/` + id);
   }
  /* public getProjectAuthByName(name :string): Observable<ProjectAuth>{
     return this.http.get<ProjectAuth>(`${this.apiURL}/${this.url}/` + name);

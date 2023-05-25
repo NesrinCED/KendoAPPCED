@@ -11,6 +11,7 @@ import { EmployeeService } from 'src/app/service/employee.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
 import ValidateForm from 'src/app/helpers/ValidateForm';
+import { ProjectAuthService } from 'src/app/service/projectAuth.service';
 
 @Component({
   selector: 'app-generate-pdf',
@@ -56,7 +57,6 @@ export class GeneratePdfComponent {
   projects : string[]=[];
   id:any;
   jsonData:any;
-  user:any;
   ngForm!:FormGroup;
   selectedProject: any; 
   selectedTemplate: any; 
@@ -70,10 +70,24 @@ export class GeneratePdfComponent {
   list:string[]=[];
   values:string[]=[];
   jsonData0 :any;
+  isConfirmedTemplate=false;
+  choosedContent:string;
+
+  roleName:any;
+  user:any;
+  employeeId:any;
+  listAccessedReadTemplates:any;
 
   ngOnInit() {
     this.user=this.employeeService.GetUser();
-    this.getAllProj();
+    this.employeeId=this.user.employeeId;
+    this.roleName=this.employeeService.GetUser().roleDTO.roleName;
+    if(this.roleName=="Admin"){
+      this.getAllProj();
+    }
+    else{
+      this.getFilteredProjects(this.employeeId);
+    }
     this.ngForm=this.fb.group({
       name: ['', Validators.required],
       projectName: ['', Validators.required],
@@ -82,9 +96,21 @@ export class GeneratePdfComponent {
     });
  
   }
-  constructor(private router:Router,private fb: FormBuilder,
-     private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
-
+  constructor(private router:Router,private fb: FormBuilder, private projectAuthService:ProjectAuthService
+     ,private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
+  /*****for user */
+  getFilteredProjects(id:string){
+    this.projectAuthService.getReadAccessedProjectsByEmployee(this.employeeId).subscribe(
+      (result: any[]) => {
+        this.projects = result;
+        this.listAccessedReadTemplates = result;
+        console.log("templates Accessedprojects ", this.projects);
+      },
+      (error) => {
+        console.log("error in Accessedprojects",error)
+      }
+    )
+  }
   onProjectChange(event:any) {
     this.selectedProject = event; 
     this.getFilteredTemplates(this.selectedProject?.projectId);
@@ -108,19 +134,21 @@ export class GeneratePdfComponent {
   }
   onTemplateChange(event:any) {
     this.selectedTemplate = event;
+    this.isSelectedTemplate=true;
     var content!:string;
     content=this.selectedTemplate.content;
+    this.choosedContent=content;
     var index=content.indexOf("{");
     var end=content.indexOf("}");
     while(index!=-1 && end!=-1){
-      this.list.push(content.substring(index+1,end))
+      var field=content.substring(index+1,end);
+      if (!this.list.find(item => item === field)) {
+        this.list.push(field);
+      }
       content=content.substring(end+1,content.length);
       index=content.indexOf("{");
       end=content.indexOf("}");
     }
-    console.log(this.list);
-    this.isSelectedTemplate=true;
-
   }
 
   onSubmit1() {
@@ -171,7 +199,6 @@ export class GeneratePdfComponent {
   public open(): void {
     this.opened = true;
   }
-
   onSubmitJson(){
     console.log("enter !")
 
@@ -192,10 +219,18 @@ export class GeneratePdfComponent {
       }
       console.log(this.jsonData0)
       this.isSelectedTemplate=false;
+      this.isConfirmedTemplate=false;
     }
     else{
       this.showDangerAlertJson=true;
     }
   }
-}
+  ConfirmTemplate(){
+    this.isConfirmedTemplate=true;
 
+  }
+  CancelTemplate(){
+    this.isConfirmedTemplate=false;
+    this.isSelectedTemplate=false;
+  }
+}

@@ -58,7 +58,10 @@ export class EmployeeService {
   }
 
   add(addEmployeeRequest:Employee){
-    addEmployeeRequest.projectAuthorizationsDTO.forEach( a => a.projectAuthorizationId='00000000-0000-0000-0000-000000000000');
+    addEmployeeRequest.projectAuthorizationsDTO.forEach( a => {
+      a.projectAuthorizationId='00000000-0000-0000-0000-000000000000';
+      a.employeeId='00000000-0000-0000-0000-000000000000';
+    } );
     addEmployeeRequest.employeeId='00000000-0000-0000-0000-000000000000';
     return this.http.post<Employee>("https://localhost:7176/api/Employee/Add",addEmployeeRequest);
   }

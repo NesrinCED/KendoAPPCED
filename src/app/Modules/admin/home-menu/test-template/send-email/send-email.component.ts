@@ -15,6 +15,7 @@ import { EmployeeService } from 'src/app/service/employee.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
 import ValidateForm from 'src/app/helpers/ValidateForm';
+import { ProjectAuthService } from 'src/app/service/projectAuth.service';
 
 @Component({
   selector: 'app-send-email',
@@ -62,11 +63,11 @@ export class SendEmailComponent {
   jsonData:any;
   subject:any;
   to:any;
-  user:any;
   ngForm!:FormGroup;
   selectedProject: any; 
   selectedTemplate: any; 
   isSelectedTemplate=false;
+  isConfirmedTemplate=false;
   list : string[]=[];
   values:string[]=[];
   jsonData0 :any;
@@ -75,10 +76,23 @@ export class SendEmailComponent {
   showDangerAlertJson=false;
   dangerAlertV=false;
   jsonForm!:FormGroup;
+  choosedContent:string;
+  roleName:any;
+  user:any;
+  employeeId:any;
+  listAccessedReadTemplates:any;
 
   ngOnInit() {
+
     this.user=this.employeeService.GetUser();
-    this.getAllProj();
+    this.employeeId=this.user.employeeId;
+    this.roleName=this.employeeService.GetUser().roleDTO.roleName;
+    if(this.roleName=="Admin"){
+      this.getAllProj();
+    }
+    else{
+      this.getFilteredProjects(this.employeeId);
+    }
     this.ngForm=this.fb.group({
       name: ['', Validators.required],
       projectName: ['', Validators.required],
@@ -88,9 +102,21 @@ export class SendEmailComponent {
     this.jsonForm=this.fb.group({
     });
   }
-  constructor(private router:Router,private fb: FormBuilder,
-     private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
-
+  constructor(private router:Router,private fb: FormBuilder, private projectAuthService:ProjectAuthService
+     ,private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
+  /*****for user */
+  getFilteredProjects(id:string){
+    this.projectAuthService.getReadAccessedProjectsByEmployee(this.employeeId).subscribe(
+      (result: any[]) => {
+        this.projects = result;
+        this.listAccessedReadTemplates = result;
+        console.log("templates Accessedprojects ", this.projects);
+      },
+      (error) => {
+        console.log("error in Accessedprojects",error)
+      }
+    )
+  }
   onProjectChange(event:any) {
     this.selectedProject = event; 
     this.getFilteredTemplates(this.selectedProject?.projectId);
@@ -115,7 +141,6 @@ export class SendEmailComponent {
    // console.log(event); 
   }
   onSubmit() {
-
     if(this.ngForm.valid){
       const subjectTextArea=document.getElementById('subject') as HTMLTextAreaElement;
       const toTextArea=document.getElementById('to') as HTMLTextAreaElement;
@@ -136,12 +161,14 @@ export class SendEmailComponent {
         SendEmail(this.templateRequest.templateId,body)
         .subscribe(
           (result: any) => {
+            console.log("result",result)
             this.showSuccessAlert=true;
             this.router.navigate(['TestTemplate']);
-          },
-          (error: HttpErrorResponse) => {
+          }
+          /*(error: HttpErrorResponse) => {
             console.log("errrorr !!",error)
-          });
+          }*/
+          );
       } catch (error) {
         console.log("catch",error)
        // this.showDangerAlert=true;
@@ -171,19 +198,26 @@ export class SendEmailComponent {
   }
 
   onTemplateChange(event:any) {
+    this.list=[];
     this.selectedTemplate = event;
+    console.log("selected one ",this.selectedTemplate)
+    this.isSelectedTemplate=true;
     var content!:string;
     content=this.selectedTemplate.content;
+    this.choosedContent=content;
     var index=content.indexOf("{");
     var end=content.indexOf("}");
     while(index!=-1 && end!=-1){
-      this.list.push(content.substring(index+1,end))
+      var field=content.substring(index+1,end);
+      if (!this.list.find(item => item === field)) {
+        this.list.push(field);
+      }
       content=content.substring(end+1,content.length);
       index=content.indexOf("{");
       end=content.indexOf("}");
     }
-    this.isSelectedTemplate=true;
-
+    console.log("list form one ",this.list)
+    
   }
 
   onSubmitJson(){
@@ -202,10 +236,19 @@ export class SendEmailComponent {
       }
       console.log("onSubmitJson",this.jsonData0)
       this.isSelectedTemplate=false;
+      this.isConfirmedTemplate=false;
     }
     else{
       this.showDangerAlertJson=true;
     }
+  }
+  ConfirmTemplate(){
+    this.isConfirmedTemplate=true;
+
+  }
+  CancelTemplate(){
+    this.isConfirmedTemplate=false;
+    this.isSelectedTemplate=false;
   }
 
 }

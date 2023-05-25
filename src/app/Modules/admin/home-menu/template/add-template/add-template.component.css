@@ -120,3 +120,8 @@ input[type='password']{
     font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
+.custom-editor {
+    height: auto !important; /* Set height to auto to adjust based on content */
+    min-height: 100px; /* Set a minimum height for the editor */
+  }
+  

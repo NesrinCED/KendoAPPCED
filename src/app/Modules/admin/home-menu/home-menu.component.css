@@ -34,8 +34,8 @@
 my-app {
   padding: 0;
 }
-
-.itemTitle{
+/***purple****/
+/*.itemTitle{
   font-family: 'Times New Roman', Times, serif ;
   font-weight: bolder;
   color:  #4c036d;
@@ -53,10 +53,32 @@ my-app {
   background-color: #cf9cd2;
 }
 
-
 .k-drawer-item:hover {
   background-color: #f6e8ff;
+}*/
+/****in blue*****/
+.itemTitle{
+  font-family: 'Times New Roman', Times, serif ;
+  font-weight: bolder;
+  color:  #308bcd ;
+  text-transform: uppercase;
 }
+.k-drawer-item {
+ background-color: #fffeff;
+  border-bottom: 0.1px solid #adcee6 ;
+}
+.k-drawer-item.k-selected {
+  background-color: #acd4f0 ;
+}
+
+.k-drawer-item.k-selected:hover {
+  background-color: #b9dcf5 ;
+}
+
+.k-drawer-item:hover {
+  background-color: #b9dcf5 ;
+}
+
 
 
 .buttonDrawer {

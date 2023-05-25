@@ -38,11 +38,26 @@ export class AccessedWriteTemplatesComponent {
   canceledDelete=true;
   idToDelete:any;
 
+  gridHistoric:any[];
+  showHistoric=false;
+  template : Template={
+    templateId: '',
+      name: '',
+      language: '',
+      content: '',
+      createdBy: '',
+      modifiedBy: '',
+      projectId: '',
+      createdDate: undefined,
+      modifiedDate: undefined
+  };
+
   roleName:any;
   user:any;
   employeeId:any;
   listAccessedWriteTemplates:any;
-
+  disabledCreate=false;
+  
   project : Project={
     projectId:'',
     projectName:'',
@@ -76,8 +91,12 @@ export class AccessedWriteTemplatesComponent {
     this.employeeId=this.user.employeeId;
     this.projectAuthService.getEmployeeAccessdProjectAuth(this.employeeId).subscribe(
       (result: any[][]) => {
+        console.log("*********",result)
         this.gridDataUser = result.flat();
         this.listAccessedWriteTemplates = result;
+        if (this.listAccessedWriteTemplates.length==0){
+          this.disabledCreate=true;
+        }
         console.log("templates AccessedWriteTemplatesComponent ", this.gridDataUser);
         this.gridDataUser.forEach(
           (a:any) => {
@@ -109,11 +128,13 @@ export class AccessedWriteTemplatesComponent {
     this.opened = true;
     this.router.navigate(['AddTemplate']);
   }
-
+  ShowDeleteTemplate(id : string){
+    this.dialogDelete=true;
+    this.idToDelete=id;
+  }
   deleteTemplate(id : string){
     this.idToDelete=id;
     //this.templateService.getTemplate(id).subscribe(res=>console.log(res));
-    this.dialogDelete=true;
     if(!this.canceledDelete){
       this.templateService.deleteTemplate(id).subscribe
       ( (result) => (
@@ -136,6 +157,30 @@ export class AccessedWriteTemplatesComponent {
     this.canceledDelete=true;
     this.dialogDelete=false;
 
+  }
+  viewTemplateHistoric(id:string){
+    this.showHistoric=true;
+    this.templateService.getTemplate(id).subscribe(
+      (res:any) => {
+        this.template=res;
+      }
+    )
+    if (id){
+      this.templateService.getHistoricByTemplateId(id).subscribe(
+        {
+          next: (res) => { 
+            this.gridHistoric=res;
+            console.log("historic ",this.gridHistoric)
+          }
+        }
+      );
+    }
+    else{
+      console.log("error in getting id");
+    }
+  }
+  cancelView(){
+    this.showHistoric=false;
   }
   updateTemplate(id : string){
     this.router.navigate(['UpdateTemplate',id]); 

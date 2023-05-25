@@ -41,7 +41,7 @@
                             <li>
                                 <a class="styled-icons-item">
                                     <kendo-button class="forIcon" icon="trash"
-                                    (click)="deleteEmployee(i.employeeId)" >
+                                    (click)="showDeletePopup(i.employeeId)" >
                                     </kendo-button>
                                 </a>
                             </li>
@@ -134,8 +134,10 @@
                     <ng-template kendoGridCellTemplate let-dataItem>
                         <div class="form-group"  >
                             <input type="checkbox"  kendoCheckBox
+                            [disabled]="!dataItem.read"
                             (click)="changeStatus(dataItem, 'write')" 
-                            formControlName="write" id="projectAuthorization.write" />
+                             id="projectAuthorization.write" />
+                           
                         </div>
                     </ng-template>
                 </kendo-grid-column>
@@ -179,4 +181,3 @@
       <kendo-grid-column field="projectId" title="Project Name"> </kendo-grid-column>
     </kendo-grid>
   </kendo-dialog>
-  

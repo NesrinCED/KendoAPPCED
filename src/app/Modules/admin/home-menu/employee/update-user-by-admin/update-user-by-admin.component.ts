@@ -90,7 +90,8 @@ export class UpdateUserByAdminComponent {
                             read: a.read,
                             write: a.write,
                             projectName:name,
-                            projectId:a.projectId
+                            projectId:a.projectId,
+                            projectAuthorizationId:a.projectAuthorizationId
                           }
                         )
                       }

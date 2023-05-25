@@ -89,3 +89,8 @@ input[type='text']{
     border: none;
     cursor: pointer;
 }
+.custom-editor {
+    height: auto !important; /* Set height to auto to adjust based on content */
+    min-height: 100px; /* Set a minimum height for the editor */
+  }
+  

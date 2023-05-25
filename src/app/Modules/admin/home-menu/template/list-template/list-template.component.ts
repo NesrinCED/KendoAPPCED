@@ -13,6 +13,7 @@ import { GridDataResult } from '@progress/kendo-angular-grid';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { Template } from 'src/app/model/template';
 
 @Component({
   selector: 'app-list-template',
@@ -45,6 +46,20 @@ export class ListTemplateComponent {
   canceledDelete=true;
   idToDelete:any;
 
+  gridHistoric:any[];
+  showHistoric=false;
+  template : Template={
+    templateId: '',
+      name: '',
+      language: '',
+      content: '',
+      createdBy: '',
+      modifiedBy: '',
+      projectId: '',
+      createdDate: undefined,
+      modifiedDate: undefined
+  };
+
   project : Project={
     projectId:'',
     projectName:'',
@@ -63,6 +78,33 @@ export class ListTemplateComponent {
     this.getAllProj();
     this.user=this.employeeService.GetUser() ;
   }
+  viewTemplateHistoric(id:string){
+    this.showHistoric=true;
+    this.templateService.getTemplate(id).subscribe(
+      (res:any) => {
+        this.template=res;
+      }
+    )
+    if (id){
+      this.templateService.getHistoricByTemplateId(id).subscribe(
+        {
+          next: (res) => { 
+            this.gridHistoric=res;
+            console.log("historic ",this.gridHistoric)
+          }
+        }
+      );
+    }
+    else{
+      console.log("error in getting id");
+    }
+  }
+/*this.gridHistoric.forEach((x)=>
+this.templateService.getTemplate(x.templateId).subscribe((a:any)=>
+{
+  x.templateId=a.name;
+}
+));*/
   onProjectChange(event:any) {
     this.isSelectedProject=true;
     this.selectedProject = event; 
@@ -83,7 +125,6 @@ export class ListTemplateComponent {
     this.projectService.getFilteredTemplates(projectId,language)
       .subscribe((result: any[]) => {
         this.filteredTemplates = result; 
-        //console.log(this.filteredTemplates);
         this.gridData=this.filteredTemplates;
         const newLang:string[]=[]
         if (this.filteredTemplates.length > 0) {
@@ -94,6 +135,8 @@ export class ListTemplateComponent {
           });
         }
         this.languages=newLang;
+       // console.log(this.filteredTemplates);
+
         //console.log("modified Lang",this.languages)
    });
    
@@ -143,11 +186,14 @@ export class ListTemplateComponent {
     this.opened = true;
     this.router.navigate(['AddTemplate']);
   }
-
-  deleteTemplate(id : string){
-    this.idToDelete=id;
-    //this.templateService.getTemplate(id).subscribe(res=>console.log(res));
+  ShowDeleteTemplate(id : string){
     this.dialogDelete=true;
+    this.idToDelete=id;
+  }
+  deleteTemplate(id : string){
+  //  this.idToDelete=id;
+    //this.templateService.getTemplate(id).subscribe(res=>console.log(res));
+//    this.dialogDelete=true;
     if(!this.canceledDelete){
       this.templateService.deleteTemplate(id).subscribe
       ( (result) => (
@@ -169,7 +215,9 @@ export class ListTemplateComponent {
   cancelDelete(){
     this.canceledDelete=true;
     this.dialogDelete=false;
-
+  }
+  cancelView(){
+    this.showHistoric=false;
   }
   updateTemplate(id : string){
     this.router.navigate(['UpdateTemplate',id]); 

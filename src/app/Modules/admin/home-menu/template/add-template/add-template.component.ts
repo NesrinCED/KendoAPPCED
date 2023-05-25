@@ -57,7 +57,8 @@ export class AddTemplateComponent {
   roleName:any;
   user:any;
   employeeId:any;
-  listAccessedWriteTemplates:any;
+  listAccessedWriteTemplates:any[];
+  createDisabled=false;
 
   addTemplateRequest : Template={
     templateId: '',
@@ -104,8 +105,8 @@ export class AddTemplateComponent {
 
   constructor(private router:Router, private templateService:TemplateService,
     private projectService : ProjectService, private employeeService:EmployeeService
-    ,private fb:FormBuilder
-    ,private datePipe: DatePipe,private toastr:ToastrService, private projectAuthService:ProjectAuthService) { }
+    ,private fb:FormBuilder,private datePipe: DatePipe,private toastr:ToastrService, 
+    private projectAuthService:ProjectAuthService) { }
     
   getAllEmp(){
     this.employeeService.getAllemp()
@@ -210,7 +211,7 @@ export class AddTemplateComponent {
   }
   /*****for user */
   getFilteredProjects(id:string){
-    this.projectAuthService.getEmployeeAccessdProjects(this.employeeId).subscribe(
+    this.projectAuthService.getWriteAccessedProjectsByEmployee(this.employeeId).subscribe(
       (result: any[]) => {
         this.projects = result;
         this.listAccessedWriteTemplates = result;
