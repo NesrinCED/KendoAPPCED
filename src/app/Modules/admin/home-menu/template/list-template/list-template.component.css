@@ -1,23 +1,33 @@
+.templateListTitle{
+  margin-right: 55%;
+  font-family: 'Times New Roman', Times, serif ;
+  font-weight: bolder;
+  font-size: 40px;
+  color:  #3899DD ;
+  /*  color:  #286ea1 ;*/
+}
+.addButton{
+  text-align: center;
+  font-size: 25px;
+  padding: 4px 35px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  border-radius: 10px;
+  border-color: #333;
+  color:  #333;
+  background: #fff; 
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.26);
 
+}
+.addButton:hover {
+  color: #fff; /* Hover text color */
+  background-color: #333; /* Hover background color */
+}
 .container{
     height: 600px;
     overflow: auto;
     /*min-width: 1200px;*/
   }
-.addButton{
-  text-align: center;
-  font-size: 25px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: lighter;
-  padding: 6px 5%;
-  margin-left: 70%;
-  margin-top: 5%;
-  border-radius: 25px;
-  color:  #fff;
-  background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-  border: none;
-  cursor: pointer;
-}
 
 .resetButton{
   font-size: 20px;
@@ -27,38 +37,6 @@
   border-radius: 25px;
   color:  #fff;
   background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
-  border: none;
-  cursor: pointer;
-}
-.buttonsD{
-  text-align: center;
-  margin-top: 5%;
-}
-.cancelB{
-  text-align: center;
-  padding: 6px 5%;
-  margin-right: 10%;
-  font-size: 18px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: lighter;
-  margin-top: 2%;
-  border-radius: 25px;
-  color:  #f6f6f6;
-  background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
-  border: none;
-  cursor: pointer;
-}
-.yesB{
-  width: 10%; 
-  padding: 6px 10%;
-  text-align: center;
-  font-size: 18px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: lighter;
-  margin-top: 2%;
-  border-radius: 25px;
-  color:  #f6f6f6;
-  background: linear-gradient(to right, #612376  25%, #e0c4f0  ); 
   border: none;
   cursor: pointer;
 }
@@ -75,78 +53,71 @@
     margin-left:30%;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.deleteTitle{
-  font-size: 20px;
-  margin-top: 3%;
-  color: #4c036d;
+
+/****** action buttons *******/
+
+.circular-button {
   text-align: center;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  margin-top: 2%;
+  border-radius: 25px;
+  color:  #f6f6f6;
+  background: linear-gradient(to right,#286ea1  25%, #4697d2 ); 
+  border: none;
+  cursor: pointer;
+  margin-left: 5%;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  color:#fff;
+}
+
+.circular-button .k-icon {
+  font-size: 15px;
+}
+/***deelete icon***/
+.circular-button-delete {
+  margin-left: 3%;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: #E03616; 
+  color:#fff;
+}
+/************************/
+.k-grid {
+  border-color: #fff;
+}
+.k-grid-md .k-table-th > .k-cell-inner > .k-link {
+  padding-block: 8px;
+  color: #286ea1;
+  background-color: rgb(238, 243, 255);
+  font-size: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  padding-inline: 12px;
+}
+
+.k-grid-md td, .k-grid-md .k-table-td {
+  border-inline-start-width: 0;
+  border-inline-start-width: 0;
+  color:#333; 
+  background-color: #fff;
+  font-size: 15px;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
-  .title h2 {
-    color: #fff;
-    font-size: 50px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    position: absolute;
-    transform: translate(-50%, -50%);
-  
-  }
-  .title h2:nth-child(1) {
-    color: transparent;
-    -webkit-text-stroke: 2px #551572;
-  }
-  
-  .title h2:nth-child(2) {
-    color:  #652782;
-    animation: animate 4s ease-in-out infinite;
-  }
-  
-  @keyframes animate {
-    0%,
-    100% {
-      clip-path: polygon(
-        0% 45%,
-        16% 44%,
-        33% 50%,
-        54% 60%,
-        70% 61%,
-        84% 59%,
-        100% 52%,
-        100% 100%,
-        0% 100%
-      );
-    }
-  
-    50% {
-      clip-path: polygon(
-        0% 60%,
-        15% 65%,
-        34% 66%,
-        51% 62%,
-        67% 50%,
-        84% 45%,
-        100% 46%,
-        100% 100%,
-        0% 100%
-      );
-    }
-  }
-
-
-/******** kendo grid ****/
-.button{
-    text-align: center;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    margin-top: 2%;
-    border-radius: 25px;
-    color:  #f6f6f6;
-    background: linear-gradient(to right,#4c036d  25%, #9659c0 ); 
-    border: none;
-    cursor: pointer;
-    margin-left: 5%;
+.k-grid tr.k-alt td {
+  border-top: 1px solid rgb(222, 231, 253);
 }
-::ng-deep .k-grid-header .k-header{
+
+.k-grid tr:not(.k-alt) td {
+  border-top: 1px solid rgb(222, 231, 253);
+}
+/******** kendo grid ****/
+
+/*::ng-deep .k-grid-header .k-header{
     background-color: #4c036d;
     color : #fff;
     line-height: 2em;
@@ -171,8 +142,19 @@
 ::ng-deep .k-grid tr:not(.k-alt) td {
   border-top: 2px solid #ffffff;    border-left: 1.5px solid #fff;
 }
+*/
 .user-line {
-  background-color:#f2e5fa;
+  background-color:#151c45;
+  font-size: 50px;
+}
+/****** dropdownList ****/
+.custom-dropdown .k-item {
+  color: #484d51; /* Change the text color */
+  background-color: #f2f2f2; /* Change the background color */
+}
+
+.custom-dropdown .k-item:hover {
+  background-color: #e5e5e5; /* Change the background color on hover */
 }
   .k-dropdownlist {
     background-color: #f0f0f0 ;
@@ -181,12 +163,16 @@
     width: 50%;
     height: 45px;
   }
+  .k-dropdownlist .k-item {
+    background-color: #9f2626 ;
+  }
   .k-dropdownlist:hover{
     background-color: #e4e2e2 ;
   }
   .k-dropdownlist .k-icon {
     color:#510e75;
   }
+  /**************/
   label{
     font-size: 20px;
     color: #510e75;
@@ -211,8 +197,6 @@
     font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   
   }
-
-
   .custom-editor {
     height: auto !important; /* Set height to auto to adjust based on content */
     min-height: 100px; /* Set a minimum height for the editor */
@@ -222,3 +206,48 @@
     display: none; /* Hide the toolbar */
   }
   
+  /***** delete dialog **********/
+.deleteTitle{
+  font-size: 20px;
+  margin-top: 3%;
+  color: #333;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+.buttonsD{
+  text-align: center;
+  margin-top: 5%;
+}
+.cancelDelete{
+  text-align: center;
+  padding: 6px 5%;
+  margin-right: 10%;
+  font-size: 18px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  margin-top: 2%;
+  border-radius: 10px;
+  border-color: #333;
+  color:  #333;
+  background-color: #fff;
+  cursor: pointer;
+}
+.cancelDelete:hover {
+  color: #fff; /* Hover text color */
+  background-color: #333; /* Hover background color */
+}
+.yesDelete{
+  width: 10%; 
+  padding: 6px 10%;
+  text-align: center;
+  font-size: 18px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  margin-top: 2%;
+  border-radius: 10px;
+  color:  #f6f6f6;
+  background: linear-gradient(to right, #E03616  25%, #ff5e3e  ); 
+  border: none;
+  cursor: pointer;
+}

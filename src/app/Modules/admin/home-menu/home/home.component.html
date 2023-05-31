@@ -1,17 +1,24 @@
-<div class="row" >
-    <div class="col-md-6" style="padding-top: 5%;">
+<div class="row home"   >
+    <div class="col-md-6" >
       <div>
-        <img src="{{ images[currentImageIndex] }}" class="home" />
+        <img [ngStyle]="getImageStyle()" class="animate-img" />
       </div>
     </div>
-    <div class="col-md-6" style="padding-top: 7%;">
+    <div class="col-md-6" style="padding-top: 5%;">
       <div class="homeT1">
-        Your satisfaction <br>is our top priority
+        Effortless Communication , <br>
+        Secure User Management with DTG
       </div> 
       <div class="homeT2">
-        Thank you <strong style="  text-transform: uppercase;">{{userName}} </strong> for joining <strong>DTG</strong>. <br>
-        We invite you to explore our extensive range of <br> services
-         and discover how we can help you attain<br> your aspirations.        </div>
+        Welcome <strong style="  text-transform: uppercase;">{{userName}} </strong> to our DTG Web App!
+        <br><br>
+        Simplify your Email communication and document generation processes with our  <br>
+        dynamic template generation App. Our platform provides dynamic template generation, <br>
+        secure management of company users and ensuring your data remains protected. <br>
+        Experience the convenience and efficiency of our user-friendly interface.  <br>
+        
+       
+      </div>
        <br><br>
   </div>
 </div>    

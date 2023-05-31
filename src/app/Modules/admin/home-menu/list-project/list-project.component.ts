@@ -8,6 +8,7 @@ import ValidateForm from 'src/app/helpers/ValidateForm';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { ProjectAuthService } from 'src/app/service/projectAuth.service';
+import { Offset } from '@progress/kendo-angular-popup';
 
 @Component({
   selector: 'app-list-project',
@@ -16,6 +17,10 @@ import { ProjectAuthService } from 'src/app/service/projectAuth.service';
   styleUrls: ['./list-project.component.css']
 })
 export class ListProjectComponent {
+  
+ /* public marginLeft = { horizontal: -150, vertical: -50 };
+  public marginRight = { horizontal: 93, vertical: -120 };*/
+
   showUsers = false;
   showTemplates = false;
   filteredTemplates : any[];
@@ -108,6 +113,7 @@ export class ListProjectComponent {
       (result: any) => {
         this.submitted = false;
         this.opened=false;
+        this.getAll()
       },
      /* (error: HttpErrorResponse) => {
         console.log("errrorr !!")

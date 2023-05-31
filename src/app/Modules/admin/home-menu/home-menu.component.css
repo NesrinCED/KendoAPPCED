@@ -5,7 +5,7 @@
   
 }
 .custom-toolbar {
-  background-color: #f6f6f6;
+  background-color: #efefef;
 }
 
 .border-right {
@@ -57,27 +57,34 @@ my-app {
   background-color: #f6e8ff;
 }*/
 /****in blue*****/
-.itemTitle{
-  font-family: 'Times New Roman', Times, serif ;
-  font-weight: bolder;
-  color:  #308bcd ;
-  text-transform: uppercase;
-}
-.k-drawer-item {
- background-color: #fffeff;
-  border-bottom: 0.1px solid #adcee6 ;
-}
-.k-drawer-item.k-selected {
-  background-color: #acd4f0 ;
-}
+  .itemTitle{
+    font-family: 'Times New Roman', Times, serif ;
+    font-weight: bolder;
+    color:  #fff ;
+    text-transform: uppercase;
+  }
+  .itemDescr{
+    color:  #fff ;
+    font-size: 13px;
+  }
+  .k-drawer-item {
+  background-color: #286ea1 ;
+    /*border-bottom: 0.1px solid #adcee6 ;*/
+  }
+  .k-drawer-mini .k-drawer.k-drawer-start, .k-drawer-expanded .k-drawer.k-drawer-start, .k-drawer-left.k-drawer-mini .k-drawer, .k-drawer-left.k-drawer-expanded .k-drawer {
+    background-color: #286ea1 ;
+    /*min-width: 3.5%;*/
+  }
+  .k-drawer-item.k-selected {
+    background-color: #3899DD ;
+  }
+  .k-drawer-item.k-selected:hover {
+    background-color: #3899DD;
+  }
 
-.k-drawer-item.k-selected:hover {
-  background-color: #b9dcf5 ;
-}
-
-.k-drawer-item:hover {
-  background-color: #b9dcf5 ;
-}
+  .k-drawer-item:hover {
+    background-color: #3899DD ;
+  }
 
 
 
@@ -96,7 +103,7 @@ my-app {
   }
   
   .buttonDrawer:hover {
-    background-color: #3899DD
+    background-color: #f2fafa
   }
   .input-role{
     border-radius: 10px;
@@ -109,18 +116,23 @@ my-app {
     border: 1px solid #f6f6f6;
     color:  #308bcd ;
 }
-/* .input-field{
-    border-radius: 10px;
-    padding: 5px;
-    align-items: center;
-    font-size: 20px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    cursor: pointer;
-    width: 30%;
-    border: 1px solid #f6f6f6;
-    color:  #308bcd ;
-}
-*/
+
 /*Blue #3899DD Green #86BC35 Purple #56248C*/
+/*
+  $CED-blue:                              #3899DD !default;
+    $CED-bluelight:                         #9BCCEE !default;
+    $CED-blueultralight:                    #CDE5F6 !default;
+    $CED-green:                             #86BC35 !default;
+    $CED-purple:                            #56238E !default;
+    $CED-success:                           #29BF12 !default;
+    $CED-warning:                           #FF9933 !default;
+    $CED-danger:                            #E03616 !default;
+    $CED-pink:                              #f01a7d !default;
+    $CED-lightPurple:                       #9C03C1 !default;
+    $CED-greenlight:                        #29bf1233 !default; 
+286ea1
+*/
+
+
 
 

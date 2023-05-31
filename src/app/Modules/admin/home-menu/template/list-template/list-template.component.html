@@ -1,18 +1,13 @@
-
-<div class="row">
-  <div class="col-md-6 " >
-    <div class="title">
-      <h2> Templates List</h2>
-      <h2> Templates List</h2>
-    </div>   
-  </div>
-  <div class="col-md-4 "  >
-    <kendo-button (click)="openDialog()" class="addButton" >
-      <span class="k-icon k-i-plus"  style="font-size: 25px; color:  #fff "></span> 
-      Create Template
-    </kendo-button>
+<div class="row" style="  margin-top: 2%; margin-left: 7%; " >
+  <div class="col" >
+      <span class="templateListTitle" >Template List </span>
+      <kendo-button (click)="openDialog()" class="addButton" >
+          <span   style="font-size: 25px; font-weight: bold; padding-right: 2%; ">+</span> 
+          Create Template
+      </kendo-button>
   </div>
 </div>
+
 <br>
 <div class="row">
   <div class="col-md-3" >
@@ -20,7 +15,7 @@
   </div>
   <div class="col-md-3" >
     <label style="color: #484d51 ;" >Project Name</label>
-    <kendo-dropdownlist 
+    <kendo-dropdownlist class="custom-dropdown"
     [data]="projects" textField="projectName" #projectList
     [(ngModel)]="project" id="project.projectId" (valueChange)="onProjectChange($event)">
     </kendo-dropdownlist>
@@ -39,11 +34,12 @@
 
 
 <br>
-<div class="container">
+<!--  [pageable]="true"  
+  [pageSize]="pageSize"-->
+<div class="k-grid container">
   <kendo-grid   
   [kendoGridBinding]="gridData"  
-  [pageable]="true"  
-  [pageSize]="pageSize"
+
   [style]="{'width':'100%'}">
   <kendo-grid-column field="name" title="Name" [width]="130"></kendo-grid-column>
   <kendo-grid-column field="language" title="Language" [width]="120"></kendo-grid-column>
@@ -60,7 +56,8 @@
   <kendo-grid-column field="createdBy" title="Created By" [width]="140"   >
     <ng-template kendoGridCellTemplate let-dataItem  >
       <td [ngClass]="{'user-line': dataItem?.templateCreatedBy?.employeeName === user.employeeName }"> 
-        {{dataItem?.templateCreatedBy?.employeeName}}</td>
+        {{dataItem?.templateCreatedBy?.employeeName}} 
+      </td>
     </ng-template>  
   </kendo-grid-column>
 
@@ -69,11 +66,17 @@
       {{dataItem?.project?.projectName}}
     </ng-template>  
   </kendo-grid-column>
-  <kendo-grid-column field="action" title="Actions" [width]="200"> 
+  <kendo-grid-column field="action" title="Actions" [width]="150"> 
     <ng-template kendoGridCellTemplate let-dataItem>
-      <button kendoButton icon="pencil" class="button" (click)="updateTemplate(this.dataItem.templateId)" ></button>
-      <button kendoButton icon="trash" class="button" (click)="ShowDeleteTemplate(this.dataItem.templateId)" ></button>
-      <button kendoButton icon="eye" class="button" (click)="viewTemplateHistoric(this.dataItem.templateId)" ></button>
+      <button kendoButton class="circular-button" (click)="updateTemplate(this.dataItem.templateId)">
+        <span class="k-icon k-i-pencil"></span>
+      </button>      
+      <button kendoButton class="circular-button-delete" (click)="ShowDeleteTemplate(this.dataItem.templateId)">
+        <span class="k-icon k-i-trash"></span>
+      </button>
+      <button kendoButton class="circular-button" (click)="viewTemplateHistoric(this.dataItem.templateId)">
+        <span class="k-icon k-i-eye"></span>
+      </button>
     </ng-template>
   </kendo-grid-column>
 
@@ -97,11 +100,11 @@
 </div>
 
 <!----delete dialog-->
-<kendo-dialog *ngIf="dialogDelete" [width]="450" [height]="150"  >
-  <div class="deleteTitle"> Are You Sure To Delete This Template ? </div>
+<kendo-dialog *ngIf="dialogDelete" [width]="350" height="auto"  >
+  <div class="deleteTitle"> Are you sure you want to Delete this Template ? </div>
   <div class="buttonsD">
-    <button kendoButton type="reset" (click)="cancelDelete()" class="cancelB">Cancel</button>   
-    <button kendoButton  type="submit" (click)="yes()"class="yesB">Yes</button>
+    <button kendoButton type="reset" (click)="cancelDelete()" class="cancelDelete">Cancel</button>   
+    <button kendoButton  type="submit" (click)="yes()"class="yesDelete">Yes</button>
   </div>
 </kendo-dialog>
 <!----historic dialog-->

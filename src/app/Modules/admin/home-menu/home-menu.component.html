@@ -7,7 +7,7 @@
     <kendo-avatar  [imageSrc]="'assets/images/imageUser.png'" shape="circle"></kendo-avatar>
     <input class="input-role" value="{{roleName}}" disabled>
     <button kendoButton *ngIf="employeeService.IsLoggedIn()" (click)="logout()">
-     <kendo-icon name="logout" style="color: #24558c;"></kendo-icon>
+     <kendo-icon name="logout" style="color: #286ea1"></kendo-icon>
     </button> 
   </div>
 </div>
@@ -24,18 +24,18 @@
     >
     <ng-template kendoDrawerItemTemplate let-item let-selected="selected">
       <div [routerLink]="item.link" routerLinkActive="active"  >
-        <span class="k-icon {{ item.iconDrawer }}" style=" margin-bottom: 10%; margin-right: 10px;  font-size: 25px; color: #0d5588 ;"></span>
+        <span class="k-icon {{ item.iconDrawer }}" style=" margin-bottom: 10%; margin-right: 10px;  font-size: 23px; color: #fff ;"></span>
         <div style=" display: inline-block;">
           <div *ngIf="expanded">
             <div class="itemTitle">{{ item.title }}</div>
-            <span class="item-descr">{{ item.description }}</span>
+            <span class="itemDescr">{{ item.description }}</span>
           </div>
         </div>
       </div>
     </ng-template>
     
     </kendo-drawer>
-    <kendo-drawer-content style=" background-color: #fff; height: 100%; "> 
+    <kendo-drawer-content style=" min-height: 100%; "> 
 
       
       <router-outlet></router-outlet>

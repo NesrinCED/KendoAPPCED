@@ -44,15 +44,15 @@ public items = [
   { separator: true },
   {
     title: "Projects",
-    description: "List Of Projects",
+    description: "Project's List ",
     iconDrawer: "k-i-clipboard-code",
     link: "Projects",
     selected: false,
   },
   { separator: true },
   {
-    title: "Template",
-    description: "Go To Template Space",
+    title: "Templates",
+    description: "Template's List",
     iconDrawer: "k-i-track-changes",
     link: "AllTemplates",
     selected: false,
@@ -68,7 +68,7 @@ public items = [
   { separator: true },
   {
     title: "Settings",
-    description: "Manage Your Account",
+    description: "Manage Account",
     iconDrawer: "k-i-settings",
     link: "Settings",
     selected: false,

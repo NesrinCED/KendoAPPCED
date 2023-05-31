@@ -1,111 +1,101 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 
-<div class="row">
-  <div class="col-md-6" >
-    <div class="title">
-      <h2 >Projects List  </h2>
-      <h2>Projects List</h2>
-    </div>  
-  </div>
-  <div class="col-md-6" style="padding-left: 15%;">
-     <kendo-button (click)="openDialog()" class="addButton" >
-      <span class="k-icon k-i-plus"  style="font-size: 30px; color:  #fff "></span> 
-      Add Project
-    </kendo-button>
+<div class="row" style="  margin-top: 2%; margin-left: 7%; " >
+  <div class="col" >
+      <span class="projectListTitle" >Project List </span>
+      <kendo-button (click)="openDialog()" class="addButton" >
+          <span style="font-size: 25px; font-weight: bold; padding-right: 2%; ">+</span> 
+           Add Project
+      </kendo-button>
   </div>
 </div>
 
-<div class="container"  >
-  <div class="row">
-    <div class="col-4" data-wow-delay=".2s"
-    style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;"
-    *ngFor="let i of list"
-    >
-        <div class="team-style07">
-            <div class="team-thumb mb-1-9"> 
-                <div class="thumb" >
-                  <div class="row">
-                    <div class="col-md-12">
-                      <img src="assets/images/project.jpg" class="rounded-circle" height="120px" width="120px"> 
-                        <h3 class="name" >  
-                          {{i.projectName}}
-                          <h3 class="name0">{{i.createdBy}}</h3>
-                          <h3 class="name0">{{i.createdDate}}</h3>
-                        </h3>                 
-                    </div>
-                  </div>
-                </div>
-               <!--<div class="team-social"></div>-->
-            </div>
-            <div class="row" style="text-align: center; " >
-              <div class="col">
-                <button kendoButton #anchorUser (click)="onToggleUser(i.projectId)" class="userButton"style=" margin-right:10%; ">
-                  <span class="k-icon k-i-myspace"  style="font-size: 23px; color:  #fff "></span> 
-                </button>
-                <kendo-popup
-                  [anchor]="anchorUser.element"
-                  (anchorViewportLeave)="showUsers = false"
-                  *ngIf="showUsers  && selectedProjectId === i.projectId"    >
-                  <div class="content" *ngFor="let j of filteredUsers">
-                    {{j.employeeName}}
-                  </div>
-                </kendo-popup>
-                <button kendoButton #anchorTemplate (click)="onToggleTemplates(i.projectId)" class="userButton"style=" margin-right:10%;"  >
-                 <span class="k-icon k-i-track-changes"  style="font-size: 23px; color:  #fff "></span> 
-                </button>
-                <kendo-popup 
-                [anchor]="anchorTemplate.element"
-                (anchorViewportLeave)="showTemplates = false"
-                *ngIf="showTemplates && selectedProjectId === i.projectId">
-                <div class="content" *ngFor="let j of filteredTemplates" >
-                  {{j.name}}
-                </div>
-              </kendo-popup>
-              </div>              
-            </div>       
-    </div>
+<div class="row all-projects ">
+  <div class="col-4" *ngFor="let i of list"  >
+    <kendo-card class="card-project" >
+      <div class="row">
+        <div class="col-md-8">
+          <!--<img src="assets/images/project.jpg" class="rounded-circle" height="120px" width="120px">-->
+          <h3 class="cardTitle" > {{i.projectName}} </h3>  
+          <h3 class="cardText">
+            <span class="k-icon k-i-user"  style="font-size: 16px; color: #56248C; "></span> 
+            {{i.createdBy}}
+          </h3>
+          <h3 class="cardText">
+            <span class="k-icon k-i-calendar"  style="font-size: 16px; color: #56248C; "></span> 
+            {{i.createdDate}}
+          </h3>              
+        </div>
+        <div class="col-2">
+          <div class="containerDetails">
+            <button kendoButton #anchorUser style="margin-right: 10%;"
+            (click)="onToggleUser(i.projectId)" class="userButton">
+              <span class="k-icon k-i-myspace"  style="font-size: 23px; color:  #fff "></span> 
+            </button>
+            <kendo-popup [anchor]="anchorUser.element" 
+              (anchorViewportLeave)="showUsers = false"
+              *ngIf="showUsers  && selectedProjectId === i.projectId"  
+              class="popup-right"  >
+              <div class="content" *ngFor="let j of filteredUsers">
+                {{j.employeeName}}
+              </div>
+            </kendo-popup>
+            <button kendoButton #anchorTemplate style="margin-right: 10%;"
+             (click)="onToggleTemplates(i.projectId)" class="userButton" >
+              <span class="k-icon k-i-track-changes"  style="font-size: 23px; color:  #fff "></span> 
+            </button>
+            <kendo-popup [anchor]="anchorTemplate.element" 
+              (anchorViewportLeave)="showTemplates = false"
+              *ngIf="showTemplates && selectedProjectId === i.projectId"
+              class="popup-right"   >
+              <div class="content" *ngFor="let j of filteredTemplates" >
+                {{j.name}}
+              </div>
+            </kendo-popup>
+          
+          </div>                    
+        </div>
+      </div>   
+    </kendo-card>  
+    <br>
   </div>
+  
 </div>
-<!---->
 
-<!---->
-<kendo-dialog *ngIf="opened" [width]="400" [height]="420"  >
-  <ngb-alert *ngIf="dangerAlert" type="danger" class="alertDesignD" >
-    Please Fill All Fields !
-  </ngb-alert>
-  <div >
-    <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 3%;font-size: 30px; color: #941e9a "></span> 
-    <div class="titleProj"> Add A New Project</div>
-  </div>
-  <div class="row" style="margin-top: 5%;" >
+<!--add dialog-->
+<kendo-dialog *ngIf="opened" [width]="400" [height]="500"  >
+  <div class="titleAddProjectDialog">
+    <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 2%;font-size: 25px; color: #286ea1 "></span> 
+    <div class="addProjectTitle"> Add new Project</div>
+  </div>   
+  <div  style="margin-top: 5%;" >
     <div  style=" text-align: center; ">
-        <img src="assets/images/project.jpg" class="rounded-circle" height="120px" width="120px"> 
+        <img src="assets/images/project.png"   style="height: 150px; min-width: 300px;   border-radius: 10px;" > 
     </div>
-      <form  [formGroup]="ngForm" (ngSubmit)="onSubmit()">        
-        <div class="form-group" style="display: flex;" >
-            <label style="margin-right: 7%;" > Name</label> 
-            <div class="input-field-project" >
-                <input class="form-control"
-                formControlName="projectName" type="text"
-                 id="projectName" [(ngModel)]="project.projectName" >
-            </div>
-        </div> 
-        <br>
-        <div class="form-group" style="display: flex;">
-          <label> Manager</label>
-          <div class="input-field-project" >
-              <input class="form-control"
-              formControlName="createdBy" type="text"
-               id="createdBy" [(ngModel)]="project.createdBy" >
+    <br><br>
+      <form  [formGroup]="ngForm">
+        <div class="form-group">
+          <div class="input-field-addProject">
+            <input class="form-control" formControlName="projectName" placeholder="ProjectName"
+            type="text" id="projectName" [(ngModel)]="project.projectName">
           </div>
         </div>
+        <br>  
+        <div class="form-group">
+          <div class="input-field-addProject">
+            <input class="form-control" formControlName="createdBy" placeholder="Manager"
+            type="text" id="createdBy" [(ngModel)]="project.createdBy">
+          </div>
+        </div>      
         </form>
+      </div> 
+  <div class="form-group">
+      <div class="row" style="margin-left: 10%; margin-top: 5%;" >
+        <div class="col">
+          <button kendoButton (click)="closeDialog()" class="cancelAddProject">Cancel</button>
+          <button kendoButton  (click)="onSubmit()" class="saveAddProject">Add</button>
+        </div>
       </div>
-    <kendo-dialog-actions>
-      <button kendoButton  (click)="closeDialog()" class="kendoActionCancel">Cancel</button>
-      <button kendoButton type="submit"  class="kendoActionSave">Add</button>
-  </kendo-dialog-actions>
+  </div>    
 </kendo-dialog>
-
-
 

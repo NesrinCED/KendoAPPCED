@@ -1,83 +1,72 @@
-<kendo-dialog 
- *ngIf="opened" (close)="close('cancel')"
-[minWidth]="250" [width]="1100" [height]="700" >
-<ngb-alert *ngIf="dangerAlert" type="danger" class="alertDesignD" >
-    Please Fill All Fields !
-  </ngb-alert>
-<div>
-    <div style=" background-color: #fdf9ff; ">
-        <div class="container">
-        <span class="k-icon k-i-file-add" style="padding-bottom: 3%;font-size: 30px; color: #8d0f8b "></span> 
+<kendo-dialog  class="custom-dialog"
+    *ngIf="opened" (close)="close('cancel')"
+    [minWidth]="250" [width]="700"  
+    >
+    <ngb-alert *ngIf="dangerAlert" type="danger" class="alertDesignD" >
+        Please Fill All Fields !
+    </ngb-alert>
+    <div class="containerTitle">
+        <span class="k-icon k-i-file-add" style="padding-bottom: 1%;font-size: 30px; color: #8d0f8b "></span> 
         <div class="titleT"> Create A New Template</div>
-        </div>
-    </div>      
-    <div >
-        <form  [formGroup]="ngForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label>Language</label>
-                    <kendo-dropdownlist  
-                     [data]="languages" class="form-control" id="language" 
-                     formControlName="language" [(ngModel)]="addTemplateRequest.language">                
-                    </kendo-dropdownlist>
-                </div>
-                <div class="form-group">
-                    <label>Template Name</label>
-                    <div class="input-field" >
-                        <input class="form-control"
-                        formControlName="name" type="text"
-                         id="name" [(ngModel)]="addTemplateRequest.name" >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Project Name</label>
-                    <kendo-dropdownlist 
-                    [data]="projects" textField="projectName" formControlName="projectName"
-                    [(ngModel)]="project" id="project.projectId">
-                   </kendo-dropdownlist>
-                </div>
-                <div class="form-group">
-                    <label>Content</label>
-                    <kendo-editor class="form-control"  id="content" [iframe]="false" name="content"
-                    #editor 
-                     [(ngModel)]="addTemplateRequest.content" [(value)]="addTemplateRequest.content" >
-                        <kendo-toolbar>
-                            <kendo-toolbar-button kendoEditorBoldButton></kendo-toolbar-button>
-                            <kendo-toolbar-button kendoEditorItalicButton></kendo-toolbar-button>
-                            <kendo-toolbar-button kendoEditorUnderlineButton></kendo-toolbar-button>
-                            <kendo-toolbar-button kendoEditorStrikethroughButton></kendo-toolbar-button>
-                            <kendo-upload></kendo-upload>
-                            <kendo-toolbar-button
-                            text="Upload Image"
-                            (click)="openImage()"
-                            ></kendo-toolbar-button>       
-                            <kendo-toolbar-button
-                            text="Add Feature"
-                            (click)="openFeature()"
-                            ></kendo-toolbar-button>           
-                        </kendo-toolbar>
-                    </kendo-editor>
-                    
-                    <app-image-dialog #upload [editor]="editor"></app-image-dialog>
-
-                </div>      
-            <kendo-dialog-actions>
-                <!-- dont do it ngsubmit and click (click)="onSubmit()"==>2rows added-->
-                <button kendoButton type="reset" (click)="cancel()" class="cancelButton">Cancel</button>
-                <button kendoButton  type="submit" class="addButton">Create</button>
-              </kendo-dialog-actions>
-        </form>
     </div>
-</div>
+    <form  [formGroup]="ngForm">
+            <div class="form-group">
+                <label>Language</label>
+                <kendo-dropdownlist  
+                    [data]="languages" class="form-control" id="language" 
+                    formControlName="language" [(ngModel)]="addTemplateRequest.language">                
+                </kendo-dropdownlist>
+            </div>
+            <div class="form-group">
+                <label>Template Name</label>
+                <div class="input-field" >
+                    <input class="form-control"
+                    formControlName="name" type="text"
+                        id="name" [(ngModel)]="addTemplateRequest.name" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Project Name</label>
+                <kendo-dropdownlist 
+                [data]="projects" textField="projectName" formControlName="projectName"
+                [(ngModel)]="project" id="project.projectId">
+                </kendo-dropdownlist>
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <kendo-editor class="form-control"  id="content" [iframe]="false" name="content"
+                #editor class="custom-editor"
+                    [(ngModel)]="addTemplateRequest.content" [(value)]="addTemplateRequest.content" >
+                    <kendo-toolbar>
+                        <kendo-toolbar-button kendoEditorBoldButton></kendo-toolbar-button>
+                        <kendo-toolbar-button kendoEditorItalicButton></kendo-toolbar-button>
+                        <kendo-toolbar-button kendoEditorUnderlineButton></kendo-toolbar-button>
+                        <kendo-toolbar-button kendoEditorStrikethroughButton></kendo-toolbar-button>
+                        <kendo-upload></kendo-upload>
+                        <kendo-toolbar-button
+                        text="Upload Image"
+                        (click)="openImage()"
+                        ></kendo-toolbar-button>       
+                        <kendo-toolbar-button
+                        text="Add Feature"
+                        (click)="openFeature()"
+                        ></kendo-toolbar-button>           
+                    </kendo-toolbar>
+                </kendo-editor>
+                
+                <app-image-dialog #upload [editor]="editor"></app-image-dialog>
+
+            </div>      
+
+    </form>     
+<kendo-dialog-actions>
+    <!-- dont do it ngsubmit and click (click)="onSubmit()"==>2rows added-->
+    <button kendoButton type="reset" (click)="cancel()" class="cancelAddTemplate">Cancel</button>
+    <button kendoButton  (click)="onSubmit()" class="createTemplate">Create</button>
+  </kendo-dialog-actions>
 </kendo-dialog>
 
-<kendo-dialog *ngIf="openedFeature" [width]="400" [height]="250" >
-    <ngb-alert *ngIf="dangerAlertF" type="danger" class="alertDesignD" >
-      Please Fill the Feature Field !
-    </ngb-alert>
-    <div class="container" style="margin-bottom: 5%;">
-      <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 3%;font-size: 25px; color: #941e9a "></span> 
-      <div class="titleP"> Add A New Feature</div>
-    </div>
+<!--<kendo-dialog *ngIf="openedFeature" [width]="400" [height]="250" >
     <form  [formGroup]="featureForm" (ngSubmit)="onSubmitFeature()">
         <div class="form-group" style="
              display: flex;
@@ -90,11 +79,40 @@
                 id="featureName" [(ngModel)]="featureName" >
             </div>
         </div> 
-           
-      <kendo-dialog-actions>
-          <button kendoButton  type="submit" class="kendoAction">Add Feature</button>
-          <button kendoButton type="reset" (click)="closeDialog()" class="kendoAction">Cancel</button>
-        </kendo-dialog-actions>
     </form>
-</kendo-dialog>
+</kendo-dialog>-->
 
+<!-- add features dialog -->
+<kendo-dialog *ngIf="openedFeature" [width]="500" [height]="250"  >
+    <ngb-alert *ngIf="dangerAlertF" type="danger" class="alertDesignD" >
+        Please Fill the Feature Field !
+      </ngb-alert>
+    <div class="titleAddFeatureDialog">
+      <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 2%;font-size: 25px; color: #286ea1 "></span> 
+      <div class="addFeatureTitle"> Add new Feature</div>
+    </div>   
+    <form  [formGroup]="featureForm">
+        <div class="form-group">
+        <div class="row">
+            <div class="col-3">
+                <label  class="label-addFeature">Feature Name</label>
+            </div>
+            <div class="col-9">
+                <div class="input-field-addFeature">
+                <input class="form-control" formControlName="featureName" 
+                type="text" id="featureName" [(ngModel)]="featureName">
+                </div>
+            </div>
+            </div>
+        </div>     
+    </form> 
+    <div class="form-group">
+        <div class="row" style="margin-left: 10%; margin-top: 5%;" >
+          <div class="col">
+            <button kendoButton (click)="closeDialog()" class="cancelAddFeature">Cancel</button>
+            <button kendoButton  (click)="onSubmitFeature()" class="saveAddFeature">Add Feature</button>
+          </div>
+        </div>
+    </div>    
+  </kendo-dialog>
+  

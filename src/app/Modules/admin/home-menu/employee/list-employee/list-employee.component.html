@@ -1,165 +1,217 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 
-<div class="row">
-    <div class="col-md-6" >
-      <div class="title">
-        <h2>Employees List </h2>
-        <h2>Employees List </h2>
-      </div>  
-    </div>
-    <div class="col-md-6" style="padding-left: 15%;" >
-       <kendo-button (click)="openAddDialog()" class="addButton" >
-        <span class="k-icon k-i-plus"  style="font-size: 30px; color:  #fff "></span> 
-        Add Employee
-      </kendo-button>
+<div class="row" style="  margin-top: 2%; margin-left: 7%; " >
+    <div class="col" >
+        <span class="employeeListTitle" >Employee List </span>
+        <kendo-button (click)="openAddDialog()" class="addButton" >
+            <span style="font-size: 16px; font-weight: bold; padding-right: 2%; ">+</span> 
+             Add Employee
+        </kendo-button>
     </div>
 </div>
 
 <div class="container" >
     <div class="row">
         <div class="col-sm-3" data-wow-delay=".2s" 
-        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;  "
-        *ngFor="let i of list">
-        <div class="team-style07" >
-                <div class="team-thumb mb-1-9">
-                    <div class="thumb">
-                        <img src="assets/images/user.jpg" class="rounded-circle"
-                        style="  max-width: 50%;
-                        height: auto;
-                        vertical-align: top;"
-                        >
-                    </div>
-                    <div class="team-social">
-                        <ul class="styled-icons">
-                            <li>
-                                <a class="styled-icons-item">
-                                    <kendo-button  class="forIcon" icon="pencil"
-                                     (click)="editEmployee(i.employeeId)" >
-                                    </kendo-button>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="styled-icons-item">
-                                    <kendo-button class="forIcon" icon="trash"
-                                    (click)="showDeletePopup(i.employeeId)" >
-                                    </kendo-button>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="styled-icons-item">
-                                    <kendo-button class="forIcon" icon="eye"
-                                    (click)="viewEmployee(i.employeeId)"  >
-                                    </kendo-button>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <h3 class="name">{{i.employeeName}}</h3>
-                <p class="name0">User</p>
-                <div class="project-progress pull-left">
-                    <span class="name1"> Created Templates 
-                        <!--<span class="percentage">{{ (i.createdTemplatesDTO.length / totalNumTemplates * 100) | number:'1.0-2' }}% </span>-->
-                    </span><br>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar"  aria-valuemin="0" aria-valuemax="100"[style.width.%]="(i.createdTemplatesDTO.length / totalNumTemplates * 100)">
+            style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;  "
+            *ngFor="let i of list">
+            <div class="team-style07" >
+                    <div class="team-thumb mb-1-9">
+                        <div class="thumb">
+                            <img src="assets/images/user.jpg" class="rounded-circle"
+                            style="  max-width: 35%;
+                            height: auto;
+                            vertical-align: top;"
+                            >
+                        </div>
+                        <div class="team-social">
+                            <ul class="styled-icons">
+                                <li>
+                                    <a class="styled-icons-item">
+                                        <kendo-button  class="forIcon" icon="pencil"
+                                        (click)="editEmployee(i.employeeId)" >
+                                        </kendo-button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a >
+                                        <kendo-button class="forIcon delete-icon" icon="trash"
+                                        (click)="showDeletePopup(i.employeeId)" >
+                                        </kendo-button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="styled-icons-item">
+                                        <kendo-button class="forIcon" icon="eye"
+                                        (click)="viewEmployee(i.employeeId)"  >
+                                        </kendo-button>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="project-progress pull-left">
-                    <span class="name1"> Modified Templates 
-                        <!--<span class="percentage">{{ (i.modifiedTemplatesDTO.length / totalNumTemplates * 100) | number:'1.0-2' }}% </span>-->
-                    </span><br>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar"  aria-valuemin="0" aria-valuemax="100"[style.width.%]="(i.modifiedTemplatesDTO.length / totalNumTemplates * 100)">
+
+                    <div class="row">
+                        <div class="col">
+                            <span class="k-icon k-i-user" style="float: left;font-size: 20px; color: #333 "></span> 
+                            <span class="employeeName">{{i.employeeName}}</span>
                         </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="k-icon k-i-myspace" style="float: left;font-size: 20px; color: #333 "></span> 
+                            <span class="employeeName">{{i.roleDTO.roleName}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="at-icon" style="float: left;font-size: 20px; color: #333; font-weight: bold; ">@</span> 
+                            <span class="employeeName">{{i.employeeEmail}}</span>
+                        </div>
+                    </div>
+                    <br> 
+                    <div class="project-progress pull-left">
+                        <div class="static">
+                            <div   >
+                                <div class="row" >
+                                    <div class="col"  >
+                                         <span class="percentageText">Created Templates </span>
+
+                                         <span class="percentage">{{ (i.createdTemplatesDTO.length / totalNumTemplates * 100) | number:'1.0-2' }}% </span>
+
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <br> 
+                    <div class="project-progress pull-left">
+                        <div class="static">
+                            <div   >
+                                <div class="row" >
+                                    <div class="col"  >
+                                         <span class="percentageText">Modified Templates </span>
+
+                                         <span class="percentage">{{ (i.modifiedTemplatesDTO.length / totalNumTemplates * 100) | number:'1.0-2' }}% </span>
+
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
             </div> <br>   
-        </div>
+            <!---->
+            
+        </div>     
     </div>
 </div>
 <!--Add Dialog-->
-<kendo-dialog *ngIf="openedAdd" [width]="500" [height]="700"  >
-    <div class="containerDialog">
-      <span class="k-icon k-i-plus-circle" style="padding-bottom: 3%;font-size: 30px; color: #941e9a "></span> 
-      <div class="titleP"> Add A New Employee</div>
-    </div>
+<kendo-dialog *ngIf="openedAdd" [width]="470" [height]="700"  >
+    <div class="titleAddDialog">
+      <span class="k-icon k-i-plus" style="padding-bottom: 1%;font-size: 25px; color: #286ea1 "></span> 
+      <div class="addEmployeeTitle"> Add new employee</div>
+    </div>     
     <form  [formGroup]="ngForm">        
         <div class="form-group">
-          <label> Name</label>
-          <div class="input-field" >
-              <input class="form-control"
-              formControlName="employeeName" type="text"
-               id="employeeName" [(ngModel)]="employee.employeeName " >
-          </div>
-        </div>
-        <div class="form-group">
-            <label> Email Adress</label>
-            <div class="input-field" >
-                <input class="form-control"
-                formControlName="employeeEmail" type="email"
-                id="employeeEmail" [(ngModel)]="employee.employeeEmail" >
+            <div class="row">
+              <div class="col-2">
+                <label class="label-addEmployee">Name</label>
+              </div>
+              <div class="col-10">
+                <div class="input-field-addEmployee">
+                  <input class="form-control" formControlName="employeeName" 
+                  type="text" id="employeeName" [(ngModel)]="employee.employeeName">
+                </div>
+              </div>
             </div>
-            <small *ngIf="ngForm.controls['employeeEmail'].dirty && ngForm.hasError('email','employeeEmail')" class="text-danger">* Wrong Email Format </small>
         </div>
+        <br>
         <div class="form-group">
-            <label> Role</label>
-            <kendo-dropdownlist 
-                [data]="roles" textField="roleName" formControlName="roleName"
-                [(ngModel)]="role" id="role.roleId" >
-            </kendo-dropdownlist>
+            <div class="row">
+              <div class="col-2">
+                <label class="label-addEmployee"> E-mail </label>
+            </div>
+              <div class="col-10">
+                <div class="input-field-addEmployee">
+                    <input class="form-control"
+                    formControlName="employeeEmail" type="email"
+                    id="employeeEmail" [(ngModel)]="employee.employeeEmail" >
+                </div>
+                <small *ngIf="ngForm.controls['employeeEmail'].dirty && ngForm.hasError('email','employeeEmail')" class="text-danger">* Wrong Email Format </small>
+              </div>
+            </div>
         </div>
-        <div  >
-            <label> Project Authorization </label>
-            <kendo-grid [kendoGridBinding]="gridData"  
-            [style]="{'width':'100%'}">
-                <kendo-grid-column  title="Project" >
-                    <ng-template kendoGridCellTemplate let-dataItem>
-                        <div class="form-group" >
-                                {{dataItem.name}}
-                        </div>
-                    </ng-template>
-                </kendo-grid-column>
-                <kendo-grid-column field="read" title="Read" >
-                    <ng-template kendoGridCellTemplate let-dataItem>
-                        <div class="form-group" >
-                            <input type="checkbox"  kendoCheckBox
-                            (click)="changeStatus(dataItem, 'read')"
-                            formControlName="read" id="projectAuthorization.read" />
-                        </div>
-                    </ng-template>
-                </kendo-grid-column>
-                <kendo-grid-column field="write" title="Write" >
-                    <ng-template kendoGridCellTemplate let-dataItem>
-                        <div class="form-group"  >
-                            <input type="checkbox"  kendoCheckBox
-                            [disabled]="!dataItem.read"
-                            (click)="changeStatus(dataItem, 'write')" 
-                             id="projectAuthorization.write" />
-                           
-                        </div>
-                    </ng-template>
-                </kendo-grid-column>
-                
-            </kendo-grid>
+        <br>
+        <div class="form-group">
+            <div class="row">
+              <div class="col-2">
+                <label class="label-addEmployee">Role</label>
+              </div>
+              <div class="col-10">
+                <kendo-dropdownlist 
+                    [data]="roles" textField="roleName" formControlName="roleName"
+                    [(ngModel)]="role" id="role.roleId" >
+                </kendo-dropdownlist>
+              </div>
+            </div>
+        </div>
+       <br>
+        <div>
+            <label class="label-Project-Authorization"> Project Authorization </label>
+            <br> <br>
+            <div class="k-grid" >
+                <kendo-grid [kendoGridBinding]="gridData"
+                [style]="{'width':'100%'}" >
+                    <kendo-grid-column  title="Project" >
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            <div class="form-group" >
+                                    {{dataItem.name}}
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="read" title="Read" >
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            <div class="form-group" >
+                                <input type="checkbox"  kendoCheckBox
+                                (click)="changeStatus(dataItem, 'read')"
+                                formControlName="read" id="projectAuthorization.read" />
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="write" title="Write" >
+                        <ng-template kendoGridCellTemplate let-dataItem>
+                            <div class="form-group"  >
+                                <input type="checkbox"  kendoCheckBox
+                                [disabled]="!dataItem.read"
+                                (click)="changeStatus(dataItem, 'write')" 
+                                 id="projectAuthorization.write" />
+                               
+                            </div>
+                        </ng-template>
+                    </kendo-grid-column>
+                    
+                </kendo-grid>
+            </div>
+
         </div>
     </form>
-    <kendo-dialog-actions>
-        <button kendoButton type="reset" (click)="closeDialog()" class="kendoActionCancel">Cancel</button>
-        <button kendoButton  (click)="addEmployee()"  class="kendoActionSave">Add</button>
-    </kendo-dialog-actions>
-    
+    <div class="form-group">
+        <div class="row" style="margin-left: 20%; margin-top: 5%;" >
+          <div class="col">
+            <button kendoButton type="reset" (click)="closeDialog()" class="cancelAddEmployee">Cancel</button>
+            <button kendoButton (click)="addEmployee()" class="saveAddEmployee">Add</button>
+          </div>
+        </div>
+    </div>    
 </kendo-dialog>
 <!--Delete Dialog-->
-<kendo-dialog *ngIf="dialogDelete" [width]="450" [height]="150"  >
-    <div class="deleteTitle"> Are You Sure To Delete This Employee ? </div>
+<kendo-dialog *ngIf="dialogDelete" [width]="350" height="auto"  >
+    <div class="deleteTitle"> Are you sure you want to Delete this employee ? </div>
     <div class="buttonsD">
-      <button kendoButton type="reset" (click)="cancelDelete()" class="cancelB">Cancel</button>   
-      <button kendoButton  type="submit" (click)="yes()"class="yesB">Yes</button>
+      <button kendoButton type="reset" (click)="cancelDelete()" class="cancelDelete">Cancel</button>   
+      <button kendoButton  type="submit" (click)="yes()"class="yesDelete">Yes</button>
     </div>
-  
-  </kendo-dialog>
+</kendo-dialog>
 <!--View Dialog-->
   <kendo-dialog *ngIf="viewOpened" [width]="950" [height]="400" >
     <div class="row">

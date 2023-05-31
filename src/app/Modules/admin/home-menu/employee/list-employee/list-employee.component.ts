@@ -196,7 +196,7 @@ export class ListEmployeeComponent {
     .getAllemp()
     .subscribe( (result: any[]) => {
       this.list=result; 
-     // console.log("employeeList",this.list)
+      console.log("employeeList",this.list)
     } 
     );
   }

@@ -12,17 +12,24 @@
 .panel{
     max-height: 370px;
     width: 1000px;
-    box-shadow: 15px 15px 15px #d0d8e0;
+    box-shadow: 7px 7px 4px 2px #cacbcb; /* Customize the shadow properties as needed */
     border-radius: 10px;
     margin-top: 5%;
     margin-left: 15%;
 }
 .panel-body {
     display: flex;
+    
 }
 .login{
     height: 450px;
     min-width:550px; 
+}
+.mutedText{
+    text-align: center;
+    opacity: 0.6;
+    margin-top: 5%;
+    font-size: 13px;
 }
 /****************form**************/
 /*Blue #3899DD Green #86BC35Purple #56248C*/
