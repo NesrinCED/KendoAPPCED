@@ -3,9 +3,9 @@
 <div class="row" style="  margin-top: 2%; margin-left: 7%; " >
   <div class="col" >
       <span class="projectListTitle" >Project List </span>
-      <kendo-button (click)="openDialog()" class="addButton" >
-          <span style="font-size: 25px; font-weight: bold; padding-right: 2%; ">+</span> 
-           Add Project
+      <kendo-button (click)="openDialog()" class="addProjectButton" >
+        <span style="font-size: 16px; font-weight: bold; padding-right: 2%; ">+</span> 
+        Add Project
       </kendo-button>
   </div>
 </div>
@@ -15,23 +15,22 @@
     <kendo-card class="card-project" >
       <div class="row">
         <div class="col-md-8">
-          <!--<img src="assets/images/project.jpg" class="rounded-circle" height="120px" width="120px">-->
           <h3 class="cardTitle" > {{i.projectName}} </h3>  
           <h3 class="cardText">
-            <span class="k-icon k-i-user"  style="font-size: 16px; color: #56248C; "></span> 
+            <span class="k-icon k-i-user"  style="font-size: 14px; color: #333; "></span> 
             {{i.createdBy}}
           </h3>
           <h3 class="cardText">
-            <span class="k-icon k-i-calendar"  style="font-size: 16px; color: #56248C; "></span> 
+            <span class="k-icon k-i-calendar"  style="font-size: 14px; color: #333; "></span> 
             {{i.createdDate}}
           </h3>              
         </div>
         <div class="col-2">
           <div class="containerDetails">
-            <button kendoButton #anchorUser style="margin-right: 10%;"
+            <button kendoButton #anchorUser style="margin-right: 5%;" [disabled]="isUserButtonDisabled[i.projectId]"
             (click)="onToggleUser(i.projectId)" class="userButton">
               <span class="k-icon k-i-myspace"  style="font-size: 23px; color:  #fff "></span> 
-            </button>
+            </button> 
             <kendo-popup [anchor]="anchorUser.element" 
               (anchorViewportLeave)="showUsers = false"
               *ngIf="showUsers  && selectedProjectId === i.projectId"  
@@ -40,7 +39,7 @@
                 {{j.employeeName}}
               </div>
             </kendo-popup>
-            <button kendoButton #anchorTemplate style="margin-right: 10%;"
+            <button kendoButton #anchorTemplate style="margin-right: 5%;" [disabled]="isTemplateButtonDisabled[i.projectId]"
              (click)="onToggleTemplates(i.projectId)" class="userButton" >
               <span class="k-icon k-i-track-changes"  style="font-size: 23px; color:  #fff "></span> 
             </button>
@@ -65,7 +64,7 @@
 <!--add dialog-->
 <kendo-dialog *ngIf="opened" [width]="400" [height]="500"  >
   <div class="titleAddProjectDialog">
-    <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 2%;font-size: 25px; color: #286ea1 "></span> 
+    <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 2%;font-size: 18px; color: #286ea1 "></span> 
     <div class="addProjectTitle"> Add new Project</div>
   </div>   
   <div  style="margin-top: 5%;" >

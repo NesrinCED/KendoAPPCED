@@ -3,7 +3,7 @@
 <div class="row" style="  margin-top: 2%; margin-left: 7%; " >
     <div class="col" >
         <span class="employeeListTitle" >Employee List </span>
-        <kendo-button (click)="openAddDialog()" class="addButton" >
+        <kendo-button (click)="openAddDialog()" class="addEmployeeButton" >
             <span style="font-size: 16px; font-weight: bold; padding-right: 2%; ">+</span> 
              Add Employee
         </kendo-button>
@@ -28,8 +28,15 @@
                             <ul class="styled-icons">
                                 <li>
                                     <a class="styled-icons-item">
-                                        <kendo-button  class="forIcon" icon="pencil"
+                                        <kendo-button  class="forIcon edit-icon" icon="pencil"
                                         (click)="editEmployee(i.employeeId)" >
+                                        </kendo-button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="styled-icons-item">
+                                        <kendo-button class="forIcon view-icon" icon="eye"
+                                        (click)="openViewEmployee(i.employeeId)" [disabled]="isListEmpty[i.employeeId]" >
                                         </kendo-button>
                                     </a>
                                 </li>
@@ -40,32 +47,25 @@
                                         </kendo-button>
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="styled-icons-item">
-                                        <kendo-button class="forIcon" icon="eye"
-                                        (click)="viewEmployee(i.employeeId)"  >
-                                        </kendo-button>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
-                            <span class="k-icon k-i-user" style="float: left;font-size: 20px; color: #333 "></span> 
+                            <span class="k-icon k-i-user" style="float: left;font-size: 15px; color: #333; "></span> 
                             <span class="employeeName">{{i.employeeName}}</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <span class="k-icon k-i-myspace" style="float: left;font-size: 20px; color: #333 "></span> 
+                            <span class="k-icon k-i-myspace" style="float: left;font-size: 15px; color: #333 "></span> 
                             <span class="employeeName">{{i.roleDTO.roleName}}</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <span class="at-icon" style="float: left;font-size: 20px; color: #333; font-weight: bold; ">@</span> 
+                            <span class="at-icon" style="float: left;font-size: 15px; color: #333; font-weight: bold; ">@</span> 
                             <span class="employeeName">{{i.employeeEmail}}</span>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
 <!--Add Dialog-->
 <kendo-dialog *ngIf="openedAdd" [width]="470" [height]="700"  >
     <div class="titleAddDialog">
-      <span class="k-icon k-i-plus" style="padding-bottom: 1%;font-size: 25px; color: #286ea1 "></span> 
+      <span class="k-icon k-i-plus" style="padding-bottom: 1%;font-size: 18px; color: #286ea1 "></span> 
       <div class="addEmployeeTitle"> Add new employee</div>
     </div>     
     <form  [formGroup]="ngForm">        
@@ -213,7 +213,7 @@
     </div>
 </kendo-dialog>
 <!--View Dialog-->
-  <kendo-dialog *ngIf="viewOpened" [width]="950" [height]="400" >
+  <kendo-dialog *ngIf="viewOpened" [width]="600" height=auto >
     <div class="row">
       <div class="col">
         <div class="titleEmployeeTemplates"><span style="text-transform: uppercase;" >{{ViewEmployee.employeeName}}</span> Templates</div>
@@ -229,7 +229,7 @@
     [style]="{'width':'100%'}" >
       <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
       <kendo-grid-column field="language" title="Language"></kendo-grid-column>
-      <kendo-grid-column field="createdDate" title="CreatedDate"> </kendo-grid-column>
-      <kendo-grid-column field="projectId" title="Project Name"> </kendo-grid-column>
+      <kendo-grid-column field="createdDate" title="Creation Date"> </kendo-grid-column>
+      <kendo-grid-column field="projectId" title="Project "> </kendo-grid-column>
     </kendo-grid>
   </kendo-dialog>

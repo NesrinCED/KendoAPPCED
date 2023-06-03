@@ -1,96 +1,96 @@
-.k-dropdownlist {
-    background-color: #f7eefc;
-    border: 1px solid #4c036d ;
+.custom-editor {
+    min-height: 100px; 
+    height: auto ;
+    max-height: 300px; 
+    padding: 5px; 
+    overflow-y: auto;
+    border: 1px solid #b0b6b9;
     border-radius: 10px;
-    width: 80%;
-    height: 45px;
   }
-  .k-dropdownlist:hover{
-    background-color: #efe1f8;
-  }
-  .k-dropdownlist .k-icon {
-    color:#510e75;
-  }
-  
-  .k-editor{
-    background-color: #fdfafe;
-    border: 1px solid #4c036d  ;
-    border-radius: 10px;
-    height: 250px;
-    width:90%;
-    margin-left: 5%;
-}
 
 /************/
-.titleT{
+.titleEditTemplateDialog{
+    height: 7%; 
+    margin-bottom: 2%;
+    border-bottom: 1px solid rgb(165, 167, 173);
+  }
+  .EditTemplateTitle{
     display: inline-block;  
-    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent;
-
-    padding-left: 3%;
-    font-size: 37px;
+    color: #286ea1;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    font-size: 20px;
     font-weight: bolder;
-    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
-}
-.form-group1 {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 1%;
-}
-label{
-    color: #4c036d  ;
-    font-size: 20px; 
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-.input-field{
+    font-family:  var(--globalFF);
+  
+  }
+  .cancelEditTemplate{
+    text-align: center;
+    font-size: 18px;
+    font-family: var(--globalFF);
+    font-weight: lighter;
+    padding: 6px 25px;
+    margin-right: 5%;
     border-radius: 10px;
-    padding: 5px;
-    cursor: pointer;
-    border: 1px solid #441097;
-    color: #585858;
-    width: 80%;
-}
-.input-field.error{
-    border : 1px solid red;
-    color: red;
-}
-
-input[type='text']{
-    border: none;
-    outline: none;
-    box-shadow: none;
-    width: 100%;
-}
-.saveButton{
-    text-align: center;
-    font-size: 25px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    padding: 6px 35%;
-    margin-top: 2%;
-    border-radius: 25px;
-    color:  #f6f6f6;
-    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-    border: none;
-    cursor: pointer;
-}
-.cancelButton{
-    text-align: center;
-    font-size: 25px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    padding: 6px 35%;
-    margin-top: 2%;
-    border-radius: 25px;
-    color:  #f6f6f6;
-    background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
-    border: none;
-    cursor: pointer;
-}
-.custom-editor {
-    height: auto !important; /* Set height to auto to adjust based on content */
-    min-height: 100px; /* Set a minimum height for the editor */
+    border-color: #333;
+    color:  #333;
+    background-color: #fff;
+  }
+  .cancelEditTemplate:hover {
+    color: #fff; 
+    background-color: #333; 
   }
   
+  .saveEditTemplate{
+    text-align: center;
+    font-size: 18px;
+    font-family: var(--globalFF);
+    font-weight: lighter;
+    padding: 7px 35px;
+    border-radius: 10px;
+    color:  #ffffff ;
+    background-color: #3899DD; 
+    border: none; 
+  }
+  .col3label{
+    width: 19%;
+  }
+.label-EditTemplate{
+  margin-bottom: 2%;
+  margin-top: 2%;
+  font-size: 14px;
+  color: #333;
+  font-family: var(--globalFF);
+  font-weight: 500;
+}
+.input-field-template{
+  border-radius: 10px;
+  padding: 1px;
+  border: 1px solid #333;
+  width: 70%;  
+}
+.input-field.error{
+  border : 1px solid #E03616;
+  color: #E03616;
+}
+
+input[type='text'],
+input[type='password']{
+  border: none;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
+}
+.k-dropdownlist {
+  background-color: rgb(238, 243, 255);
+  border: 1px solid #333;
+  border-radius: 10px;
+  width: 70%;
+  height: 45px;
+}
+.k-dropdownlist:hover{
+  background-color: rgb(214, 223, 244);
+}
+.k-dropdownlist .k-icon {
+  color:#333;
+}

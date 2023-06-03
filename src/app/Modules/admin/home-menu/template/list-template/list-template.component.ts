@@ -25,14 +25,14 @@ import { Template } from 'src/app/model/template';
 export class ListTemplateComponent {
   @ViewChild('projectList', { static: false }) projectList: DropDownListComponent;
   @ViewChild('languageList', { static: false }) languageList: DropDownListComponent;
-  
+
   user:any;
-  public gridView: GridDataResult;
-  public gridData: any[]=[] ;
-  public pageSize = 20;
-  public buttonCount = 2;
-  public sizes = [5,10, 20, 50];
-  public opened = true;
+  gridView: GridDataResult;
+  gridData: any[]=[] ;
+  pageSize = 20;
+  buttonCount = 2;
+  sizes = [5,10, 20, 50];
+  opened = true;
   selectedProject:any;
   isSelectedProject=false;
   selectedLanguage:any;
@@ -78,7 +78,7 @@ export class ListTemplateComponent {
     this.getAllProj();
     this.user=this.employeeService.GetUser() ;
   }
-  viewTemplateHistoric(id:string){
+  viewTemplateHistory(id:string){
     this.showHistoric=true;
     this.templateService.getTemplate(id).subscribe(
       (res:any) => {

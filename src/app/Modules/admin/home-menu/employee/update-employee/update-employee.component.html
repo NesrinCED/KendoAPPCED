@@ -8,51 +8,50 @@
         Please Fill All Fields !
     </ngb-alert>
 </div>
-<div class="card" style="    min-height:35% ;
-width:60% ;
-margin-left: 20%;
-margin-right: 20%;
-margin-top: 1%;
-box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
+<div class="card" style="    min-height:40% ;
+width:27% ;
+margin-left: 30%;
+box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.26);
 ">
   <div class="card-body">
-    <div class="card-header" style="height: 12%;margin-bottom: 2%; background-color: #fdf9ff;">
-        <div class="container">
-        <span class="k-icon k-i-edit" style="padding-bottom: 3%;font-size: 30px; color: #8d0f8b "></span> 
-        <div class="titleT"> Edit Account</div>
-    </div>      
-    </div>      
+    <div class="titleAccountDialog">
+        <span class="k-icon k-i-pencil" style="padding-bottom: 1%;font-size: 18px; color: #286ea1 "></span> 
+        <div class="accountEmployeeTitle"> Update Account</div>
+    </div>    
     <!--row word is important not form-row !!!!-->
     <div class="form-row row">
-        <div class="col-md-4" style="padding-top: 1px">
-            <img src="assets/images/user.jpg" class="rounded-circle" style="text-align: center;" >
-        </div>
-        <div class="col-md-8" >
+        <div class="col">
+            <img src="assets/images/user.jpg" class="rounded-circle"
+            style="  max-width: 30%;
+            height: auto;
+            margin-left: 35%;"
+            >
             <form [formGroup]="ngForm" (ngSubmit)="edit()" >
                 <div class="form-group">
                     <label class="labelC">Name</label>
                     <div class="input-field" >
-                        <span class="k-icon k-i-user" style="color: #4c036d;font-size: 20px;"></span>
+                        <span class="k-icon k-i-user iconForm" ></span>
                         <input class="form-control" id="employeeName"
                         formControlName="employeeName" type="text" placeholder="Username" 
                         [(ngModel)]="employeeDetails.employeeName" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label  class="labelC">Recent Password</label>
+                    <label  class="labelC">Current Password</label>
                     <div class="input-field" >
-                        <span class="k-icon k-i-lock" style="color: #4c036d;font-size: 20px;"></span>
+                        <span class="k-icon k-i-lock iconForm" ></span>
                         <input class="form-control" id="currentPassword" [type]="type"
-                        formControlName="currentPassword" placeholder="Recent Password"
+                        formControlName="currentPassword" placeholder="Current Password"
+                        
                          >
-                        <span (click)="hideshowPass()" class="fa {{eyeIcon}}" style=" color: #4c036d;"></span>
+                        <span (click)="hideshowPass()" class="fa {{eyeIcon}}" style=" color: #286ea1;"></span>
 
                     </div>
                 </div>
                 <div class="form-group">
                     <label  class="labelC">New Password</label>
                     <div class="input-field" >
-                        <span class="k-icon k-i-lock"style="color: #4c036d;font-size: 20px;"></span>
+                        <span class="k-icon k-i-lock iconForm"></span>
                         <input class="form-control" id="newPassword" [type]="type"
                          formControlName="newPassword"  placeholder="New Password" 
                          [(ngModel)]="employeeDetails.employeePassword"
@@ -62,7 +61,7 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
                 <div class="form-group" *ngIf="isUser" >
                     <label  class="labelC">Email</label>
                     <div class="input-field" >
-                        <span class="k-icon k-i-envelop-link"style="color: #4c036d;font-size: 20px;"></span>
+                        <span class="k-icon k-i-envelop-link iconForm"></span>
                         <input class="form-control" id="employeeEmail" type="email"
                          formControlName="employeeEmail"  placeholder="Email Account" 
                          [(ngModel)]="employeeDetails.employeeEmail"
@@ -71,12 +70,10 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);
                 </div>
             </form>
 
-            <div class="row" style="padding-top: 5%;">
-                <div class="col-6">
-                    <button kendoButton (click)="onReset()" type="reset" class="cancelButton">Cancel</button>
-                </div>
-                <div class="col-6">
-                    <button kendoButton (click)="edit()" type="submit" class="updateButton">Save</button>
+            <div class="row" style="padding-top: 5%; text-align: center;">
+                <div class="col">
+                    <button kendoButton (click)="onReset()" type="reset" class="cancelAccountEmployee">Cancel</button>
+                    <button kendoButton (click)="edit()" type="submit" class="saveAccountEmployee">Save</button>
                 </div>
             </div>
 

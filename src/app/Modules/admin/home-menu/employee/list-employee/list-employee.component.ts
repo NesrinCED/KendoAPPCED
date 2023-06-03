@@ -15,8 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 import { TemplateService } from 'src/app/service/template.service';
 import { take, startWith, map } from 'rxjs/operators';
 import { interval,Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-list-employee',
+  providers: [DatePipe],
   templateUrl: './list-employee.component.html',
   styleUrls: ['./list-employee.component.css'],
   encapsulation: ViewEncapsulation.None,
@@ -42,7 +45,7 @@ import { interval,Observable } from 'rxjs';
   ]
 })
 export class ListEmployeeComponent {
-
+  isListEmpty : { [employeeId: string]: boolean } = {};
   list: any[] ;
   private popupRef: PopupRef | null = null;
   opened:boolean=false;
@@ -116,7 +119,7 @@ export class ListEmployeeComponent {
   };
   constructor(private toastr:ToastrService,private router:Router, private employeeService:EmployeeService
     , private fb:FormBuilder, private roleService: RoleService, private projectService: ProjectService
-    , private templateService: TemplateService){}
+    ,private datePipe: DatePipe, private templateService: TemplateService){}
 
   ngOnInit() : void{
     //console.log("list employee",this.employeeService.GetUser())
@@ -128,7 +131,7 @@ export class ListEmployeeComponent {
     )
   //  console.log("total ",this.totalNumTemplates)
     this.loggedEmployee=this.employeeService.GetUser()
-    this.getAllemp();
+    this.getAllemp()
     
     this.getAllRoles();
     this.ngForm=this.fb.group({
@@ -196,8 +199,11 @@ export class ListEmployeeComponent {
     .getAllemp()
     .subscribe( (result: any[]) => {
       this.list=result; 
-      console.log("employeeList",this.list)
-    } 
+      this.list.forEach(
+        (a:any) => {
+          this.viewEmployee(a.employeeId)
+        }
+      )    } 
     );
   }
   getAllRoles(){
@@ -271,8 +277,11 @@ export class ListEmployeeComponent {
     this.router.navigate(['Developers/UpdateUserByAdmin',id]);
   }
   /******* For View *******/
-  viewEmployee(id : string){
+  openViewEmployee(id : string){
     this.viewOpened=true;
+    this.viewEmployee(id)
+  }
+  viewEmployee(id : string){
     if (id){
       this.employeeService.getEmployee(id).subscribe(
         {
@@ -280,16 +289,25 @@ export class ListEmployeeComponent {
             this.ViewEmployee=result;
             this.ViewEmployeeDetails=result;
             this.ViewGridData= this.ViewEmployeeDetails.createdTemplatesDTO;
+            this.isListEmpty[id] = this.ViewGridData.length === 0;
             this.ViewGridData.forEach((x)=>
             this.projectService.getProject(x.projectId).subscribe((a:any)=>
             {
               x.projectId=a.projectName;
             }
             ));
+            this.ViewGridData.forEach(
+              (a:any) => {
+                const formattedCreatedDate = this.datePipe.transform(a.createdDate, 'dd MMMM yyyy');
+                const formattedModifiedDate = this.datePipe.transform(a.modifiedDate, 'dd MMMM yyyy');
+                a.createdDate=formattedCreatedDate
+                a.modifiedDate=formattedModifiedDate
+              }
+            )
            }
         }
       );
-    }
+    } 
     else{
       console.log("error in getting id");
     }

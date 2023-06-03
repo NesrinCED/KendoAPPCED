@@ -91,7 +91,7 @@ changeItemsUeer(){
   console.log("home", this.user);*/
   if(this.roleName=="User"){
       this.employeeId=this.user.employeeId;
-      const itemsToRemove = ['Developers', 'Projects', 'Template'];
+      const itemsToRemove = ['Developers', 'Projects', 'Templates'];
       this.items = this.items.filter(item => item.title && !itemsToRemove.includes(item.title));
       //console.log(this.items);
       this.items.push(

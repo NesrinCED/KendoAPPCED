@@ -20,7 +20,6 @@ export class UpdateEmployeeComponent {
     employeeEmail: '',
     projectAuthorizationsDTO: []
   };
-  
   recentPassword:string="";
   type: string="password";
   isText: boolean=false;
@@ -38,7 +37,6 @@ export class UpdateEmployeeComponent {
    }
 
   ngOnInit() : void{
-    //console.log("update employee",this.employeeService.GetUser())
     this.roleName=this.employeeService.GetUser().roleDTO.roleName;
     console.log("update employee",this.employeeService.GetUser().roleDTO.roleName)
     if(this.roleName=="Admin"){

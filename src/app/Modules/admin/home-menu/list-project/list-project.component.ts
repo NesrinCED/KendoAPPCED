@@ -25,6 +25,8 @@ export class ListProjectComponent {
   showTemplates = false;
   filteredTemplates : any[];
   filteredUsers : any[];
+  isUserButtonDisabled:  { [projectId: string]: boolean } = {};
+  isTemplateButtonDisabled:  { [projectId: string]: boolean } = {};
   selectedProjectId:any;
   list: any[] ;
   opened:boolean=false;
@@ -57,6 +59,7 @@ export class ListProjectComponent {
 
   ngOnInit() : void{
     this.getAll();
+    
     this.ngForm=this.fb.group({
       projectName: ['',Validators.required],
       createdBy: ['',Validators.required]
@@ -70,7 +73,9 @@ export class ListProjectComponent {
       this.list.forEach(
         (a:any) => {
           const formattedDate = this.datePipe.transform(a.createdDate, 'dd MMMM yyyy');
-          a.createdDate=formattedDate
+          a.createdDate=formattedDate;
+          this.getFilteredUsers(a.projectId,"")
+          this.getFilteredTemplates(a.projectId,"")
         }
       )
       //console.log(this.list);
@@ -80,7 +85,8 @@ export class ListProjectComponent {
   getFilteredTemplates(projectId:string, language:string){
     this.projectService.getFilteredTemplates(projectId,language)
       .subscribe((result: any[]) => {
-        this.filteredTemplates = result; 
+        this.filteredTemplates = result;
+        this.isTemplateButtonDisabled[projectId] = this.filteredTemplates.length === 0; 
         console.log("**filtered***",this.filteredTemplates);
       });
   }
@@ -88,10 +94,7 @@ export class ListProjectComponent {
     this.projectAuthService.getEmployeesProjectAuth(projectId)
       .subscribe((result: any[]) => {
         this.filteredUsers = result; 
-        if(this.filteredUsers.length ==0)
-        {
-          this.filteredUsers.push("No Employees For Project")
-        }
+        this.isUserButtonDisabled[projectId] = this.filteredUsers.length === 0;
         console.log("**filtered***",this.filteredUsers);
       });
   }

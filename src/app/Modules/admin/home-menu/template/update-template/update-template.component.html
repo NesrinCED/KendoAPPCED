@@ -1,51 +1,73 @@
 
-<div class="card" style="    width:85% ;
-margin-left: 5%;
-margin-top: 0.5%;
-box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);" >
+<div class="card" style="    width:50% ;
+margin-left: 20%;
+margin-top: 1%;
+box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.26);" >
   <div class="card-body">
-    <div class="card-header" style=" background-color: #fdf9ff;">
-        <div class="container">
-        <span class="k-icon k-i-edit" style="padding-left: 2%;padding-bottom: 2%;font-size: 30px; color: #8d0f8b "></span> 
-        <div class="titleT"> Edit Template</div>
-    </div>      
-    </div>      
+    <div class="titleEditTemplateDialog">
+        <span class="k-icon k-i-edit" style="padding-bottom: 1%;font-size: 20px; color: #286ea1 "></span> 
+        <div class="EditTemplateTitle"> Edit Template</div>
+    </div>     
     <!--row word is important not form-row !!!!-->
     <div class="form-row row">
         <div class="col-md" >
-            <form [formGroup]="ngForm" (ngSubmit)="onSubmit()" >
-                <div class="form-group1" style="margin-top: 2%;">
-                    <label>Name</label>
-                    <div class="input-field" style="margin-left: 7.5%;" >
-                        <input class="form-control" id="name"
-                        formControlName="name" type="text" placeholder="Name" 
-                        [(ngModel)]="templateDetails.name" >
+            <form [formGroup]="ngForm" >
+                <div class="row">
+                    <div class="col-6">
+                        <label class="label-EditTemplate">Template Name</label>
+                    </div>
+                    <div class="col-6">
+                        <label class="label-EditTemplate">Modified By</label>
                     </div>
                 </div>
-                <div class="form-group1 ">
-                    <label>Language</label>
-                    <kendo-dropdownlist  style="margin-left: 5%;"
-                    [data]="languages" class="form-control" id="language" 
-                    formControlName="language" [(ngModel)]="templateDetails.language">                
-                   </kendo-dropdownlist>
-                </div>
-                <div class="form-group1 ">
-                    <label>Modified By</label>
-                    <div class="input-field" style="margin-left: 3%;" >
-                        <input class="form-control" id="modifiedBy" type="text" 
-                         formControlName="modifiedBy" [(ngModel)]="employee.employeeName"
-                         readonly
-                        >
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group" >
+                            <div class="input-field-template" >
+                                <input class="form-control" id="name"
+                                formControlName="name" type="text" placeholder="Name" 
+                                [(ngModel)]="templateDetails.name" >
+                            </div>
+                        </div>                   
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <div class="input-field-template"  >
+                                <input class="form-control" id="modifiedBy" type="text" 
+                                 formControlName="modifiedBy" [(ngModel)]="employee.employeeName"
+                                 readonly >
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group1">
-                    <label>Project Name</label>   
-                    <kendo-dropdownlist style="margin-left: 2%;"
-                    [data]="projects" [textField]="'projectName'" [valueField]="'projectName'" formControlName="projectName"
-                    [(ngModel)]="project" id="project.projectId" >
-                   </kendo-dropdownlist>
+                <div class="row">
+                    <div class="col-6">
+                        <label class="label-EditTemplate">Language</label>
+                    </div>
+                    <div class="col-6">
+                        <label class="label-EditTemplate">Project Name</label>
+                    </div>
                 </div>
-                <div class="form-group1">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <kendo-dropdownlist  
+                            [data]="languages" class="form-control" id="language" 
+                            formControlName="language" [(ngModel)]="templateDetails.language">                
+                           </kendo-dropdownlist>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <kendo-dropdownlist 
+                            [data]="projects" [textField]="'projectName'" [valueField]="'projectName'" formControlName="projectName"
+                            [(ngModel)]="project" id="project.projectId" >
+                           </kendo-dropdownlist>
+                        </div>
+                    </div>
+                </div>               
+                <label class="label-EditTemplate">Template Content</label>
+                <div class="form-group">
                     <kendo-editor class="form-control custom-editor"  id="content" [iframe]="false" name="content"
                     #editor
                      [(ngModel)]="templateDetails.content" [(value)]="templateDetails.content" >
@@ -64,15 +86,14 @@ box-shadow: 0px 10px 30px 0px rgba(94, 61, 116, 0.687);" >
                     <app-image-dialog #upload [editor]="editor"></app-image-dialog>
                 </div>
             </form>
-            <div class="row" style="padding-top: 1%;">
-                <div class="col-6">
-                    <button kendoButton (click)="cancel()" type="reset" class="cancelButton">Cancel</button>
+            <div class="form-group">
+                <div class="row" style="margin-left: 30%; margin-top: 5%;" >
+                  <div class="col">
+                    <button kendoButton type="reset" (click)="cancel()" class="cancelEditTemplate">Cancel</button>
+                    <button kendoButton (click)="onSubmit()" class="saveEditTemplate">Save</button>
+                  </div>
                 </div>
-                <div class="col-6">
-                    <button kendoButton (click)="onSubmit()" type="submit" class="saveButton">Save</button>
-                </div>
-            </div>
-
+            </div>  
     </div>
 
 </div>
