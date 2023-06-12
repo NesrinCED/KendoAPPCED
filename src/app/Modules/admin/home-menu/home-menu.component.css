@@ -1,62 +1,37 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 
-.titles{
-  display: inline-block;
+  .titles{
+    display: inline-block;
+    
+  }
+  .homeToolbar {
+    background-color: #ececec;
+    margin-left: 3.5%;
+  }
+  .buttonDrawer {
+    border-radius: 6px;
+    background-color: #ececec;
+  }
   
-}
-.custom-toolbar {
-  background-color: #efefef;
-}
+  .buttonDrawer:hover {
+    background-color: #e0e0e0
+  }
+  .logoutButton {
+    margin-left: 32%;
+    border-radius: 6px;
+    background-color: #ececec;
+  }
 
-.border-right {
-  border-right: 1px solid black;
-}
-.home { 
-  height: auto;
-  min-width:600px; 
-  padding-left: 8%;
-  padding-top: 5%;
-}
-.homeT1{
-  font-size: 50px;
-  color: #48545e;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.homeT2{
-  text-align: left;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 20px;
-  line-height: 2em;
-  color: #2d3338;
+  .logoutButton:hover {
+    background-color: #e0e0e0
+  }
+  .border-right {
+    border-right: 1px solid black;
+  }
 
-}
-
-my-app {
-  padding: 0;
-}
-/***purple****/
-/*.itemTitle{
-  font-family: 'Times New Roman', Times, serif ;
-  font-weight: bolder;
-  color:  #4c036d;
-  text-transform: uppercase;
-}
-.k-drawer-item {
- background-color: #fffeff;
-  border-bottom: 0.1px solid #f3dcfc;
-}
-.k-drawer-item.k-selected {
-  background-color: #cf9cd2;
-}
-
-.k-drawer-item.k-selected:hover {
-  background-color: #cf9cd2;
-}
-
-.k-drawer-item:hover {
-  background-color: #f6e8ff;
-}*/
-/****in blue*****/
+  my-app {
+    padding: 0;
+  }
   .itemTitle{
     font-family: 'Times New Roman', Times, serif ;
     font-weight: bolder;
@@ -86,25 +61,6 @@ my-app {
     background-color: #3899DD ;
   }
 
-
-
-.buttonDrawer {
-    text-align: center;
-    font-size: 18px;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    padding: 8px 12px;
-    margin-left: 1%;
-    border-radius: 6px;
-    color:  #f6f6f6;
-    background-color: #48545e;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .buttonDrawer:hover {
-    background-color: #f2fafa
-  }
   .input-role{
     border-radius: 10px;
     padding: 5px;
@@ -115,7 +71,8 @@ my-app {
     width: 30%;
     border: 1px solid #f6f6f6;
     color:  #308bcd ;
-}
+    margin-left: 5%;
+  }
 
 /*Blue #3899DD Green #86BC35 Purple #56248C*/
 /*

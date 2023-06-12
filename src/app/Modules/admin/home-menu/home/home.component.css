@@ -2,15 +2,15 @@
 
 
 .animate-img{
-  width: 612px; 
-  height: 400px; 
-  margin-left: 8%;
-  margin-top: 5%;
+  width: 590px; 
+  height: 320px; 
   transition: background-image 3000ms; 
 }
 .home { 
+ /* justify-content: space-between;*/
   min-height: 1000px;
-  background-color: #f4faff;
+  padding-left: 5%;
+  padding-top: 5%;
 } 
 .homeT1{
   display: inline-block;  
@@ -20,12 +20,12 @@
 
   font-size: 35px;
   font-weight: bolder;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: var(--globalFF);
 
 }
 .homeT2{
-  text-align: left;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  /*width: 90%;*/
+  font-family: var(--globalFF);
   font-size: 16px;
   line-height: 2em;
   color: #2d3338;

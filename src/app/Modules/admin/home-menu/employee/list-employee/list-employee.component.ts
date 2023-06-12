@@ -220,6 +220,8 @@ export class ListEmployeeComponent {
   }
 
   openAddDialog(){
+    this.gridData=[]
+
     this.employee={
       employeeId: '',
       employeeName: '',

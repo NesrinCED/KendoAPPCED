@@ -1,154 +1,208 @@
 
-.alertDesignD{
-    font-size: 20px; background-color: #E03616; color: #fff; 
-}
-.alertDesignS{
-    font-size: 20px; background-color: #29BF12; color: #fff; 
-}
-.titleT{
-    display: inline-block;  
-    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent;
-
-    padding-left: 5%;
-    font-size: 30px;
-    font-weight: bolder;
-    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-label{
-    font-size: 20px;
-    color: #510e75;
+  .downloademailButton{
+    text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
-}
-.input-field{
-    border-radius: 10px;
-    padding: 5px;
-    display: flex;
-    align-items: center;
+    font-weight: lighter;
+    margin-top: 2%;
+    border-radius: 25px;
+    color:  #f6f6f6;
+    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
+    border: none;
     cursor: pointer;
-    border: 1px solid #8142a3;
-    color: #585858;
-    width: 100%;
 }
-.input-field.error{
-    border : 1px solid red;
-    color: red;
+/**** email dialog *****/
+
+.emailDialog{
+  height: 12%; 
+  margin-bottom: 5%;
+  border-bottom: 1px solid rgb(165, 167, 173);
+}
+.k-window {
+  border-radius: 10px;
 }
 
-input[type='text'],
-input[type='password']{
-    border: none;
-    outline: none;
-    box-shadow: none;
-    width: 100%;
+.emailTitle{
+  display: inline-block;  
+  color: #286ea1;
+  padding-left: 2%;
+  font-size: 18px;
+  font-weight: bolder;
+  font-family:  var(--globalFF);
+
+}
+.cancelemail{
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--globalFF);
+  font-weight: lighter;
+  padding: 6px 35px;
+  margin-right: 5%;
+  border-radius: 10px;
+  border-color: #333;
+  color:  #333;
+  background-color: #fff;
+}
+.cancelemail:hover {
+  color: #fff; /* Hover text color */
+  background-color: #333; /* Hover background color */
+}
+
+.sendEmail{
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--globalFF);
+  font-weight: lighter;
+  padding: 7px 35px;
+  border-radius: 10px;
+  color:  #ffffff ;
+  background:  #479ad6  ; 
+  border: none;
+  cursor: pointer;
+  
+}
+.label-email{
+font-size: 15px;
+margin-bottom: 1%;
+margin-top: 1%;
+font-weight: 500;
+color: #333;
+font-family: var(--globalFF);
+}
+
+.input-field-email{
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #286ea1;
+}
+.input-field-email input {
+  border: none;
+  outline: none;
 }
 
 .k-dropdownlist {
-    background-color: #f7eefc;
-    border: 1px solid #8142a3;
-    border-radius: 10px;
-    width: 100%;
-    height: 45px;
-  }
-  .k-dropdownlist:hover{
-    background-color: #efe1f8;
-  }
-  .k-dropdownlist .k-icon {
-    color:#510e75;
-  }
- /* .k-dropdownlist .k-icon::before {
-    margin-left: 150%;
-    margin-bottom: 100%;
-  }
-  */
-  .downloadPDFButton{
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    margin-top: 2%;
-    border-radius: 25px;
-    color:  #f6f6f6;
-    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-    border: none;
-    cursor: pointer;
+  background-color: rgb(238, 243, 255);
+  border: 1px solid #286ea1;
+  border-radius: 10px;
+  width: 100%;
+  height: 35px;
 }
-.k-editor{
-    background-color: #fdfafe;
-    border: 1px solid #8142a3;
-    border-radius: 10px;
-    height: 250px
+.k-dropdownlist:hover{
+  background-color: rgb(214, 223, 244);
 }
-.addButton{
-    text-align: center;
-    font-size: 25px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    margin-top: 2%;
-    border-radius: 25px;
-    color:  #f6f6f6;
-    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-    border: none;
-    cursor: pointer;
+.k-dropdownlist .k-icon {
+  color:#286ea1;
 }
-.kendoAction{
-    text-align: center;
-    font-size: 20px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    padding: 6px 5%;
-    margin-top: 2%;
-    border-radius: 25px;
-    color:  #ffffff ;
-    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-    border: none;
-    cursor: pointer;
-}
-.titleP{
-    display: inline-block;  
-    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent;
+/*********************************************/  
 
-    padding-left: 5%;
-    font-size: 25px;
-    font-weight: bolder;
-    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+/******* template content *******/
+.containerContent{
+  height: 10%; 
+  margin-bottom: 4%;
+  border-bottom: 1px solid rgb(165, 167, 173);
 }
-.kendoActionCancel{
-    text-align: center;
-    font-size: 25px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    margin-top: 2%;
-    border-radius: 25px;
-    color:  #f6f6f6;
-    background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
-    border: none;
-    cursor: pointer;
-  }
-  .kendoActionSave{
-    text-align: center;
-    font-size: 25px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: lighter;
-    padding: 6px 5%;
-    margin-top: 2%;
-    border-radius: 25px;
-    color:  #ffffff ;
-    background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-    border: none;
-    cursor: pointer;
-  }
+.titleTemplate{
+  display: inline-block;  
+  color: #286ea1;
+  padding-left: 2%;
+  font-size: 18px;
+  font-weight: bolder;
+  font-family:  var(--globalFF);
+}
+.cancelTemplate{
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--globalFF);
+  font-weight: lighter;
+  padding: 6px 25px;
+  margin-right: 5%;
+  border-radius: 10px;
+  border-color: #333;
+  color:  #333;
+  background-color: #fff;
+}
+.cancelTemplate:hover {
+  color: #fff; /* Hover text color */
+  background-color: #333; /* Hover background color */
+}
 
-  .custom-editor {
-    height: auto !important; /* Set height to auto to adjust based on content */
-    min-height: 100px; /* Set a minimum height for the editor */
+.confirmTemplate{
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--globalFF);
+  font-weight: lighter;
+  padding: 7px 5px;
+  border-radius: 10px;
+  color:  #ffffff ;
+  background:  #479ad6  ; 
+  border: none;
+  cursor: pointer;
+  
+}
+/***********************************/
+
+/******* feature form *******/
+.containerFeature{
+  height: 12%; 
+  margin-bottom: 4%;
+}
+.titleFeature{
+  display: inline-block;  
+  color: #286ea1;
+  padding-left: 2%;
+  font-size: 18px;
+  font-weight: bolder;
+  font-family:  var(--globalFF);
+}
+.cancelFeature{
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--globalFF);
+  font-weight: lighter;
+  padding: 6px 5px;
+  margin-right: 5%;
+  border-radius: 10px;
+  border-color: #333;
+  color:  #333;
+  background-color: #fff;
+}
+.cancelFeature:hover {
+  color: #fff; /* Hover text color */
+  background-color: #333; /* Hover background color */
+}
+
+.confirmFeature{
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--globalFF);
+  font-weight: lighter;
+  padding: 7px 10px;
+  border-radius: 10px;
+  color:  #ffffff ;
+  background:  #479ad6  ; 
+  border: none;
+  cursor: pointer;
+}
+.label-feature{
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 2%;
+  color: #333;
+  font-family: var(--globalFF);
   }
   
-  .custom-editor .k-editor-toolbar {
-    display: none; /* Hide the toolbar */
+  .input-field-feature{
+    border-radius: 10px;
+    font-size: 11px; /* Adjust the size as needed */
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #333;
   }
-  
+/***********************************/

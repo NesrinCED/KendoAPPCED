@@ -39,13 +39,16 @@ export class ListTemplateComponent {
   isSelectedLanguage=false;
   filteredTemplates : string[]=[];
   projects : string[]=[];
+  public source: Array<string> = [];
+
+  public templateNames: Array<string>;
   initialLanguages= ['Arabic', 'French', 'English','Korean','Turkish','Chinese','Punjabi','German', 'Japanese', 'Indonesian', 'Portuguese', 'Russian', 'Spanish', 'Hindi'];
   languages = this.initialLanguages;
   filteredTemplatesLangauage : string[]=[];
   dialogDelete=false;
   canceledDelete=true;
   idToDelete:any;
-
+  
   gridHistoric:any[];
   showHistoric=false;
   template : Template={
@@ -99,12 +102,19 @@ export class ListTemplateComponent {
       console.log("error in getting id");
     }
   }
-/*this.gridHistoric.forEach((x)=>
-this.templateService.getTemplate(x.templateId).subscribe((a:any)=>
-{
-  x.templateId=a.name;
-}
-));*/
+  handleFilter(value:any) {
+    this.templateNames = this.source.filter(
+      (s) => s.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    );
+    this.templateService.getTemplateByName(value).subscribe(
+      (res:any) => {
+        this.gridData=[];
+        this.gridData.push(res)
+        console.log("*",res)
+      }
+      
+    )
+  }
   onProjectChange(event:any) {
     this.isSelectedProject=true;
     this.selectedProject = event; 
@@ -154,8 +164,9 @@ this.templateService.getTemplate(x.templateId).subscribe((a:any)=>
           (a:any) => {
             const formattedCreatedDate = this.datePipe.transform(a.createdDate, 'dd MMMM yyyy');
             const formattedModifiedDate = this.datePipe.transform(a.modifiedDate, 'dd MMMM yyyy');
-            a.createdDate=formattedCreatedDate
-            a.modifiedDate=formattedModifiedDate
+            a.createdDate=formattedCreatedDate;
+            a.modifiedDate=formattedModifiedDate;
+            this.source.push(a.name)
           }
         )
         this.sortData()  
@@ -163,6 +174,7 @@ this.templateService.getTemplate(x.templateId).subscribe((a:any)=>
     } 
     );
   }
+
   sortData() {
    // console.log("before sort",this.gridData)
     this.gridData.sort((a:any, b:any) => {
@@ -175,7 +187,7 @@ this.templateService.getTemplate(x.templateId).subscribe((a:any)=>
     .subscribe( (result: any[]) =>{
      (this.projects=result)
     });
-  }
+  } 
 
   public close(status: string): void {
     console.log(`Dialog result: ${status}`);
@@ -200,7 +212,9 @@ this.templateService.getTemplate(x.templateId).subscribe((a:any)=>
         console.log(result),
         this.getalltemp(),
         this.showSuccessDelete(),
-        this.dialogDelete=false
+        setTimeout(() => {
+          this.dialogDelete=false
+        }, 5000)
         ),
         (error=>
           this.showErrorDelete()
@@ -240,7 +254,7 @@ this.templateService.getTemplate(x.templateId).subscribe((a:any)=>
     this.selectedProject=null;
   }
   public showSuccessDelete(): void {
-    this.toastr.success('Template Deleted Successefully !', 'Delete Message');
+    this.toastr.success('Template Deleted Successfully !', 'Delete Message');
   }
   public showErrorDelete(): void {
     this.toastr.error('Template Not Deleted ', 'Delete Message');

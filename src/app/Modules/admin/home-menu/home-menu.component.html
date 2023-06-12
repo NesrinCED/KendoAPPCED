@@ -1,46 +1,38 @@
-
-<div class="custom-toolbar">
-  <button kendoButton (click)="drawer.toggle()">
-    <img src="assets/images/CED_Img.png" alt="CED"  height="40" width="100">
-  </button>
-  <div style="float: right;">
-    <kendo-avatar  [imageSrc]="'assets/images/imageUser.png'" shape="circle"></kendo-avatar>
-    <input class="input-role" value="{{roleName}}" disabled>
-    <button kendoButton *ngIf="employeeService.IsLoggedIn()" (click)="logout()">
-     <kendo-icon name="logout" style="color: #286ea1"></kendo-icon>
-    </button> 
+<div class="containerDrawerTool" >
+  <div class="homeToolbar">
+    <button kendoButton (click)="drawer.toggle()" class="buttonDrawer">
+      <img src="assets/images/CED_Img.png" alt="CED"  height="40" width="100">
+    </button>
+    <div style="float: right;">
+      <kendo-avatar style="margin-left: 2%;" [imageSrc]="'assets/images/imageUser.png'" shape="circle"></kendo-avatar>
+      <input class="input-role" value="{{roleName}}" disabled >
+      <button kendoButton *ngIf="employeeService.IsLoggedIn()" (click)="logout()" class="logoutButton">
+       <kendo-icon name="logout" style="color: #308bcd"></kendo-icon>
+      </button> 
+    </div>
   </div>
-</div>
-
-<kendo-drawer-container  > 
-    <kendo-drawer 
-      #drawer 
-      [items]="items"
-      mode="push"
-      [mini]="true"
-      [width]="250"
-      [(expanded)]="expanded"
-      (select)="onSelect($event)"
-    >
-    <ng-template kendoDrawerItemTemplate let-item let-selected="selected">
-      <div [routerLink]="item.link" routerLinkActive="active"  >
-        <span class="k-icon {{ item.iconDrawer }}" style=" margin-bottom: 10%; margin-right: 10px;  font-size: 23px; color: #fff ;"></span>
-        <div style=" display: inline-block;">
-          <div *ngIf="expanded">
-            <div class="itemTitle">{{ item.title }}</div>
-            <span class="itemDescr">{{ item.description }}</span>
+  <kendo-drawer-container> 
+      <kendo-drawer 
+        #drawer 
+        [items]="items"
+        [mini]="true"
+        [width]="250"
+        [(expanded)]="expanded"
+        (select)="onSelect($event)" >
+        <ng-template kendoDrawerItemTemplate let-item let-selected="selected">
+          <div [routerLink]="item.link" routerLinkActive="active"  >
+            <span class="k-icon {{ item.iconDrawer }}" style=" margin-bottom: 10%; margin-right: 10px;  font-size: 23px; color: #fff ;"></span>
+            <div style=" display: inline-block;">
+              <div *ngIf="expanded">
+                <div class="itemTitle">{{ item.title }}</div>
+                <span class="itemDescr">{{ item.description }}</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </ng-template>
-    
-    </kendo-drawer>
-    <kendo-drawer-content style=" min-height: 100%; "> 
-
-      
-      <router-outlet></router-outlet>
-      
-    </kendo-drawer-content>
-</kendo-drawer-container>
-
-      <!--<app-home *ngIf="selectedItem === 'Home'"></app-home>-->
+        </ng-template>
+      </kendo-drawer>
+      <kendo-drawer-content > 
+        <router-outlet></router-outlet>
+      </kendo-drawer-content>
+  </kendo-drawer-container>
+</div>

@@ -9,8 +9,8 @@
 .iconForm{
     color: #286ea1;
     font-size: 15px;
-    padding-left: 2%;
-    padding-right: 3%;
+    padding-left: 3%;
+    padding-right: 4%;
 }
 .labelC{
     font-size: 14px;
@@ -76,11 +76,9 @@ input[type='password']{
 /***********************************/
 .titleAccountDialog{
     height: 7%; 
-    padding-top: 2%;
+    padding-bottom: 1%;
     margin-bottom: 5%;
-    border-bottom: 1px solid rgb(165, 167, 173);
-    background-color: rgb(238, 243, 255);
-  
+    border-bottom: 1px solid #286ea1;  
   }
     .accountEmployeeTitle{
       display: inline-block;  

@@ -1,112 +1,114 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 
-<div class="row" style="  margin-top: 2%; margin-left: 7%; " >
-    <div class="col" >
-        <span class="employeeListTitle" >Employee List </span>
-        <kendo-button (click)="openAddDialog()" class="addEmployeeButton" >
-            <span style="font-size: 16px; font-weight: bold; padding-right: 2%; ">+</span> 
-             Add Employee
-        </kendo-button>
+<div class="containerEmployees">
+    <div class="row" style="  margin-top: 2%; margin-left: 1%; margin-bottom: 1%; " >
+        <div class="col" >
+            <span class="employeeListTitle" >Employee List </span>
+            <kendo-button (click)="openAddDialog()" class="addEmployeeButton" >
+                <span style="font-size: 16px; font-weight: bold; padding-right: 2%; ">+</span> 
+                 Add Employee
+            </kendo-button>
+        </div>
     </div>
-</div>
-
-<div class="container" >
-    <div class="row">
-        <div class="col-sm-3" data-wow-delay=".2s" 
-            style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;  "
-            *ngFor="let i of list">
-            <div class="team-style07" >
-                    <div class="team-thumb mb-1-9">
-                        <div class="thumb">
-                            <img src="assets/images/user.jpg" class="rounded-circle"
-                            style="  max-width: 35%;
-                            height: auto;
-                            vertical-align: top;"
-                            >
+    
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-3" data-wow-delay=".2s" 
+                style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;  "
+                *ngFor="let i of list">
+                <div class="team-style07" >
+                        <div class="team-thumb mb-1-9">
+                            <div class="thumb">
+                                <img src="assets/images/user.jpg" class="rounded-circle"
+                                style="  max-width: 35%;
+                                height: auto;
+                                vertical-align: top;"
+                                >
+                            </div>
+                            <div class="team-social">
+                                <ul class="styled-icons">
+                                    <li>
+                                        <a class="styled-icons-item">
+                                            <kendo-button  class="forIcon edit-icon" icon="pencil"
+                                            (click)="editEmployee(i.employeeId)" >
+                                            </kendo-button>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="styled-icons-item">
+                                            <kendo-button class="forIcon view-icon" icon="eye"
+                                            (click)="openViewEmployee(i.employeeId)" [disabled]="isListEmpty[i.employeeId]" >
+                                            </kendo-button>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a >
+                                            <kendo-button class="forIcon delete-icon" icon="trash"
+                                            (click)="showDeletePopup(i.employeeId)" >
+                                            </kendo-button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="team-social">
-                            <ul class="styled-icons">
-                                <li>
-                                    <a class="styled-icons-item">
-                                        <kendo-button  class="forIcon edit-icon" icon="pencil"
-                                        (click)="editEmployee(i.employeeId)" >
-                                        </kendo-button>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="styled-icons-item">
-                                        <kendo-button class="forIcon view-icon" icon="eye"
-                                        (click)="openViewEmployee(i.employeeId)" [disabled]="isListEmpty[i.employeeId]" >
-                                        </kendo-button>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a >
-                                        <kendo-button class="forIcon delete-icon" icon="trash"
-                                        (click)="showDeletePopup(i.employeeId)" >
-                                        </kendo-button>
-                                    </a>
-                                </li>
-                            </ul>
+    
+                        <div class="row">
+                            <div class="col">
+                                <span class="k-icon k-i-user" style="float: left;font-size: 15px; color: #333; "></span> 
+                                <span class="employeeName">{{i.employeeName}}</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <span class="k-icon k-i-user" style="float: left;font-size: 15px; color: #333; "></span> 
-                            <span class="employeeName">{{i.employeeName}}</span>
+                        <div class="row">
+                            <div class="col">
+                                <span class="k-icon k-i-myspace" style="float: left;font-size: 15px; color: #333 "></span> 
+                                <span class="employeeName">{{i.roleDTO.roleName}}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <span class="k-icon k-i-myspace" style="float: left;font-size: 15px; color: #333 "></span> 
-                            <span class="employeeName">{{i.roleDTO.roleName}}</span>
+                        <div class="row">
+                            <div class="col">
+                                <span class="at-icon" style="float: left;font-size: 15px; color: #333; font-weight: bold; ">@</span> 
+                                <span class="employeeName">{{i.employeeEmail}}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <span class="at-icon" style="float: left;font-size: 15px; color: #333; font-weight: bold; ">@</span> 
-                            <span class="employeeName">{{i.employeeEmail}}</span>
-                        </div>
-                    </div>
-                    <br> 
-                    <div class="project-progress pull-left">
-                        <div class="static">
-                            <div   >
-                                <div class="row" >
-                                    <div class="col"  >
-                                         <span class="percentageText">Created Templates </span>
-
-                                         <span class="percentage">{{ (i.createdTemplatesDTO.length / totalNumTemplates * 100) | number:'1.0-2' }}% </span>
-
+                        <br> 
+                        <div class="project-progress pull-left">
+                            <div class="static">
+                                <div   >
+                                    <div class="row" >
+                                        <div class="col"  >
+                                             <span class="percentageText">Created Templates </span>
+    
+                                             <span class="percentage">{{ (i.createdTemplatesDTO.length / totalNumTemplates * 100) | number:'1.0-2' }}% </span>
+    
+                                        </div>
                                     </div>
-                                </div>
-                              </div>
+                                  </div>
+                            </div>
                         </div>
-                    </div>
-                    <br> 
-                    <div class="project-progress pull-left">
-                        <div class="static">
-                            <div   >
-                                <div class="row" >
-                                    <div class="col"  >
-                                         <span class="percentageText">Modified Templates </span>
-
-                                         <span class="percentage">{{ (i.modifiedTemplatesDTO.length / totalNumTemplates * 100) | number:'1.0-2' }}% </span>
-
+                        <br> 
+                        <div class="project-progress pull-left">
+                            <div class="static">
+                                <div   >
+                                    <div class="row" >
+                                        <div class="col"  >
+                                             <span class="percentageText">Modified Templates </span>
+    
+                                             <span class="percentage">{{ (i.modifiedTemplatesDTO.length / totalNumTemplates * 100) | number:'1.0-2' }}% </span>
+    
+                                        </div>
                                     </div>
-                                </div>
-                              </div>
+                                  </div>
+                            </div>
                         </div>
-                    </div>
-            </div> <br>   
-            <!---->
-            
-        </div>     
+                </div> <br>   
+                <!---->
+                
+            </div>     
+        </div>
     </div>
 </div>
 <!--Add Dialog-->
-<kendo-dialog *ngIf="openedAdd" [width]="470" [height]="700"  >
+<kendo-dialog *ngIf="openedAdd" [width]="470" [height]="620"  >
     <div class="titleAddDialog">
       <span class="k-icon k-i-plus" style="padding-bottom: 1%;font-size: 18px; color: #286ea1 "></span> 
       <div class="addEmployeeTitle"> Add new employee</div>

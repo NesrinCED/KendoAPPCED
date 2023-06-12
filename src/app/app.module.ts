@@ -63,9 +63,10 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
     NgbModule,
     FilterModule,
     ToastrModule.forRoot({
-      timeOut: 2000, // 3 seconds
+      timeOut: 5000, 
       closeButton: true,
       progressBar: true,
+      positionClass: 'toast-top-right', 
     }),
     ProgressBarModule,
   ],

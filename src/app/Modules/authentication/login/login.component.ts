@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
 
   }
   public showSuccess(): void {
-    this.toastr.success('You Logged In Successefully !', 'LOGIN Message');
+    this.toastr.success('You Logged In Successfully !', 'LOGIN Message');
   }
   public showError(): void {
     this.toastr.error('User Not Found ', 'LOGIN Message');

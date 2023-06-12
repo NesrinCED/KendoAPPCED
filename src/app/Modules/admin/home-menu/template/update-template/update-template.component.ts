@@ -126,19 +126,15 @@ export class UpdateTemplateComponent {
     .subscribe(
       {
       next : (result) =>{
-       /* if (this.templateDetails==this.recentTemplate){
-          this.showInfo()
-          console.log("new",this.templateDetails,"rece,t",this.recentTemplate)
-        }
-        else{
-          this.showSuccessUpdate()
-        }*/this.showSuccessUpdate()
+      this.showSuccessUpdate()
+      setTimeout(() => {
         if(this.roleName=="Admin"){
           this.router.navigate(['AllTemplates']);                  
         }
         else{
           this.router.navigate(['Templates']);                  
         }
+      }, 5000);
       }
       },);
     /*if (this.ngForm.valid){
@@ -169,7 +165,7 @@ export class UpdateTemplateComponent {
     this.dialog.open();
   }
   public showSuccessUpdate(): void {
-    this.toastr.success('Template Updated Successefully !', 'Update Message');
+    this.toastr.success('Template Updated Successfully !', 'Update Message');
   }
   public showErrorDelete(): void {
     this.toastr.error('Template Not Updated ', 'Update Message');

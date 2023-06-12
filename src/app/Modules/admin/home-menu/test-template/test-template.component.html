@@ -1,24 +1,27 @@
-
-<div class="titleTest"> Test Generated Templates</div>
-
-<div class="card">
-<div class="card-body">
-    <div class="row" style="padding-top: 10%;">
-        <div class="col-md-6" style=" border-right: 1px solid rgb(56, 51, 51);">
-        <div class="titleEmail">Access To SendEmail Space ? </div>
-            <div class="titleEmail0">Click Down to Send Your Email</div>    
-            <div class="buttonEmailContainer">
-                <kendo-button icon="envelop-link" class="EmailButton" routerLink="SendEmail">Send Email</kendo-button>
-            </div>
+<div class="testTitle"> Explore Templates</div>
+<div class="card-container">
+    <div class="card generateCard">
+        <img src="assets/images/PDF.jpg" height="180px" >
+        <div class="generateTitleCard">
+            Create Document
         </div>
-    <div class="col-md-6" >
-        <div class="titleEmail">Access To GeneratePDF Space ? </div>
-            <div class="titleEmail0">Click Down to generate PDF Document</div>    
-            <div class="buttonEmailContainer">
-                <kendo-button icon="file-pdf" class="PDFButton" routerLink="GeneratePDF">Generate PDF Document</kendo-button>
-            </div>
+        <div class="generateTextCard">
+            To create a PDF document using your chosen template 
+            and download it on your PC, <br> simply click here.
         </div>
+        <br>
+        <button kendoButton icon="file-pdf" class="PDFButton" routerLink="GeneratePDF">Generate Document</button>
     </div>
+    <div class="card sendCard">
+        <img src="assets/images/email.png" height="180px" >
+        <div class="generateTitleCard">
+            Send Email
+        </div>
+        <div class="generateTextCard">
+            To send an email using your chosen template and deliver it with the desired information, 
+             <br> simply click here.
+        </div>
+        <br>
+        <button kendoButton icon="envelop-link" class="emailButton" routerLink="SendEmail">Send Email</button>
     </div>
-</div>
-  
+  </div>

@@ -225,7 +225,7 @@ export class AddTemplateComponent {
 
 /******alerts****/
   public showSuccess(): void {
-    this.toastr.success('Template Created Successefully !', 'Save Message');
+    this.toastr.success('Template Created Successfully !', 'Save Message');
   }
   public showError(): void {
     this.toastr.error('Template Not Created ', 'Save Message');

@@ -12,6 +12,7 @@ import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
 import ValidateForm from 'src/app/helpers/ValidateForm';
 import { ProjectAuthService } from 'src/app/service/projectAuth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-generate-pdf',
@@ -97,7 +98,8 @@ export class GeneratePdfComponent {
  
   }
   constructor(private router:Router,private fb: FormBuilder, private projectAuthService:ProjectAuthService
-     ,private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
+     ,private templateService : TemplateService,private employeeService : EmployeeService
+     ,private toastr:ToastrService ,private projectService : ProjectService) { }
   /*****for user */
   getFilteredProjects(id:string){
     this.projectAuthService.getReadAccessedProjectsByEmployee(this.employeeId).subscribe(
@@ -154,13 +156,11 @@ export class GeneratePdfComponent {
   onSubmit1() {
     if( this.templateRequest.templateId!=""){
         this.generatedPDF=true;
-        this.showSuccessAlert=true;
-        this.showDangerAlert=false;
+        this.showSuccess()
     }
     else {
+      this.showErrorForm()
       this.generatedPDF=false;
-      this.showDangerAlert=true;
-      this.showSuccessAlert=false;
       console.log("form invalid",this.ngForm.value)
       ValidateForm.validateAllFormFileds(this.ngForm);
     }
@@ -169,17 +169,17 @@ export class GeneratePdfComponent {
   onSubmit() {
     this.generatePDF();
   } 
-  generatePDF() {
-    console.log("dddd",this.templateRequest.templateId)
-    console.log("dddd",this.jsonData0)
-
-    this.templateService.GeneratePDF(this.templateRequest.templateId,this.jsonData0).subscribe((blob: Blob) => {
+  generatePDF() {    this.templateService.GeneratePDF(this.templateRequest.templateId,this.jsonData0).subscribe((blob: Blob) => {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
     link.download = 'TemplatePdf.pdf';
     link.click();
     window.URL.revokeObjectURL(url);
+    this.showSuccessDownload()
+    setTimeout(() => {
+    }
+    , 5000); 
     },
     (error: HttpErrorResponse) => {
       console.log("errrorr !!",error)
@@ -200,37 +200,69 @@ export class GeneratePdfComponent {
     this.opened = true;
   }
   onSubmitJson(){
-    console.log("enter !")
-
-    if(this.ngForm.value){
-      console.log("valid !")
+    this.values=[]
+    this.list.forEach(i=>{
+      const inputElement = document.getElementById(i) as HTMLInputElement;
+      const inputValue = inputElement.value;
+      this.values.push(inputValue) 
+    });
+    console.log("vvvvv",this.values)
+    if(!this.values.includes('')){
       this.jsonData0={};
-      this.showDangerAlertJson=false;
       this.list.forEach(i=>{
         const inputElement = document.getElementById(i) as HTMLInputElement;
         const inputValue = inputElement.value;
         this.values.push(inputValue) 
       });
-      console.log(this.values)
       for (let i = 0; i < this.list.length; i++) {
         const key = this.list[i];
         const value = this.values[i];
         this.jsonData0[key] =value;
       }
       console.log(this.jsonData0)
-      this.isSelectedTemplate=false;
-      this.isConfirmedTemplate=false;
+      this.showSuccessFeatures()
+      setTimeout(() => {
+        this.isSelectedTemplate=false;
+        this.isConfirmedTemplate=false;
+      }
+      , 5000); 
     }
     else{
-      this.showDangerAlertJson=true;
+      this.showErrorFeatures()
     }
   }
   ConfirmTemplate(){
     this.isConfirmedTemplate=true;
-
+ 
   }
   CancelTemplate(){
     this.isConfirmedTemplate=false;
     this.isSelectedTemplate=false;
+    this.ngForm.reset()
   }
+
+    /******alerts****/
+    public showSuccess(): void {
+      this.toastr.success('Document generated Successfully !', 'Document Message');
+    }
+    public showSuccessDownload(): void {
+      this.toastr.success('Document downloaded Successfully !', 'Document Message');
+    }
+    public showSuccessFeatures(): void {
+      this.toastr.success('Features added Successfully !', 'Save Message');
+    }
+    public showErrorForm(): void {
+      this.toastr.error('Please Fill All Fields  !', 'FORM Message');
+    }
+    public showErrorFeatures(): void {
+      this.toastr.error('Please Fill All Features  !', 'FORM Message');
+    }    
+    public showInfo(): void {
+      this.toastr.info('Message Info!', 'Title Info!');
+    }
+    public showWarning(): void {
+      this.toastr.warning('Please Fill All Fields  !', 'FORM Warning');
+    }
+
+
 }

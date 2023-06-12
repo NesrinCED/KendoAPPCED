@@ -13,21 +13,23 @@
   <div class="col-md-3" >
     <div class="filterTitle">Choose Your Filter :</div>
   </div>
-  <div class="col-md-3" >
-    <label style="color: #484d51 ;" >Project Name</label>
-    <kendo-dropdownlist class="custom-dropdown"
-    [data]="projects" textField="projectName" #projectList
-    [(ngModel)]="project" id="project.projectId" (valueChange)="onProjectChange($event)">
-    </kendo-dropdownlist>
+  <div class="col-md-2" >
+    <kendo-autocomplete #autocomplete [data]="templateNames" placeholder="Search Name.."
+     [filterable]="true"  (filterChange)="handleFilter($event)">
+</kendo-autocomplete>
+
   </div>
-  <div class="col-md-3" >
-    <label style="color: #484d51 ;" >Language</label>
+  <div class="col-md-3" style="margin-left: 7%;">
+    <kendo-dropdownlist style="margin-right: 2%;" class="custom-dropdown" [data]="projects" textField="projectName" #projectList 
+    [(ngModel)]="project" id="project.projectId" (valueChange)="onProjectChange($event)"
+    defaultItem="Select Project..." >
+    </kendo-dropdownlist>
     <kendo-dropdownlist 
-    [data]="languages"  #languageList
+    [data]="languages"  #languageList defaultItem="Select Language..."
     [(ngModel)]="selectedLanguage" id="selectedLanguage" (valueChange)="onLanguageChange($event)">
     </kendo-dropdownlist>
   </div>
-  <div class="col-md-3" >
+  <div class="col-md-3" style="margin-left: 1%;">
     <button kendoButton icon="minus-outline" class="resetButton"  (click)="reset()">Reset Filter</button>
   </div>
 </div>
@@ -107,8 +109,8 @@
     <button kendoButton  type="submit" (click)="yes()"class="yesDelete">Yes</button>
   </div>
 </kendo-dialog>
-<!----historic dialog-->
-<kendo-dialog *ngIf="showHistoric"  [width]="800"  height="auto" >
+<!----history dialog-->
+<kendo-dialog *ngIf="showHistoric"  [width]="800" >
   <div class="row">
     <div class="col">
       <div class="titleTemplateHistory"><span style="text-transform: uppercase;" >{{template.name}}</span> History</div>
@@ -118,7 +120,8 @@
       </kendo-button>
     </div>
   </div>
-  <div class="row card cardHistoryLine" *ngFor="let i of gridHistoric">
+  <div class="scrollable-dialog-content">
+      <div class="row card cardHistoryLine" *ngFor="let i of gridHistoric">
     <div class="col-5">
       <p class="modifiedByText">
         <span class="k-icon k-i-user" style="float: left;font-size: 15px; color: #333; "></span> 
@@ -132,6 +135,8 @@
     </div>
   </div>
   
+  </div>
+
 
 </kendo-dialog>
 

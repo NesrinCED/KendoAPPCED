@@ -33,13 +33,13 @@
   }
 
 .resetButton{
-  font-size: 20px;
+  font-size: 18px;
   font-family: var(--globalFF);
   font-weight: lighter;
   padding: 6px 5%;
   border-radius: 25px;
   color:  #fff;
-  background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
+  background: #5a5858 ;
   border: none;
   cursor: pointer;
 }
@@ -55,7 +55,13 @@
     color: #484d51 ;
     margin-left:30%;
     font-family: var(--globalFF);
-}
+  }
+  .filterText{
+    font-size: 15px;
+    color: #484d51 ;
+    font-family: var(--globalFF);
+  }
+
 
 /****** action buttons *******/
 /***edit icon***/
@@ -98,7 +104,7 @@
 .k-grid {
   border-color: #fff;
   width: 90%;
-  margin-left: 2%;
+  margin-left: 3%;
 }
 .k-grid-md .k-table-th > .k-cell-inner > .k-link {
   padding-block: 8px;
@@ -109,7 +115,7 @@
   font-weight: bold;
   padding-inline: 12px;
 }
-
+/*EmailTemplate*/
 .k-grid-md td, .k-grid-md .k-table-td {
   border-inline-start-width: 0;
   border-inline-start-width: 0;
@@ -132,21 +138,28 @@
   background-color:#151c45;
   font-size: 50px;
 }
+/********** autocomplete *************/
+kendo-autocomplete {
+  width: 200px;
+  border-radius: 10px;
+  border-color: #286ea1;
+  color: #286ea1;
+  background-color: #f7fcff ;
+}
+kendo-autocomplete:hover,
+kendo-autocomplete::before,
+kendo-autocomplete::after {
+  border-color: #286ea1;
+  color: #286ea1;
+}
 /****** dropdownList ****/
-.custom-dropdown .k-item {
-  color: #484d51; /* Change the text color */
-  background-color: #f2f2f2; /* Change the background color */
-}
-
-.custom-dropdown .k-item:hover {
-  background-color: #e5e5e5; /* Change the background color on hover */
-}
   .k-dropdownlist {
-    background-color: #f0f0f0 ;
-    border: 1px solid #7d8489  ;
+    background-color: #f7fcff ;
+    border-color: #286ea1  ;
+    color: #286ea1  ;
     border-radius: 10px;
-    width: 50%;
-    height: 45px;
+    width: 49%;
+    height: 30px;
   }
   .xButton{
     background-color:#fff ;
@@ -200,6 +213,11 @@
   cursor: pointer;
 }
 /*** histoy ******/
+.scrollable-dialog-content {
+  max-height: 550px; 
+  overflow: auto;
+}
+
 .titleTemplateHistory{
   font-family: var(--globalFF);
   font-weight: bolder;

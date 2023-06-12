@@ -1,30 +1,19 @@
-<kendo-dialog 
- *ngIf="opened" 
-[minWidth]="250" [width]="700" [height]="400" >
-    <ngb-alert *ngIf="showSuccessAlert" type="success" class="alertDesignS" >
-        PDF Document Generated successufully !
-     </ngb-alert>
-     <ngb-alert *ngIf="showDangerAlert" type="danger" class="alertDesignD" >
-         Your Form is invalid ! Please fill up all fields !
-     </ngb-alert>
-
-    <div  style=" background-color: #fdf9ff; ">
-        <div class="container">
-        <span class="k-icon k-i-envelop-link" style="font-size: 30px; color: #8d0f8b "></span> 
-        <div class="titleT"> Send Your Email</div>
-        </div>
-    </div>      
+<kendo-dialog  *ngIf="opened" [minWidth]="250"[width]="500" [height]="350"  >
+    <div class="emailDialog">
+        <span class="k-icon k-i-envelop-link" style="padding-bottom: 1%;font-size: 18px; color: #286ea1 "></span> 
+        <div class="emailTitle"> Send Your Email</div>
+    </div>     
     <div>
         <form  [formGroup]="ngForm" >
                 <div class="form-group">
-                    <label>Project Name</label>
+                    <label class="label-email">Project Name</label>
                     <kendo-dropdownlist 
                     [data]="projects" textField="projectName" formControlName="projectName"
                     [(ngModel)]="project" id="project.projectId" (valueChange)="onProjectChange($event)">
                     </kendo-dropdownlist>
                 </div>   
                 <div class="form-group">
-                    <label>Template Name</label>
+                    <label class="label-email">Template Name</label>
                     <kendo-dropdownlist 
                     [data]="filteredTemplates" textField="name" formControlName="name"
                     [(ngModel)]="templateRequest" id="templateRequest.templateId"
@@ -33,19 +22,19 @@
                 </div>
                 <div class="row">
                     <div class="form-group" class="col-6">
-                    <label>Subject</label>
-                    <div class="input-field" >
-                        <span class="k-icon k-i-edit-tools" style="color: #4c036d;font-size: 20px;"></span>
-                        <input class="form-control" id="subject"
+                    <label class="label-email">Subject</label>
+                    <div class="input-field-email" >
+                        <span class="k-icon k-i-edit-tools" style="color: #286ea1;font-size: 15px;"></span>
+                        <input  id="subject"
                         formControlName="subject" type="text" placeholder="subject" 
                         [(ngModel)]="subject" >
                     </div>
                 </div>
                 <div class="form-group" class="col-6">
-                    <label>To</label>
-                    <div class="input-field" >
-                        <span class="k-icon k-i-user" style="color: #4c036d;font-size: 20px;"></span>
-                        <input class="form-control" id="to"
+                    <label class="label-email">Recipient</label>
+                    <div class="input-field-email"  >
+                        <span class="k-icon k-i-user" style="color: #286ea1;font-size: 15px;"></span>
+                        <input  id="to"
                         formControlName="to" type="email" placeholder="to" 
                         [(ngModel)]="to" >
                     </div>
@@ -54,52 +43,62 @@
                 </div>
         </form>
     </div>
-    <kendo-dialog-actions>
-        <button kendoButton type="reset" (click)="close()" class="kendoActionCancel">Cancel</button>
-        <button kendoButton (click)="onSubmit()" class="kendoActionSave">Send Email</button>
-    </kendo-dialog-actions>
+    <div class="row" style="margin-left: 10%; margin-top: 5%;" >
+        <div class="col">
+            <button kendoButton type="reset" (click)="close()" class="cancelemail">Cancel</button>
+            <button kendoButton (click)="onSubmit()" class="sendEmail">Send Email</button>
+        </div>
+    </div>
 </kendo-dialog>
 
 <!--Content KendoEditor example-->
-<kendo-dialog *ngIf="isSelectedTemplate" [width]="800" [height]="500" >
-    <div class="container" style="margin-bottom: 5%;">
-      <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 3%;font-size: 25px; color: #941e9a "></span> 
-      <div class="titleP"> Template Content </div>
+<kendo-dialog *ngIf="isSelectedTemplate" [width]="450" height=auto >
+    <div class="containerContent" >
+      <span class="k-icon k-i-eye" style="padding-bottom: 1%;font-size: 18px; color: #286ea1 "></span> 
+      <div class="titleTemplate"> Template Content </div>
     </div>
-    <kendo-editor class="custom-editor" id="content" [iframe]="false" name="content"
-     [(value)]="choosedContent">
-    </kendo-editor>
-
-    <kendo-dialog-actions>
-        <button kendoButton type="reset" (click)="CancelTemplate()" class="kendoActionCancel">Cancel</button>
-        <button kendoButton  (click)="ConfirmTemplate()" class="kendoActionSave">Confirm Template</button>
-    </kendo-dialog-actions>
+    <div class="contentContainer" >
+        <span [innerHTML]="choosedContent"></span>
+    </div>
+    <br>
+    <div class="row"  >
+        <div class="col" style="text-align: center;">
+            <button kendoButton type="reset" (click)="CancelTemplate()" class="cancelTemplate">Cancel</button>
+            <button kendoButton  (click)="ConfirmTemplate()" class="confirmTemplate">Confirm Template</button>
+        </div>
+    </div>
 </kendo-dialog>
 
 <!--Features Form-->
-<kendo-dialog *ngIf="isConfirmedTemplate" [width]="500" [height]="400" >
-    <ngb-alert *ngIf="showDangerAlertJson" type="danger" class="alertDesignD" >
-        Please All Features !
-    </ngb-alert>
-    <div class="container" style="margin-bottom: 5%;">
-      <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 3%;font-size: 25px; color: #941e9a "></span> 
-      <div class="titleP"> Add The required Features</div>
+<kendo-dialog *ngIf="isConfirmedTemplate" [width]="400" height="auto" >
+    <div class="containerFeature" >
+        <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 1%;font-size: 18px; color: #286ea1 "></span> 
+        <div class="titleFeature"> Add The required Features </div>
     </div>
+    <br>
     <form  [formGroup]="jsonForm">
         <div *ngFor="let item of list" class="form-group" style="
              display: flex;
              justify-content: flex-start;
             ">
-            <label style="font-size: 20px;  padding-right: 5%; padding-top: 2%; ">{{item}}</label>
-            <div class="input-field" style="width: 50%; margin-top: 5%" >
-                <input class="form-control"
-                type="text"
-                id="{{item}}"  > 
+            <div class="row">
+                <div class="col-3">
+                    <label class="label-feature">{{item}}</label>
+                </div>
+                <div class="col-9 input-field-feature" style=" margin-top: 2%" >
+                    <input class="form-control"
+                    type="text"
+                    id="{{item}}"  > 
+                </div>
             </div>
         </div> 
     </form>
     <kendo-dialog-actions>
-        <button kendoButton type="reset" (click)="close()" class="kendoActionCancel">Cancel</button>
-        <button kendoButton (click)="onSubmitJson()" class="kendoAction">Add Features</button>
+        <button kendoButton type="reset" (click)="close()" class="cancelFeature">Cancel</button>
+        <button kendoButton (click)="onSubmitJson()" class="confirmFeature">Add Features</button>
     </kendo-dialog-actions>
 </kendo-dialog>
+
+
+
+

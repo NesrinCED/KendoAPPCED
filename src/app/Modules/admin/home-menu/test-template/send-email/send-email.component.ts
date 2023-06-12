@@ -16,6 +16,7 @@ import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
 import ValidateForm from 'src/app/helpers/ValidateForm';
 import { ProjectAuthService } from 'src/app/service/projectAuth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-send-email',
@@ -103,7 +104,8 @@ export class SendEmailComponent {
     });
   }
   constructor(private router:Router,private fb: FormBuilder, private projectAuthService:ProjectAuthService
-     ,private templateService : TemplateService,private employeeService : EmployeeService,private projectService : ProjectService) { }
+     ,private templateService : TemplateService,private employeeService : EmployeeService
+     ,private toastr:ToastrService ,private projectService : ProjectService) { }
   /*****for user */
   getFilteredProjects(id:string){
     this.projectAuthService.getReadAccessedProjectsByEmployee(this.employeeId).subscribe(
@@ -141,7 +143,8 @@ export class SendEmailComponent {
    // console.log(event); 
   }
   onSubmit() {
-    if(this.ngForm.valid){
+    if( this.templateRequest.templateId!="" && this.ngForm.get('subject')?.value!=null
+    && this.ngForm.get('to')?.value!=null){
       const subjectTextArea=document.getElementById('subject') as HTMLTextAreaElement;
       const toTextArea=document.getElementById('to') as HTMLTextAreaElement;
       try {
@@ -162,12 +165,13 @@ export class SendEmailComponent {
         .subscribe(
           (result: any) => {
             console.log("result",result)
-            this.showSuccessAlert=true;
-            this.router.navigate(['TestTemplate']);
+            this.showSuccess()
+            setTimeout(() => {
+              this.router.navigate(['TestTemplate']);
+            }
+            , 5000); 
+            
           }
-          /*(error: HttpErrorResponse) => {
-            console.log("errrorr !!",error)
-          }*/
           );
       } catch (error) {
         console.log("catch",error)
@@ -175,8 +179,7 @@ export class SendEmailComponent {
       } 
     }
     else{
-      this.showDangerAlert=true;
-      this.showSuccessAlert=false;
+      this.showErrorForm()
       console.log("form invalid")
       ValidateForm.validateAllFormFileds(this.ngForm);
     }
@@ -235,8 +238,12 @@ export class SendEmailComponent {
         this.jsonData0[key] =value;
       }
       console.log("onSubmitJson",this.jsonData0)
-      this.isSelectedTemplate=false;
-      this.isConfirmedTemplate=false;
+      this.showSuccessFeatures()
+      setTimeout(() => {
+        this.isSelectedTemplate=false;
+        this.isConfirmedTemplate=false;
+      }
+      , 5000); 
     }
     else{
       this.showDangerAlertJson=true;
@@ -249,6 +256,26 @@ export class SendEmailComponent {
   CancelTemplate(){
     this.isConfirmedTemplate=false;
     this.isSelectedTemplate=false;
+    this.ngForm.reset()
   }
 
+    /******alerts****/
+    public showSuccess(): void {
+      this.toastr.success('Email sent Successfully !', 'Email Message');
+    }
+    public showSuccessFeatures(): void {
+      this.toastr.success('Features added Successfully !', 'Save Message');
+    }
+    public showErrorForm(): void {
+      this.toastr.error('Please Fill All Fields  !', 'FORM Message');
+    }
+    public showErrorFeatures(): void {
+      this.toastr.error('Please Fill All Features  !', 'FORM Message');
+    }    
+    public showInfo(): void {
+      this.toastr.info('Message Info!', 'Title Info!');
+    }
+    public showWarning(): void {
+      this.toastr.warning('Please Fill All Fields  !', 'FORM Warning');
+    }
 }

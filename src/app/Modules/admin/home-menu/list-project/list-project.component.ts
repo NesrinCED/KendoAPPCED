@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { ProjectAuthService } from 'src/app/service/projectAuth.service';
 import { Offset } from '@progress/kendo-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-project',
@@ -54,7 +55,8 @@ export class ListProjectComponent {
   }
   
   constructor(private router:Router, private projectService:ProjectService, private fb:FormBuilder
-    ,private datePipe: DatePipe, private projectAuthService:ProjectAuthService){
+    ,private datePipe: DatePipe, private projectAuthService:ProjectAuthService
+    ,private toastr:ToastrService ){
   }
 
   ngOnInit() : void{
@@ -108,29 +110,46 @@ export class ListProjectComponent {
     this.addProject();
   } 
   addProject() {
-  if (this.ngForm.value){
-    this.dangerAlert=false;
-    console.log("ppp",this.project)
-    this.projectService.CreateProject(this.project).subscribe
-    (
-      (result: any) => {
-        this.submitted = false;
-        this.opened=false;
-        this.getAll()
-      },
-     /* (error: HttpErrorResponse) => {
-        console.log("errrorr !!")
-      }*/
-    )
-  }
-  else{
-    this.dangerAlert=true;
-  }
+    if (this.ngForm.get('projectName')?.value=="" || this.ngForm.get('createdBy')?.value==""){
+      this.showError()
+      console.log("**",this.ngForm.get('projectName')?.value)
+    }
+    else{
+      console.log("ppp",this.project)
+      this.projectService.CreateProject(this.project).subscribe
+      (
+        (result: any) => {
+          this.showSuccess()
+          this.submitted = false;
+          setTimeout(() => {
+            this.opened=false;
+            this.getAll() 
+          }
+          , 5000);  
+
+        },
+      )
+    }
+   
 }
 
 onReset() {
    this.ngForm.reset();
 }
+    /******alerts****/
+    public showSuccess(): void {
+      this.toastr.success('Project Added Successfully !', 'Save Message');
+    }
+    public showError(): void {
+      this.toastr.error('Please Fill All Fields  !', 'FORM Message');
+    }
+    public showInfo(): void {
+      this.toastr.info('Message Info!', 'Title Info!');
+    }
+    public showWarning(): void {
+      this.toastr.warning('Please Fill All Fields  !', 'FORM Warning');
+    }
+
   
 }
 

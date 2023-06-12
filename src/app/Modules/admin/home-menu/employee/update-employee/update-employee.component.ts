@@ -74,7 +74,7 @@ export class UpdateEmployeeComponent {
             setTimeout(() => {
               this.showInfoLoggedOut()
               this.router.navigate(['/login']);
-            }, 3000);
+            }, 5000);
         },
         error=>{
           this.showErrorUpdate()
@@ -102,13 +102,13 @@ export class UpdateEmployeeComponent {
     this.isText ? this.type= "text" : this.type= "password";
  }
   public showSuccessUpdate(): void {
-    this.toastr.success('Account Updated Successefully !', 'Update Message');
+    this.toastr.success('Account Updated Successfully !', 'Update Message');
   }
   public showErrorUpdate(): void {
     this.toastr.error('Account Not Updated ', 'Update Message');
   }
   public showErrorPassword(): void {
-    this.toastr.error('Type Correct Recent Password ! ', 'Password Message');
+    this.toastr.error('Type Correct Current Password ! ', 'Password Message');
   }
   public showInfo(): void {
     this.toastr.info('No Changes To Update !', 'Update Info!');
