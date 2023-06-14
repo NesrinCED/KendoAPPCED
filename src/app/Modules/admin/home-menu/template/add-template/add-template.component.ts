@@ -146,7 +146,7 @@ export class AddTemplateComponent {
               this.router.navigate(['AllTemplates']);                  
             }
             else{
-              this.router.navigate(['Templates']);                  
+              this.router.navigate(['AccessedTemplates']);                  
             }
           }, 3000);              
         },
@@ -181,7 +181,7 @@ export class AddTemplateComponent {
       this.router.navigate(['AllTemplates']);                  
     }
     else{
-      this.router.navigate(['Templates']);                  
+      this.router.navigate(['AccessedTemplates']);                  
     }
   }
 

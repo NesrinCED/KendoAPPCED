@@ -74,7 +74,7 @@ export class UpdateEmployeeComponent {
             setTimeout(() => {
               this.showInfoLoggedOut()
               this.router.navigate(['/login']);
-            }, 5000);
+            }, 3000);
         },
         error=>{
           this.showErrorUpdate()

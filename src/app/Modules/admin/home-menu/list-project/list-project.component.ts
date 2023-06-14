@@ -51,7 +51,7 @@ export class ListProjectComponent {
   public onToggleTemplates(projectId:string) {
     this.selectedProjectId = projectId;
     this.showTemplates = !this.showTemplates;
-    this.getFilteredTemplates(projectId,"");
+    this.getFilteredTemplatesByProject(projectId);
   }
   
   constructor(private router:Router, private projectService:ProjectService, private fb:FormBuilder
@@ -77,15 +77,15 @@ export class ListProjectComponent {
           const formattedDate = this.datePipe.transform(a.createdDate, 'dd MMMM yyyy');
           a.createdDate=formattedDate;
           this.getFilteredUsers(a.projectId,"")
-          this.getFilteredTemplates(a.projectId,"")
+          this.getFilteredTemplatesByProject(a.projectId)
         }
       )
       //console.log(this.list);
     } 
     );
   }
-  getFilteredTemplates(projectId:string, language:string){
-    this.projectService.getFilteredTemplates(projectId,language)
+  getFilteredTemplatesByProject(projectId:string){
+    this.projectService.getFilteredTemplatesByProject(projectId)
       .subscribe((result: any[]) => {
         this.filteredTemplates = result;
         this.isTemplateButtonDisabled[projectId] = this.filteredTemplates.length === 0; 
@@ -125,7 +125,7 @@ export class ListProjectComponent {
             this.opened=false;
             this.getAll() 
           }
-          , 5000);  
+          , 3000);  
 
         },
       )

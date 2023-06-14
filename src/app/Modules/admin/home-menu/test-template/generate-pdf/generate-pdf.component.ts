@@ -179,7 +179,7 @@ export class GeneratePdfComponent {
     this.showSuccessDownload()
     setTimeout(() => {
     }
-    , 5000); 
+    ,3000); 
     },
     (error: HttpErrorResponse) => {
       console.log("errrorr !!",error)
@@ -225,7 +225,7 @@ export class GeneratePdfComponent {
         this.isSelectedTemplate=false;
         this.isConfirmedTemplate=false;
       }
-      , 5000); 
+      ,3000); 
     }
     else{
       this.showErrorFeatures()

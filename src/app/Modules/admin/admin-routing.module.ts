@@ -34,7 +34,7 @@ const routes: Routes =  [
       {path: 'TestTemplate/SendEmail',component: SendEmailComponent},
       {path: 'TestTemplate/GeneratePDF',component: GeneratePdfComponent},
       {path: 'Settings',component: UpdateEmployeeComponent},
-      {path: 'Templates', component: AccessedWriteTemplatesComponent },
+      {path: 'AccessedTemplates', component: AccessedWriteTemplatesComponent },
 
     ]
   }

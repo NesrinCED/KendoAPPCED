@@ -85,22 +85,6 @@
     </div>       
 </kendo-dialog>
 
-<!--<kendo-dialog *ngIf="openedFeature" [width]="400" [height]="250" >
-    <form  [formGroup]="featureForm" (ngSubmit)="onSubmitFeature()">
-        <div class="form-group" style="
-             display: flex;
-             justify-content: flex-start;
-            ">
-            <label style="font-size: 20px;  padding-right: 5%; padding-top: 2%; ">Feature Name</label>
-            <div class="input-field" style="width: 50%;" >
-                <input class="form-control"
-                formControlName="featureName" type="text"
-                id="featureName" [(ngModel)]="featureName" >
-            </div>
-        </div> 
-    </form>
-</kendo-dialog>-->
-
 <!-- add features dialog -->
 <kendo-dialog *ngIf="openedFeature" [width]="500" [height]="250"  >
     <ngb-alert *ngIf="dangerAlertF" type="danger" class="alertDesignD" >

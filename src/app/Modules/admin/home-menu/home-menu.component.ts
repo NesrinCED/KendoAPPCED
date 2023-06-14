@@ -100,7 +100,7 @@ changeItemsUeer(){
           title: "Template",
           description: "Go To Template Space",
           iconDrawer: "k-i-track-changes",
-          link: "Templates",
+          link: "AccessedTemplates",
           selected: false,
         },
       )

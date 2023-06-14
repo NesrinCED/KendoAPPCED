@@ -37,6 +37,8 @@ export class AccessedWriteTemplatesComponent {
   dialogDelete=false;
   canceledDelete=true;
   idToDelete:any;
+  isWriteProject : { [projectId: string]: boolean } = {};
+  isWriteRight=false;
 
   gridHistoric:any[];
   showHistoric=false;
@@ -56,6 +58,7 @@ export class AccessedWriteTemplatesComponent {
   user:any;
   employeeId:any;
   listAccessedWriteTemplates:any;
+  listAccessedReadTemplates:any;
   disabledCreate=false;
   
   project : Project={
@@ -73,23 +76,52 @@ export class AccessedWriteTemplatesComponent {
   ngOnInit() : void{
     this.user=this.employeeService.GetUser();
     this.roleName=this.employeeService.GetUser().roleDTO.roleName;
-    this.getAccessedWriteTemplate();
+    this.getReadTemplate();
     this.user=this.employeeService.GetUser() ;
-      this.templateService
-      .getAllTemp()
-      .subscribe(
-         (result: any[]) => {
-          this.gridData=result;
-              
-      } 
-      );
+    this.templateService.getAllTemp().subscribe( (result: any[]) => { this.gridData=result;} );
+    this.projectAuthService.getEmployeeAccessdProjectAuth(this.employeeId).subscribe(
+      (result: any[][]) => {
+        console.log("write",result)
+        
+        this.listAccessedWriteTemplates = result;
+        if (this.listAccessedWriteTemplates.length==0){
+          this.isWriteRight=false;
+        }
+        else{this.isWriteRight=true;}
+      });
     
   }
-  getAccessedWriteTemplate(){
+  getReadTemplate(){
     console.log("access", this.roleName);
     console.log("access", this.user);
     this.employeeId=this.user.employeeId;
-    this.projectAuthService.getEmployeeAccessdProjectAuth(this.employeeId).subscribe(
+    this.projectAuthService.GetReadTemplates(this.employeeId).subscribe(
+      (result: any[][]) => {
+        console.log("*********",result)
+        this.listAccessedReadTemplates=result;
+        this.gridDataUser = result.flat();
+      //  console.log("same?",this.listAccessedReadTemplates==this.a)
+        console.log("templates Read ", this.gridDataUser);
+        this.gridDataUser.forEach(
+          (a:any) => {
+            const formattedCreatedDate = this.datePipe.transform(a.createdDate, 'dd MMMM yyyy');
+            const formattedModifiedDate = this.datePipe.transform(a.modifiedDate, 'dd MMMM yyyy');
+            a.createdDate=formattedCreatedDate
+            a.modifiedDate=formattedModifiedDate;
+            this.projectAuthService.isWriteProj(a.projectId,this.user.employeeId)
+            .subscribe( (res:any) => {
+              //console.log("projRight",a.projectId,res)
+              this.isWriteProject[a.projectId] = !res
+            }) ;
+          }
+        )
+        this.sortData()  
+      },
+      (error) => {
+        console.log("error in fillteredTemplates",error)
+      }
+    )
+   /* this.projectAuthService.getEmployeeAccessdProjectAuth(this.employeeId).subscribe(
       (result: any[][]) => {
         console.log("*********",result)
         this.gridDataUser = result.flat();
@@ -111,7 +143,7 @@ export class AccessedWriteTemplatesComponent {
       (error) => {
         console.log("error in fillteredTemplates",error)
       }
-    )
+    )*/
   }
   sortData() {
     this.gridDataUser.sort((a:any, b:any) => {
@@ -139,7 +171,7 @@ export class AccessedWriteTemplatesComponent {
       this.templateService.deleteTemplate(id).subscribe
       ( (result) => (
         console.log(result),
-        this.getAccessedWriteTemplate(),
+        this.getReadTemplate(),
         this.showSuccessDelete(),
         this.dialogDelete=false
         ),

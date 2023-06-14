@@ -5,8 +5,6 @@ import { Employee } from 'src/app/model/employee';
 import { Project } from 'src/app/model/project';
 import { ProjectService } from 'src/app/service/project.service';
 import { TemplateService } from 'src/app/service/template.service';
-import { FilterExpression } from "@progress/kendo-angular-filter";
-import { CompositeFilterDescriptor, orderBy } from "@progress/kendo-data-query";
 import { DropDownListComponent } from '@progress/kendo-angular-dropdowns';
 import { SortDescriptor } from '@progress/kendo-data-query';
 import { GridDataResult } from '@progress/kendo-angular-grid';
@@ -77,7 +75,7 @@ export class ListTemplateComponent {
 
   ngOnInit() : void{
     console.log("list template",this.employeeService.GetUser())
-    this.getalltemp();
+    this.getAllTemp();
     this.getAllProj();
     this.user=this.employeeService.GetUser() ;
   }
@@ -103,6 +101,7 @@ export class ListTemplateComponent {
     }
   }
   handleFilter(value:any) {
+    if(value!="TEMPEmail"){
     this.templateNames = this.source.filter(
       (s) => s.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
@@ -112,8 +111,9 @@ export class ListTemplateComponent {
         this.gridData.push(res)
         console.log("*",res)
       }
-      
     )
+    }
+
   }
   onProjectChange(event:any) {
     this.isSelectedProject=true;
@@ -154,12 +154,13 @@ export class ListTemplateComponent {
    goListProj(){
     this.router.navigate(["ListProject"]);
    }
-  getalltemp(){
+   getAllTemp(){
     this.templateService
     .getAllTemp()
     .subscribe(
        (result: any[]) => {
         this.gridData=result;
+        //this.gridData = this.gridData.filter(a => a.name !== 'TEMPEmail');
         this.gridData.forEach(
           (a:any) => {
             const formattedCreatedDate = this.datePipe.transform(a.createdDate, 'dd MMMM yyyy');
@@ -170,7 +171,6 @@ export class ListTemplateComponent {
           }
         )
         this.sortData()  
-            
     } 
     );
   }
@@ -210,11 +210,11 @@ export class ListTemplateComponent {
       this.templateService.deleteTemplate(id).subscribe
       ( (result) => (
         console.log(result),
-        this.getalltemp(),
+        this.getAllTemp(),
         this.showSuccessDelete(),
         setTimeout(() => {
           this.dialogDelete=false
-        }, 5000)
+        },1000)
         ),
         (error=>
           this.showErrorDelete()
@@ -244,7 +244,7 @@ export class ListTemplateComponent {
     this.opened = false;
   }
   reset(){
-    this.getalltemp();
+    this.getAllTemp();
     this.projectList.reset();
     this.languageList.reset();
     this.isSelectedLanguage=false;

@@ -208,8 +208,8 @@ kendo-autocomplete::after {
   margin-top: 2%;
   border-radius: 10px;
   color:  #f6f6f6;
-  background: linear-gradient(to right, #E03616  25%, #ff5e3e  ); 
-  border: none;
+  background-color: #E03616 ; 
+    border: none;
   cursor: pointer;
 }
 /*** histoy ******/
@@ -254,4 +254,6 @@ kendo-autocomplete::after {
   border-radius: 10px;
   border : 1px solid rgba(0, 0, 0, 0.26);
   padding: 2%;
+  width: auto;
 }
+/*****************/

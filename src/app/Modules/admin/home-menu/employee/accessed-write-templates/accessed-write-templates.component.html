@@ -2,7 +2,7 @@
 <div class="row" style="  margin-top: 2%; margin-left: 7%; " >
   <div class="col" >
       <span class="templateListTitle" >Accessed Template List </span>
-      <kendo-button (click)="openDialog()" class="addTemplateButton" >
+      <kendo-button (click)="openDialog()" class="addTemplateButton" [disabled]="!isWriteRight" >
           <span style="font-size: 16px; font-weight: bold; padding-right: 2%; ">+</span> 
            Add Template
       </kendo-button>
@@ -42,10 +42,12 @@
     
     <kendo-grid-column field="action" title="Actions" [width]="150"> 
       <ng-template kendoGridCellTemplate let-dataItem>
-        <button kendoButton class="circular-button-edit" (click)="updateTemplate(this.dataItem.templateId)">
+        <button kendoButton class="circular-button-edit" [disabled]="isWriteProject[dataItem.projectId]"
+         (click)="updateTemplate(this.dataItem.templateId)">
           <span class="k-icon k-i-pencil"></span>
         </button>      
-        <button kendoButton class="circular-button-delete" (click)="ShowDeleteTemplate(this.dataItem.templateId)">
+        <button kendoButton class="circular-button-delete" [disabled]="isWriteProject[dataItem.projectId]"
+         (click)="ShowDeleteTemplate(this.dataItem.templateId)">
           <span class="k-icon k-i-trash"></span>
         </button>
         <button kendoButton class="circular-button-view" (click)="viewTemplateHistoric(this.dataItem.templateId)">
@@ -53,22 +55,6 @@
         </button>
       </ng-template>
     </kendo-grid-column>
-
-    <!--<ng-template
-        kendoPagerTemplate
-        let-totalPages="totalPages"
-        let-currentPage="currentPage"
-    >
-        <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
-        <kendo-pager-numeric-buttons
-        [buttonCount]="buttonCount"
-        ></kendo-pager-numeric-buttons>
-        <kendo-pager-next-buttons></kendo-pager-next-buttons>
-        <kendo-pager-input></kendo-pager-input>
-        <kendo-pager-info></kendo-pager-info>
-        <kendo-pager-page-sizes [pageSizes]="sizes"></kendo-pager-page-sizes>
-    </ng-template>-->
-
     </kendo-grid>
 </div>
 
@@ -76,25 +62,34 @@
 <kendo-dialog *ngIf="dialogDelete" [width]="450" [height]="150"  >
 <div class="deleteTitle"> Are You Sure To Delete This Template ? </div>
 <div class="buttonsD">
-    <button kendoButton type="reset" (click)="cancelDelete()" class="cancelB">Cancel</button>   
-    <button kendoButton  type="submit" (click)="yes()"class="yesB">Yes</button>
+    <button kendoButton type="reset" (click)="cancelDelete()" class="cancelDelete">Cancel</button>   
+    <button kendoButton  type="submit" (click)="yes()"class="yesDelete">Yes</button>
 </div>
 </kendo-dialog>
-<!----historic dialog-->
-<kendo-dialog *ngIf="showHistoric"  [width]="950" [height]="400"  >
-    <div class="row">
-      <div class="col">
-        <div class="templateListTitle"><span style="text-transform: uppercase;" >{{template.name}}</span> History</div>
-      </div>
-      <div class="col">
-        <kendo-button icon="x" (click)="cancelView()" class="xButton" >
-        </kendo-button>
-      </div>
+<!----history dialog-->
+<kendo-dialog *ngIf="showHistoric"  [width]="800" >
+  <div class="row">
+    <div class="col">
+      <div class="titleTemplateHistory"><span style="text-transform: uppercase;" >{{template.name}}</span> History</div>
     </div>
-    <p *ngFor="let i of gridHistoric " >
-      {{i.templateHistoryCreatedBy}}
-      <kendo-editor class="custom-editor" id="content" [iframe]="false" name="content"
-       [(value)]="i.content">
-     </kendo-editor>
-    </p>
-  </kendo-dialog>
+    <div class="col">
+      <kendo-button icon="x" (click)="cancelView()" class="xButton" >
+      </kendo-button>
+    </div>
+  </div>
+  <div class="scrollable-dialog-content">
+    <div class="row card cardHistoryLine" *ngFor="let i of gridHistoric">
+      <div >
+        <p class="modifiedByText">
+          <span class="k-icon k-i-user" style="float: left;font-size: 15px; color: #333; "></span> 
+          <span style="padding-left: 3%; font-weight: bold;">{{i.templateHistoryCreatedBy}}</span>
+        </p>
+      </div>
+      <div >
+        <div class="contentContainer" >
+          <span [innerHTML]="i.content"></span>
+        </div>
+      </div>
+  </div>
+  </div>
+</kendo-dialog>

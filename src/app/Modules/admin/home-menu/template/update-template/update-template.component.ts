@@ -30,6 +30,10 @@ export class UpdateTemplateComponent {
   user:any;
   recentTemplate:any;
   roleName:any;
+  openedFeature:boolean=false;
+  featureForm!:FormGroup;
+  featureName:string;
+  currentPosition:any;
 
   templateDetails :  Template={
     templateId: '',
@@ -83,6 +87,9 @@ export class UpdateTemplateComponent {
       content: ['', Validators.required]     
       
     });
+    this.featureForm=this.fb.group({
+      featureName: ['',Validators.required]
+    })
 
     this.activatedRoute.paramMap.subscribe(
       {
@@ -132,33 +139,42 @@ export class UpdateTemplateComponent {
           this.router.navigate(['AllTemplates']);                  
         }
         else{
-          this.router.navigate(['Templates']);                  
+          this.router.navigate(['AccessedTemplates']);                  
         }
-      }, 5000);
+      }, 3000);
       }
-      },);
-    /*if (this.ngForm.valid){
-      this.templateDetails.projectId=this.project.projectId;
-      this.templateService.updateTemplate(this.templateDetails.templateId, this.templateDetails)
-      .subscribe(
-        {
-        next : (result) =>{this.router.navigate(['admin/AllTemplates']);}
-        },);
-    }
-    else{
-      console.log("form invalid")
-      ValidateForm.validateAllFormFileds(this.ngForm);
-      window.alert("Your form is invalid");
-    }*/
- 
+      },); 
   }
 
+  /******for feature **** */
+  openFeature(){
+    this.currentPosition = this.editor.view.state.selection.$anchor?.pos;
+    this.openedFeature=true;
+  }
+
+  closeDialog(){
+    this.openedFeature=false;
+  }
+
+  onSubmitFeature(){
+    if(this.featureForm.valid){
+      if (this.currentPosition !== undefined) {
+        var text= '${'+this.featureName+'}';
+        const tr = this.editor.view.state.tr.insertText(text, this.currentPosition);
+        this.editor.view.dispatch(tr);
+      }
+      this.openedFeature=false;     
+      console.log("final content",  this.templateDetails.content)
+    }
+    else{
+    }
+  }
   cancel(){
     if(this.roleName=="Admin"){
       this.router.navigate(['AllTemplates']);                  
     }
     else{
-      this.router.navigate(['Templates']);                  
+      this.router.navigate(['AccessedTemplates']);                  
     }
   }
   public openImage() {

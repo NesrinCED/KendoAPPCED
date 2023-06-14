@@ -169,7 +169,7 @@ export class SendEmailComponent {
             setTimeout(() => {
               this.router.navigate(['TestTemplate']);
             }
-            , 5000); 
+            ,3000); 
             
           }
           );
@@ -243,7 +243,7 @@ export class SendEmailComponent {
         this.isSelectedTemplate=false;
         this.isConfirmedTemplate=false;
       }
-      , 5000); 
+      ,3000); 
     }
     else{
       this.showDangerAlertJson=true;

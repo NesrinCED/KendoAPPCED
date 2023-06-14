@@ -30,64 +30,6 @@
     overflow: auto;
     /*min-width: 1200px;*/
   }
-.addButton{
-  text-align: center;
-  font-size: 25px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: lighter;
-  padding: 6px 5%;
-  margin-left: 70%;
-  margin-top: 5%;
-  border-radius: 25px;
-  color:  #fff;
-  background: linear-gradient(to right, #4c036d  25%, #9659c0  ); 
-  border: none;
-  cursor: pointer;
-}
-
-.resetButton{
-  font-size: 20px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: lighter;
-  padding: 6px 5%;
-  border-radius: 25px;
-  color:  #fff;
-  background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
-  border: none;
-  cursor: pointer;
-}
-.buttonsD{
-  text-align: center;
-  margin-top: 5%;
-}
-.cancelB{
-  text-align: center;
-  padding: 6px 5%;
-  margin-right: 10%;
-  font-size: 18px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: lighter;
-  margin-top: 2%;
-  border-radius: 25px;
-  color:  #f6f6f6;
-  background: linear-gradient(to right, #7d8489  25%, #c4cacf  ); 
-  border: none;
-  cursor: pointer;
-}
-.yesB{
-  width: 10%; 
-  padding: 6px 10%;
-  text-align: center;
-  font-size: 18px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: lighter;
-  margin-top: 2%;
-  border-radius: 25px;
-  color:  #f6f6f6;
-  background: linear-gradient(to right, #612376  25%, #e0c4f0  ); 
-  border: none;
-  cursor: pointer;
-}
 
 .title {
     padding-bottom: 4%;
@@ -112,6 +54,8 @@
 /**** for accessed template grid ******/
 .k-grid {
   border-color: #fff;
+  width: 90%;
+  margin-left: 3%;
 }
 .k-grid-md .k-table-th > .k-cell-inner > .k-link {
   padding-block: 8px;
@@ -217,4 +161,124 @@
   height: auto ;
   padding: 5px;  max-height: 300px; 
   overflow-y: auto;
+}
+/*** histoy ******/
+.scrollable-dialog-content {
+  max-height: 550px; 
+  overflow: auto;
+}
+
+.titleTemplateHistory{
+  font-family: var(--globalFF);
+  font-weight: bolder;
+  font-size: 23px;
+  color:  #333 ;
+}
+.custom-editor {
+  min-height: 100px; 
+  height: auto ;
+  max-height: 300px; 
+  padding: 5px; 
+  overflow-y: auto;
+  border: 1px solid #b0b6b9;
+  border-radius: 10px;
+}
+.modifiedByText{
+  padding-top: 5%;
+  font-family: var(--globalFF);
+  font-weight: 500;
+  font-size: 15px;
+  color:  #333 ; 
+}
+.cardHistoryLine{
+  background-color: #f2faff;
+  border-radius: 10px;
+  margin: 4%;
+  width: 90%;
+
+}
+.contentContainer{
+  margin-left: 10%;
+  margin-bottom: 4%;
+  background-color: #fff;
+  border-radius: 10px;
+  border : 1px solid rgba(0, 0, 0, 0.26);
+  padding: 2%;
+  width: auto;
+}
+/*****************/
+
+/********** autocomplete *************/
+kendo-autocomplete {
+  width: 200px;
+  border-radius: 10px;
+  border-color: #286ea1;
+  color: #286ea1;
+  background-color: #f7fcff ;
+}
+kendo-autocomplete:hover,
+kendo-autocomplete::before,
+kendo-autocomplete::after {
+  border-color: #286ea1;
+  color: #286ea1;
+}
+/****** dropdownList ****/
+  .k-dropdownlist {
+    background-color: #f7fcff ;
+    border-color: #286ea1  ;
+    color: #286ea1  ;
+    border-radius: 10px;
+    width: 49%;
+    height: 30px;
+  }
+  .xButton{
+    background-color:#fff ;
+    border-color: #fff;
+    color: #585858;
+    float: right;
+  }
+  /***** delete dialog **********/
+.deleteTitle{
+  font-size: 20px;
+  margin-top: 3%;
+  color: #333;
+  text-align: center;
+  font-family: var(--globalFF);
+  font-weight: 500;
+}
+.buttonsD{
+  text-align: center;
+  margin-top: 5%;
+}
+.cancelDelete{
+  text-align: center;
+  padding: 6px 5%;
+  margin-right: 10%;
+  font-size: 18px;
+  font-family: var(--globalFF);
+  font-weight: lighter;
+  margin-top: 2%;
+  border-radius: 10px;
+  border-color: #333;
+  color:  #333;
+  background-color: #fff;
+  cursor: pointer;
+}
+.cancelDelete:hover {
+  color: #fff; /* Hover text color */
+  background-color: #333; /* Hover background color */
+}
+.yesDelete{
+  width: 10%; 
+  padding: 6px 10%;
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--globalFF);
+  font-weight: lighter;
+  margin-top: 2%;
+  border-radius: 10px;
+  color:  #f6f6f6;
+  background-color: #E03616 ; 
+  border: none;
+  cursor: pointer;
 }
