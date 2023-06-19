@@ -64,41 +64,36 @@
                         (click)="openImage()"
                         ></kendo-toolbar-button>       
                         <kendo-toolbar-button
-                        text="Add Feature"
+                        text="Add Field"
                         (click)="openFeature()"
-                        ></kendo-toolbar-button>           
+                        ></kendo-toolbar-button>   
+                        <kendo-editor-insert-table-button></kendo-editor-insert-table-button>        
                     </kendo-toolbar>
                 </kendo-editor>
-                
                 <app-image-dialog #upload [editor]="editor"></app-image-dialog>
-
             </div>      
-
     </form>  
     <div class="form-group">
         <div class="row" style="margin-left: 60%; margin-top: 5%;" >
           <div class="col">
             <button kendoButton type="reset" (click)="cancel()" class="cancelAddTemplate">Cancel</button>
-            <button kendoButton (click)="onSubmit()" class="saveAddTemplate">Create</button>
+            <button (click)="onSubmit()"  class="saveAddTemplate">Create</button>
           </div>
         </div>
     </div>       
 </kendo-dialog>
-
+ 
 <!-- add features dialog -->
 <kendo-dialog *ngIf="openedFeature" [width]="500" [height]="250"  >
-    <ngb-alert *ngIf="dangerAlertF" type="danger" class="alertDesignD" >
-        Please Fill the Feature Field !
-      </ngb-alert>
     <div class="titleAddFeatureDialog">
       <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 2%;font-size: 25px; color: #286ea1 "></span> 
-      <div class="addFeatureTitle"> Add new Feature</div>
+      <div class="addFeatureTitle"> Add new Field</div>
     </div>   
     <form  [formGroup]="featureForm">
         <div class="form-group">
         <div class="row">
             <div class="col-3">
-                <label  class="label-addFeature">Feature Name</label>
+                <label  class="label-addFeature">Field Name</label>
             </div>
             <div class="col-9">
                 <div class="input-field-addFeature">
@@ -113,7 +108,7 @@
         <div class="row" style="margin-left: 10%; margin-top: 5%;" >
           <div class="col">
             <button kendoButton (click)="closeDialog()" class="cancelAddFeature">Cancel</button>
-            <button kendoButton  (click)="onSubmitFeature()" class="saveAddFeature">Add Feature</button>
+            <button kendoButton  (click)="onSubmitFeature()" class="saveAddFeature">Add Field</button>
           </div>
         </div>
     </div>    

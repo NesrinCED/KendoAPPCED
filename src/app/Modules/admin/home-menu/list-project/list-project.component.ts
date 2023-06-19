@@ -125,7 +125,7 @@ export class ListProjectComponent {
             this.opened=false;
             this.getAll() 
           }
-          , 3000);  
+          , 1000);  
 
         },
       )

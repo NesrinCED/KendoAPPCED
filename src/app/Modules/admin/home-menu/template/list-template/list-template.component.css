@@ -187,7 +187,6 @@ kendo-autocomplete::after {
   font-size: 18px;
   font-family: var(--globalFF);
   font-weight: lighter;
-  margin-top: 2%;
   border-radius: 10px;
   border-color: #333;
   color:  #333;
@@ -199,13 +198,11 @@ kendo-autocomplete::after {
   background-color: #333; /* Hover background color */
 }
 .yesDelete{
-  width: 10%; 
-  padding: 6px 10%;
+  padding: 6px 5%;
   text-align: center;
   font-size: 18px;
   font-family: var(--globalFF);
   font-weight: lighter;
-  margin-top: 2%;
   border-radius: 10px;
   color:  #f6f6f6;
   background-color: #E03616 ; 
@@ -256,4 +253,9 @@ kendo-autocomplete::after {
   padding: 2%;
   width: auto;
 }
+.table-style {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
 /*****************/

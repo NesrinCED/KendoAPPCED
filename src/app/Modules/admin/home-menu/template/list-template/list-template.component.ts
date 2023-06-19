@@ -89,9 +89,18 @@ export class ListTemplateComponent {
     if (id){
       this.templateService.getHistoricByTemplateId(id).subscribe(
         {
-          next: (res) => { 
-            this.gridHistoric=res;
-            console.log("historic ",this.gridHistoric)
+          next: (res:any) => { 
+            this.gridHistoric = res;
+            this.gridHistoric.forEach((a) => {
+              console.log("c", a.content);
+              a.content += `<style>
+                              table, th, td {
+                                border: 1px solid black;
+                                border-collapse: collapse;
+                              }
+                            </style>`;
+            });
+            console.log("historic ", this.gridHistoric);
           }
         }
       );

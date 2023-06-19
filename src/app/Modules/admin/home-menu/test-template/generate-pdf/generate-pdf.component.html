@@ -25,7 +25,7 @@
     <div class="row" style="margin-left: 10%; margin-top: 5%;" >
         <div class="col">
             <button kendoButton type="reset" (click)="close()" class="cancelPDF">Cancel</button>
-            <button kendoButton  (click)="onSubmit1()" class="generatePDF">Generate PDF</button>
+            <button   (click)="onSubmit1()" class="generatePDF">Generate PDF</button>
         </div>
     </div>
 </kendo-dialog>
@@ -43,35 +43,33 @@
     <div class="row"  >
         <div class="col" style="text-align: center;">
             <button kendoButton type="reset" (click)="CancelTemplate()" class="cancelTemplate">Cancel</button>
-            <button kendoButton  (click)="ConfirmTemplate()" class="confirmTemplate">Confirm Template</button>
+            <button   (click)="ConfirmTemplate()" class="confirmTemplate">Confirm Template</button>
         </div>
     </div>
 </kendo-dialog>
 
 <!--Features Form-->
-<kendo-dialog *ngIf="isConfirmedTemplate" [width]="400" height="auto" >
+<kendo-dialog *ngIf="isConfirmedTemplate" [width]="500" height="auto" >
     <div class="containerFeature" >
-        <span class="k-icon k-i-track-changes-accept" style="padding-bottom: 1%;font-size: 18px; color: #286ea1 "></span> 
-        <div class="titleFeature"> Add The required Features </div>
+        <span class="k-icon k-i-track-changes-accept" style="font-size: 18px; color: #286ea1 "></span> 
+        <div class="titleFeature"> Add The required Fields </div>
     </div>
     <br>
-    <form  [formGroup]="jsonForm">
-        <div class="row" *ngFor="let item of list" class="form-group" style="
+    <form (submit)="addFeatures()">
+        <div class="row" *ngFor="let field of fields" style="
         display: flex;
         justify-content: flex-start;
         ">
             <div class="col-4">
-                <label class="label-feature">{{item}}</label>
+                <label class="label-feature">{{ field.name }}</label>
             </div>
             <div class="col-8" class="input-field-feature" style=" margin-top: 2%" >
-                <input class="form-control"
-                type="text"
-                id="{{item}}"  > 
+                <input class="form-control" type="text" [(ngModel)]="field.value" name="{{ field.name }}" />
             </div>
         </div>
     </form>
     <kendo-dialog-actions>
         <button kendoButton type="reset" (click)="close()" class="cancelFeature">Cancel</button>
-        <button kendoButton (click)="onSubmitJson()" class="confirmFeature">Add Features</button>
+        <button  (click)="addFeatures()" class="confirmFeature">Add Fields</button>
     </kendo-dialog-actions>
 </kendo-dialog>

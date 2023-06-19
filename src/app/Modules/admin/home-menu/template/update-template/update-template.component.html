@@ -84,7 +84,8 @@ box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.26);" >
                           <kendo-toolbar-button
                           text="Add Feature"
                           (click)="openFeature()"
-                          ></kendo-toolbar-button>                                                       
+                          ></kendo-toolbar-button>  
+                          <kendo-editor-insert-table-button></kendo-editor-insert-table-button>                                                             
                         </kendo-toolbar>
                     </kendo-editor>
                     <app-image-dialog #upload [editor]="editor"></app-image-dialog>
@@ -94,7 +95,7 @@ box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.26);" >
                 <div class="row" style="margin-left: 30%; margin-top: 5%;" >
                   <div class="col">
                     <button kendoButton type="reset" (click)="cancel()" class="cancelEditTemplate">Cancel</button>
-                    <button kendoButton (click)="onSubmit()" class="saveEditTemplate">Save</button>
+                    <button  (click)="onSubmit()" class="saveEditTemplate">Save</button>
                   </div>
                 </div>
             </div>  
@@ -127,7 +128,7 @@ box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.26);" >
         <div class="row" style="margin-left: 10%; margin-top: 5%;" >
           <div class="col">
             <button kendoButton (click)="closeDialog()" class="cancelAddFeature">Cancel</button>
-            <button kendoButton  (click)="onSubmitFeature()" class="saveAddFeature">Add Feature</button>
+            <button   (click)="onSubmitFeature()" class="saveAddFeature">Add Feature</button>
           </div>
         </div>
     </div>    

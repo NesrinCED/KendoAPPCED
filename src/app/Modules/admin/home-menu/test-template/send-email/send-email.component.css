@@ -104,7 +104,7 @@ font-family: var(--globalFF);
 .containerContent{
   height: 10%; 
   margin-bottom: 4%;
-  border-bottom: 1px solid rgb(165, 167, 173);
+ /* border-bottom: 1px solid rgb(165, 167, 173);*/
 }
 .titleTemplate{
   display: inline-block;  
@@ -148,8 +148,7 @@ font-family: var(--globalFF);
 
 /******* feature form *******/
 .containerFeature{
-  height: 12%; 
-  margin-bottom: 4%;
+  height: 9%; 
 }
 .titleFeature{
   display: inline-block;  
@@ -198,8 +197,9 @@ font-family: var(--globalFF);
   
   .input-field-feature{
     border-radius: 10px;
-    font-size: 11px; /* Adjust the size as needed */
+    font-size: 11px; 
     padding: 1px;
+    width: 50%;
     display: flex;
     align-items: center;
     cursor: pointer;

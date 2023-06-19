@@ -85,10 +85,9 @@
     border-radius: 10px;
     color:  #ffffff ;
     background-color: #3899DD; 
+    border-color: #3899DD; 
   }
-  /*.saveAddEmployee:hover{
-    background-color: #3899DD; 
-  }*/
+
 .label-addEmployee{
   margin-top: 20%;
   font-size: 14px;
@@ -497,8 +496,7 @@ input[type='checkbox']:checked{
   background-color: #333; /* Hover background color */
 }
 .yesDelete{
-  width: 10%; 
-  padding: 6px 10%;
+  padding: 6px 15px;
   text-align: center;
   font-size: 18px;
   font-family: var(--globalFF);

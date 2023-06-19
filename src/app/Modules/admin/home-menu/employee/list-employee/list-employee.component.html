@@ -201,7 +201,7 @@
         <div class="row" style="margin-left: 20%; margin-top: 5%;" >
           <div class="col">
             <button kendoButton type="reset" (click)="closeDialog()" class="cancelAddEmployee">Cancel</button>
-            <button kendoButton (click)="addEmployee()" class="saveAddEmployee">Add</button>
+            <button  (click)="addEmployee()" class="saveAddEmployee">Add</button>
           </div>
         </div>
     </div>    
@@ -211,7 +211,7 @@
     <div class="deleteTitle"> Are you sure you want to Delete this employee ? </div>
     <div class="buttonsD">
       <button kendoButton type="reset" (click)="cancelDelete()" class="cancelDelete">Cancel</button>   
-      <button kendoButton  type="submit" (click)="yes()"class="yesDelete">Yes</button>
+      <button   type="submit" (click)="yes()"class="yesDelete">Yes</button>
     </div>
 </kendo-dialog>
 <!--View Dialog-->

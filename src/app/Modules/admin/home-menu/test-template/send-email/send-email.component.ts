@@ -18,6 +18,12 @@ import ValidateForm from 'src/app/helpers/ValidateForm';
 import { ProjectAuthService } from 'src/app/service/projectAuth.service';
 import { ToastrService } from 'ngx-toastr';
 
+interface Field {
+  label: string;
+  value: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-send-email',
   templateUrl: './send-email.component.html',
@@ -71,7 +77,8 @@ export class SendEmailComponent {
   isConfirmedTemplate=false;
   list : string[]=[];
   values:string[]=[];
-  jsonData0 :any;
+  jsonData0 :any;    formData: { [key: string]: any } = {};     fields: Field[] = [];
+
   showSuccessAlert = false;
   showDangerAlert = false;
   showDangerAlertJson=false;
@@ -144,6 +151,52 @@ export class SendEmailComponent {
   }
   onSubmit() {
     if( this.templateRequest.templateId!="" && this.ngForm.get('subject')?.value!=null
+      && this.ngForm.get('to')?.value!=null){
+      const subjectTextArea=document.getElementById('subject') as HTMLTextAreaElement;
+      const toTextArea=document.getElementById('to') as HTMLTextAreaElement;
+      for (const field of this.fields) {
+        const value = field.value;
+        const keys = field.label.split('.');
+        let currentObj: any = this.formData;
+        for (let i = 0; i < keys.length - 1; i++) {
+          const key = keys[i];
+          if (!currentObj[key]) {
+            currentObj[key] = {};
+          }
+          currentObj = currentObj[key];
+        }
+        currentObj[keys[keys.length - 1]] = value;
+      }
+      console.log(JSON.stringify(this.formData));
+      try {
+        const jsonData=this.formData;
+        const subject = subjectTextArea.value;
+        const to = toTextArea.value;        
+        const body={
+          subject,
+          to,
+          jsonData
+        };
+        console.log("body",body)
+        this.templateService.
+        SendEmail(this.templateRequest.templateId,body)
+        .subscribe(
+          (result: any) => {
+            console.log("result",result)
+            this.showSuccess()
+            setTimeout(() => {
+              this.router.navigate(['TestTemplate']);
+            }
+            ,3000); 
+            
+          }
+          );
+      } catch (error) {
+        console.log("catch",error)
+        this.showErrorEmail()
+      } 
+    }
+   /* if( this.templateRequest.templateId!="" && this.ngForm.get('subject')?.value!=null
     && this.ngForm.get('to')?.value!=null){
       const subjectTextArea=document.getElementById('subject') as HTMLTextAreaElement;
       const toTextArea=document.getElementById('to') as HTMLTextAreaElement;
@@ -183,7 +236,7 @@ export class SendEmailComponent {
       console.log("form invalid")
       ValidateForm.validateAllFormFileds(this.ngForm);
     }
-
+*/
   } 
   
   onReset() {
@@ -201,29 +254,28 @@ export class SendEmailComponent {
   }
 
   onTemplateChange(event:any) {
-    this.list=[];
     this.selectedTemplate = event;
-    console.log("selected one ",this.selectedTemplate)
     this.isSelectedTemplate=true;
     var content!:string;
     content=this.selectedTemplate.content;
     this.choosedContent=content;
-    var index=content.indexOf("{");
-    var end=content.indexOf("}");
-    while(index!=-1 && end!=-1){
-      var field=content.substring(index+1,end);
-      if (!this.list.find(item => item === field)) {
-        this.list.push(field);
-      }
-      content=content.substring(end+1,content.length);
-      index=content.indexOf("{");
-      end=content.indexOf("}");
+    this.fields = this.extractFields(content);
+    console.log("fileds",this.fields)
     }
-    console.log("list form one ",this.list)
-    
-  }
+    extractFields(content: string): Field[] {
+      const pattern = /\${(.*?)}/g;
+      const fields: Field[] = [];
+      let match;
+      while ((match = pattern.exec(content))) {
+        const field = match[1];
+        fields.push({ label: field, value: '', name: field.replace('.', '_') });
+      }
+      return fields;
+    }
+
 
   onSubmitJson(){
+    console.log("innn")
     if(this.ngForm.value){
       this.jsonData0={};
       this.showDangerAlertJson=false;
@@ -268,6 +320,9 @@ export class SendEmailComponent {
     }
     public showErrorForm(): void {
       this.toastr.error('Please Fill All Fields  !', 'FORM Message');
+    }
+    public showErrorEmail(): void {
+      this.toastr.error('Email Not Sent  !', 'Email Message');
     }
     public showErrorFeatures(): void {
       this.toastr.error('Please Fill All Features  !', 'FORM Message');

@@ -60,7 +60,6 @@ export class UpdateEmployeeComponent {
   }
 
   edit(){
-    if (this.ngForm.valid){
       this.dangerAlert=false;
       var id=this.employeeDetails.employeeId;
       var employee=this.employeeDetails;
@@ -80,15 +79,11 @@ export class UpdateEmployeeComponent {
           this.showErrorUpdate()
           console.error("error in updating")
         }
-      )
+        )
       }
-    }
-    else{
-      this.showErrorPassword()
-     // this.dangerAlert=true;
-    }
-
- 
+      else{
+        this.showErrorPassword()
+      } 
   }
 
   onReset() {

@@ -14,6 +14,12 @@ import ValidateForm from 'src/app/helpers/ValidateForm';
 import { ProjectAuthService } from 'src/app/service/projectAuth.service';
 import { ToastrService } from 'ngx-toastr';
 
+interface Field {
+  label: string;
+  value: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-generate-pdf',
   templateUrl: './generate-pdf.component.html',
@@ -68,11 +74,14 @@ export class GeneratePdfComponent {
   showDangerAlertJson=false;
   dangerAlertV=false;
   jsonForm!:FormGroup;
-  list:string[]=[];
+  list: Array<string | { [key: string]: string[] }> = [  ];
+
   values:string[]=[];
-  jsonData0 :any;
+  jsonData0 :any;         formData: { [key: string]: any } = {};     fields: Field[] = [];
+
   isConfirmedTemplate=false;
   choosedContent:string;
+
 
   roleName:any;
   user:any;
@@ -80,6 +89,7 @@ export class GeneratePdfComponent {
   listAccessedReadTemplates:any;
 
   ngOnInit() {
+    
     this.user=this.employeeService.GetUser();
     this.employeeId=this.user.employeeId;
     this.roleName=this.employeeService.GetUser().roleDTO.roleName;
@@ -134,58 +144,93 @@ export class GeneratePdfComponent {
     //,console.log(this.projects)
     });
   }
+  /**** demo pdf *****/
   onTemplateChange(event:any) {
     this.selectedTemplate = event;
     this.isSelectedTemplate=true;
     var content!:string;
     content=this.selectedTemplate.content;
     this.choosedContent=content;
-    var index=content.indexOf("{");
-    var end=content.indexOf("}");
-    while(index!=-1 && end!=-1){
-      var field=content.substring(index+1,end);
-      if (!this.list.find(item => item === field)) {
-        this.list.push(field);
-      }
-      content=content.substring(end+1,content.length);
-      index=content.indexOf("{");
-      end=content.indexOf("}");
-    }
+    this.fields = this.extractFields(content);
+    console.log("fileds",this.fields)
   }
-
-  onSubmit1() {
-    if( this.templateRequest.templateId!=""){
-        this.generatedPDF=true;
-        this.showSuccess()
+    extractFields(content: string): Field[] {
+      const specialCH = /\${(.*?)}/g;
+      const fields: Field[] = [];
+      let match;
+      while ((match = specialCH.exec(content))) {
+        const field = match[1];
+        fields.push({ label: field, value: '', name: field.replace('.', '_') });
+        /*{label: 'client', value: '', name: 'client'}
+          {label: 'supplier.name', value: '', name: 'supplier_name'}*/
+      }
+      return fields;
     }
-    else {
-      this.showErrorForm()
-      this.generatedPDF=false;
-      console.log("form invalid",this.ngForm.value)
-      ValidateForm.validateAllFormFileds(this.ngForm);
+    addFeatures(){
+      for (const field of this.fields) {
+        const value = field.value;
+        const keys = field.label.split('.');
+        console.log("keys",keys)
+        /* keys: ['client']
+                 ['supplier', 'name']
+        */
+        let currentObj: any = this.formData;
+        console.log("befroe currentObj",currentObj)
+        for (let i = 0; i < keys.length - 1; i++) {
+          const key = keys[i];
+          if (!currentObj[key]) {
+            currentObj[key] = {};
+          }
+          currentObj = currentObj[key];
+          console.log("currentObj",currentObj)
+        }
+        currentObj[keys[keys.length - 1]] = value;
+      }
+      console.log(JSON.stringify(this.formData));
+      //{"client":"a","purchase":{"name":"b"}}
+      this.showSuccessFeatures()
+        setTimeout(() => {
+          this.isSelectedTemplate=false;
+          this.isConfirmedTemplate=false;
+        }
+        ,3000); 
     }
+    onSubmit1() {
+      if( this.templateRequest.templateId!=""){
+          this.generatedPDF=true;
+          this.showSuccess()
+      }
+      else {
+        this.showErrorForm()
+        this.generatedPDF=false;
+        console.log("form invalid",this.ngForm.value)
+        ValidateForm.validateAllFormFileds(this.ngForm);
+      }
 
-  } 
+    } 
   onSubmit() {
     this.generatePDF();
   } 
-  generatePDF() {    this.templateService.GeneratePDF(this.templateRequest.templateId,this.jsonData0).subscribe((blob: Blob) => {
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'TemplatePdf.pdf';
-    link.click();
-    window.URL.revokeObjectURL(url);
-    this.showSuccessDownload()
-    setTimeout(() => {
-    }
-    ,3000); 
+  generatePDF() { 
+    console.log("content",this.templateRequest.content)
+    this.templateService.GeneratePDF(this.templateRequest.templateId,this.formData)
+    .subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'TemplatePdf.pdf';
+      link.click();
+      window.URL.revokeObjectURL(url);
+      this.showSuccessDownload()
+      setTimeout(() => {
+      }
+      ,3000); 
     },
     (error: HttpErrorResponse) => {
       console.log("errrorr !!",error)
     });
   }
-  
+  /*********************/
   onReset() {
     this.registerForm.reset();
   }
@@ -199,38 +244,7 @@ export class GeneratePdfComponent {
   public open(): void {
     this.opened = true;
   }
-  onSubmitJson(){
-    this.values=[]
-    this.list.forEach(i=>{
-      const inputElement = document.getElementById(i) as HTMLInputElement;
-      const inputValue = inputElement.value;
-      this.values.push(inputValue) 
-    });
-    console.log("vvvvv",this.values)
-    if(!this.values.includes('')){
-      this.jsonData0={};
-      this.list.forEach(i=>{
-        const inputElement = document.getElementById(i) as HTMLInputElement;
-        const inputValue = inputElement.value;
-        this.values.push(inputValue) 
-      });
-      for (let i = 0; i < this.list.length; i++) {
-        const key = this.list[i];
-        const value = this.values[i];
-        this.jsonData0[key] =value;
-      }
-      console.log(this.jsonData0)
-      this.showSuccessFeatures()
-      setTimeout(() => {
-        this.isSelectedTemplate=false;
-        this.isConfirmedTemplate=false;
-      }
-      ,3000); 
-    }
-    else{
-      this.showErrorFeatures()
-    }
-  }
+
   ConfirmTemplate(){
     this.isConfirmedTemplate=true;
  
